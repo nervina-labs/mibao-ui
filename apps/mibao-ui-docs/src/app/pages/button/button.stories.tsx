@@ -3,7 +3,7 @@ import { ButtonProps, Button as MibaoUiButton, ButtonTypeSet, ButtonSizeSet } fr
 
 export default {
   component: MibaoUiButton,
-  title: 'App',
+  title: 'Components/Button',
   argTypes: {
     uiType: {
       options: ButtonTypeSet,
