@@ -27,8 +27,11 @@
     ]
   },
   "projects": {
-    "mibao-ui-docs": {
+    "mibao-ui": {
       "tags": []
+    },
+    "mibao-ui-docs": {
+      "tags": ["mibao-ui"]
     },
     "mibao-ui-docs-e2e": {
       "tags": [],
