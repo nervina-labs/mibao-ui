@@ -1,13 +1,10 @@
-import styles from './app.module.scss';
-import { Button, MibaoProvider } from 'mibao-ui';
+import { Button } from 'mibao-ui';
 
 export function App() {
   return (
-    <div className={styles.app}>
-      <MibaoProvider>
-        <Button>Button</Button>
-        <Button isLoading>Button</Button>
-      </MibaoProvider>
+    <div>
+      <Button>Button</Button>
+      <Button>Button</Button>
     </div>
   );
 }

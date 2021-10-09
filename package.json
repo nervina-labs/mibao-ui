@@ -4,41 +4,48 @@
   "license": "MIT",
   "scripts": {
     "start": "nx serve",
+    "start:docs": "nx run mibao-ui-docs:storybook",
     "build": "nx build",
     "test": "nx test"
   },
   "private": true,
   "dependencies": {
-    "@chakra-ui/react": "^1.6.9",
-    "@emotion/react": "^11.4.1",
-    "@emotion/styled": "^11.3.0",
+    "classnames": "^2.3.1",
     "core-js": "^3.6.5",
     "framer-motion": "^4.1.17",
+    "lodash": "^4.17.21",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "regenerator-runtime": "0.13.7",
-    "tslib": "^2.0.0",
-    "lodash": "^4.17.21"
+    "tslib": "^2.0.0"
   },
   "devDependencies": {
+    "@babel/core": "7.12.13",
+    "@babel/preset-typescript": "7.12.13",
     "@nrwl/cli": "12.9.0",
     "@nrwl/cypress": "12.9.0",
     "@nrwl/eslint-plugin-nx": "12.9.0",
     "@nrwl/jest": "12.9.0",
     "@nrwl/linter": "12.9.0",
     "@nrwl/react": "12.9.0",
+    "@nrwl/storybook": "12.9.0",
     "@nrwl/tao": "12.9.0",
     "@nrwl/web": "12.9.0",
     "@nrwl/workspace": "12.9.0",
+    "@storybook/addon-essentials": "~6.3.0",
+    "@storybook/react": "~6.3.0",
+    "@svgr/webpack": "^5.4.0",
     "@testing-library/react": "11.2.6",
     "@testing-library/react-hooks": "7.0.1",
     "@types/jest": "26.0.24",
+    "@types/lodash": "^4.14.175",
     "@types/node": "14.14.33",
     "@types/react": "17.0.3",
     "@types/react-dom": "17.0.3",
     "@typescript-eslint/eslint-plugin": "~4.28.3",
     "@typescript-eslint/parser": "~4.28.3",
     "babel-jest": "27.0.6",
+    "babel-loader": "8.1.0",
     "cypress": "^8.3.0",
     "eslint": "7.22.0",
     "eslint-config-prettier": "8.1.0",
@@ -51,6 +58,6 @@
     "prettier": "^2.3.1",
     "ts-jest": "27.0.3",
     "typescript": "~4.3.5",
-    "@types/lodash": "^4.14.175"
+    "url-loader": "^3.0.0"
   }
 }
