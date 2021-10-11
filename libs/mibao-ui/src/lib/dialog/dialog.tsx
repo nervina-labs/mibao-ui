@@ -1,6 +1,7 @@
 import './dialog.module.scss';
-import { Button, Modal, ModalContent, ModalFooter, ModalOverlay } from '@chakra-ui/react';
+import { Button, ChakraProvider, Modal, ModalContent, ModalFooter, ModalOverlay } from '@chakra-ui/react';
 import { ModalProps } from '@chakra-ui/modal/dist/types/modal';
+import React from 'react';
 
 export type DialogProps = ModalProps
 
@@ -9,7 +10,7 @@ export const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     <Modal {...props}>
       <ModalOverlay />
       <ModalContent>
-        <ModalFooter>
+        <ModalFooter display="block">
           <Button colorScheme="blue" mr={3} onClick={props.onClose} isFullWidth>
             Close
           </Button>
@@ -18,4 +19,10 @@ export const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
       </ModalContent>
     </Modal>
   );
+}
+
+export const Test: React.FC = () => {
+  return <ChakraProvider>
+    <Button>Button</Button>
+  </ChakraProvider>
 }
