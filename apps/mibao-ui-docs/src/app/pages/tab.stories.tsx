@@ -1,5 +1,5 @@
 import { Story, Meta } from '@storybook/react';
-import { Tab, TabList, Tabs as MibaoUiTabs } from 'mibao-ui';
+import { Tab, TabList, TabPanel, TabPanels, Tabs as MibaoUiTabs } from 'mibao-ui';
 import { ChakraProvider } from '@chakra-ui/react';
 
 export default {
@@ -16,6 +16,12 @@ const Template: Story = (args) => <ChakraProvider>
       <Tab>Two</Tab>
       <Tab>Three</Tab>
     </TabList>
+
+    <TabPanels>
+      <TabPanel>1</TabPanel>
+      <TabPanel>2</TabPanel>
+      <TabPanel>3</TabPanel>
+    </TabPanels>
   </MibaoUiTabs>
 </ChakraProvider>
 
