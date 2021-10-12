@@ -9,16 +9,16 @@ import {
   TabsProps as ChakraTabsProps,
 } from '@chakra-ui/react';
 
-export type TabsProps = ChakraTabsProps
+export type TabsProps = ChakraTabsProps;
 
 export const Tabs: React.FC<TabsProps> = (props) => {
-  return <ChakraTabs {...props}>{props.children}</ChakraTabs>
+  return <ChakraTabs {...props}>{props.children}</ChakraTabs>;
 }
 
 export const Tab: React.FC = (props) => {
-  return <ChakraTab {...props}>{props.children}</ChakraTab>
+  return <ChakraTab {...props}>{props.children}</ChakraTab>;
 }
 
-export const TabList = ChakraTabList
-export const TabPanels = ChakraTabPanels
-export const TabPanel = ChakraTabPanel
+export const TabList = ChakraTabList;
+export const TabPanels = ChakraTabPanels;
+export const TabPanel = ChakraTabPanel;
