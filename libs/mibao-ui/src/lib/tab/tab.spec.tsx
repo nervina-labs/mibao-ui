@@ -1,10 +1,9 @@
-import { render } from '@testing-library/react';
-
-import Tab from './tab';
+import { render } from '@testing-library/react'
+import { Tabs } from './tab'
 
 describe('Tab', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Tab />);
-    expect(baseElement).toBeTruthy();
-  });
-});
+    const { baseElement } = render(<Tabs>1</Tabs>)
+    expect(baseElement).toBeTruthy()
+  })
+})
