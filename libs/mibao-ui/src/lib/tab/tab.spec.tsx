@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import Dialog from './dialog';
+import Tab from './tab';
 
-describe('Dialog', () => {
+describe('Tab', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Dialog />);
+    const { baseElement } = render(<Tab />);
     expect(baseElement).toBeTruthy();
   });
 });
