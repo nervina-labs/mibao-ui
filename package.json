@@ -59,5 +59,9 @@
     "ts-jest": "27.0.3",
     "typescript": "~4.3.5",
     "url-loader": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nervina-labs/mibao-ui.git"
   }
 }
