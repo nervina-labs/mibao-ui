@@ -17,6 +17,7 @@ const toPath = (_path) => path.join(process.cwd(), _path)
 module.exports = {
   stories: [],
   addons: [
+    '@storybook/addon-essentials',
     "storybook-addon-performance/register",
     "@storybook/addon-a11y",
     "@storybook/addon-toolbars",

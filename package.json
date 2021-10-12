@@ -33,6 +33,8 @@
     "@nrwl/tao": "12.9.0",
     "@nrwl/web": "12.9.0",
     "@nrwl/workspace": "12.9.0",
+    "@storybook/addon-a11y": "^6.3.10",
+    "@storybook/addon-docs": "^6.3.10",
     "@storybook/addon-essentials": "~6.3.0",
     "@storybook/react": "~6.3.0",
     "@svgr/webpack": "^5.4.0",
