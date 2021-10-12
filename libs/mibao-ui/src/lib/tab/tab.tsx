@@ -12,7 +12,7 @@ import {
 export type TabsProps = ChakraTabsProps;
 
 export const Tabs: React.FC<TabsProps> = (props) => {
-  return <ChakraTabs {...props}>{props.children}</ChakraTabs>;
+  return <ChakraTabs {...props} colorScheme="primary">{props.children}</ChakraTabs>;
 }
 
 export const Tab: React.FC = (props) => {
