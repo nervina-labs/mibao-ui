@@ -1,6 +1,47 @@
 {
   "version": 2,
   "projects": {
+    "mibao-ui": {
+      "root": "libs/mibao-ui",
+      "sourceRoot": "libs/mibao-ui/src",
+      "projectType": "library",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/mibao-ui",
+            "tsConfig": "libs/mibao-ui/tsconfig.lib.json",
+            "project": "libs/mibao-ui/package.json",
+            "entryFile": "libs/mibao-ui/src/index.ts",
+            "external": ["react/jsx-runtime"],
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": [
+              {
+                "glob": "libs/mibao-ui/README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/mibao-ui/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/mibao-ui"],
+          "options": {
+            "jestConfig": "libs/mibao-ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "mibao-ui-docs": {
       "root": "apps/mibao-ui-docs",
       "sourceRoot": "apps/mibao-ui-docs/src",
@@ -74,6 +115,37 @@
           "options": {
             "jestConfig": "apps/mibao-ui-docs/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "executor": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "port": 4400,
+            "config": {
+              "configFolder": "apps/mibao-ui-docs/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "executor": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/mibao-ui-docs",
+            "config": {
+              "configFolder": "apps/mibao-ui-docs/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
           }
         }
       }
