@@ -1,10 +1,23 @@
 import { render } from '@testing-library/react';
 
-import Tab from './tab';
+import { MibaoProvider } from '../..';
+import { Tab, Tabs, TabList, TabPanel, TabPanels } from './tab';
 
 describe('Tab', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Tab />);
+    const { baseElement } = render(
+      <MibaoProvider>
+        <Tabs>
+          <TabList>
+            <Tab>Tab</Tab>
+          </TabList>
+
+          <TabPanels>
+            <TabPanel>Tab Panel</TabPanel>
+          </TabPanels>
+        </Tabs>
+      </MibaoProvider>
+    );
     expect(baseElement).toBeTruthy();
   });
 });
