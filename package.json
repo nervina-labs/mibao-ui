@@ -6,6 +6,7 @@
     "start": "nx serve",
     "start:docs": "nx run mibao-ui-docs:storybook",
     "build": "nx build",
+    "build:docs": "nx build-storybook",
     "test": "nx test"
   },
   "private": true,

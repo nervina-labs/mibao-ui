@@ -6,7 +6,7 @@ module.exports = {
   stories: [],
   addons: [
     '@storybook/addon-essentials',
-    "storybook-addon-performance/register",
+    // "storybook-addon-performance/register",
     "@storybook/addon-a11y",
     "@storybook/addon-toolbars",
   ],
