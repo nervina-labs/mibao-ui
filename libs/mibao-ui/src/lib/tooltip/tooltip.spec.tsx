@@ -1,7 +1,7 @@
-import { render } from '@testing-library/react';
-import { MibaoProvider } from '../..';
+import { render } from '@testing-library/react'
+import { MibaoProvider } from '../..'
 
-import Tooltip from './tooltip';
+import Tooltip from './tooltip'
 
 describe('Tooltip', () => {
   it('should render successfully', () => {
@@ -9,7 +9,7 @@ describe('Tooltip', () => {
       <MibaoProvider>
         <Tooltip label="label">content</Tooltip>
       </MibaoProvider>
-    );
-    expect(baseElement).toBeTruthy();
-  });
-});
+    )
+    expect(baseElement).toBeTruthy()
+  })
+})

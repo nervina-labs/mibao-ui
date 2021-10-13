@@ -1,22 +1,22 @@
-import { Story, Meta } from '@storybook/react';
-import { Button, PlacementWithLogical, Grid } from '@chakra-ui/react';
-import { MibaoProvider, Tooltip as T } from 'mibao-ui';
+import { Story, Meta } from '@storybook/react'
+import { Button, PlacementWithLogical, Grid } from '@chakra-ui/react'
+import { MibaoProvider, Tooltip as T } from 'mibao-ui'
 
 export default {
   component: T,
   title: `Components/${T.name}`,
-  argTypes: {},
-} as Meta;
+  argTypes: {}
+} as Meta
 
 export const Placements: Story = () => {
-  const prefixList = ['auto', 'top', 'right', 'bottom', 'left'];
-  const suffixList = ['start', 'end'];
+  const prefixList = ['auto', 'top', 'right', 'bottom', 'left']
+  const suffixList = ['start', 'end']
   const placements = prefixList
     .map((prefix) => [
       prefix,
-      suffixList.map((suffix) => `${prefix}-${suffix}`),
+      suffixList.map((suffix) => `${prefix}-${suffix}`)
     ])
-    .flat(suffixList.length) as Array<PlacementWithLogical>;
+    .flat(suffixList.length) as PlacementWithLogical[]
 
   return (
     <MibaoProvider>
@@ -28,8 +28,8 @@ export const Placements: Story = () => {
         ))}
       </Grid>
     </MibaoProvider>
-  );
-};
+  )
+}
 
 export const HasArrow: Story = () => (
   <MibaoProvider>
@@ -37,4 +37,4 @@ export const HasArrow: Story = () => (
       <Button>Has arrow</Button>
     </T>
   </MibaoProvider>
-);
+)

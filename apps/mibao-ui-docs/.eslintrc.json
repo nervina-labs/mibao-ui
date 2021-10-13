@@ -4,7 +4,25 @@
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "rules": {}
+      "parserOptions": {
+        "project": ["apps/mibao-ui-docs/tsconfig.eslint.json"]
+      },
+      "extends": [
+        "plugin:react-hooks/recommended",
+        "standard-with-typescript"
+      ],
+      "plugins": [
+        "react-hooks",
+        "@typescript-eslint/eslint-plugin"
+      ],
+      "rules": {
+        "import/prefer-default-export": 0,
+        "import/no-unresolved": 0,
+        "import/no-extraneous-dependencies": 0,
+        "semi": ["error", "never"],
+        "import/extensions": 0,
+        "@typescript-eslint/consistent-type-assertions": 0
+      }
     },
     {
       "files": ["*.ts", "*.tsx"],

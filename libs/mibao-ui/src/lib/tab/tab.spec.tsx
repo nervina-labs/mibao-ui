@@ -1,7 +1,7 @@
-import { render } from '@testing-library/react';
+import { render } from '@testing-library/react'
 
-import { MibaoProvider } from '../..';
-import { Tab, Tabs, TabList, TabPanel, TabPanels } from './tab';
+import { MibaoProvider } from '../..'
+import { Tab, Tabs, TabList, TabPanel, TabPanels } from './tab'
 
 describe('Tab', () => {
   it('should render successfully', () => {
@@ -17,7 +17,7 @@ describe('Tab', () => {
           </TabPanels>
         </Tabs>
       </MibaoProvider>
-    );
-    expect(baseElement).toBeTruthy();
-  });
-});
+    )
+    expect(baseElement).toBeTruthy()
+  })
+})
