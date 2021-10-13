@@ -2,7 +2,7 @@ import { Box, Spinner, Image as ChakraImage, ImageProps as ChakraImageProps } fr
 import styles from './image.module.scss'
 import { useState, useMemo, useEffect, useCallback, ReactNode } from 'react'
 import FALLBACK_SRC from '../../../assets/images/fallback.svg'
-import { addParamsToUrl } from '../../utils'
+import { addParamsToUrl, omit } from '../../utils'
 
 export interface ImageProps extends ChakraImageProps {
   aspectRatio?: boolean
@@ -37,6 +37,12 @@ export const Image = (props: ImageProps) => {
     }
     return addParamsToUrl(props.src, props.srcQueryParams)
   }, [props])
+  // omit props
+  const imageProps = useMemo(() => omit(props, [
+    'aspectRatio',
+    'loader',
+    'srcQueryParams'
+  ]), [props])
 
   useEffect(() => {
     if (props.src) {
@@ -69,7 +75,7 @@ export const Image = (props: ImageProps) => {
         )
       }
       <ChakraImage
-        {...props}
+        {...imageProps}
         src={imageSrc}
         className={classNames}
         onLoad={onLoaded}

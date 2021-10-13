@@ -17,3 +17,11 @@ export function addParamsToUrl (
   })
   return decodeURIComponent(urlObj.toString())
 }
+
+export function omit (obj: {[key: string]: any}, keys: string[]) {
+  const keySet = new Set(keys)
+  return Object.keys(obj).filter(key => !keySet.has(key)).reduce<{[key: string]: any}>((acc, key) => {
+    acc[key] = obj[key]
+    return acc
+  }, {})
+}
