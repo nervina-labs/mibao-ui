@@ -16,13 +16,15 @@ export interface AvatarProps {
   type?: AvatarType
   shape?: AvatarShape
   size?: string
+  srcQueryParams?: { [key: string]: string }
 }
 
 export const Avatar: React.FC<AvatarProps> = ({
   src,
   type = 'image',
   shape = 'circle',
-  size
+  size,
+  srcQueryParams
 }) => {
   const isToken = type === 'token'
   const isVerified = type === 'image_verified'
@@ -37,6 +39,7 @@ export const Avatar: React.FC<AvatarProps> = ({
         rounded={shape === 'square' ? '3px' : '100%'}
         width="100%"
         aspectRatio
+        srcQueryParams={srcQueryParams}
       />
       {
         isToken && <img className={`${styles.icon} ${styles.token}`} src={DIAMONDS_SRC} alt='diamonds' />
