@@ -4,8 +4,6 @@ import { useState, useMemo, useEffect, useCallback, ReactNode } from 'react'
 import FALLBACK_SRC from '../../../assets/images/fallback.svg'
 
 export interface ImageProps extends ChakraImageProps {
-  renderer?: string
-  rendererType?: string
   aspectRatio?: boolean
   loader?: ReactNode
 }
