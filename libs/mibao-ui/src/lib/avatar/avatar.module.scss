@@ -41,3 +41,24 @@
     }
   }
 }
+
+.icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: auto;
+  transform: translate(-20%, -20%);
+}
+.icon.topRight {
+  right: 0;
+  left: unset;
+  transform: translate(20%, -20%);
+}
+.icon.bottomRight {
+  right: 0;
+  bottom: 0;
+  top: unset;
+  left: unset;
+  transform: translate(20%, 20%);
+}
