@@ -1,5 +1,7 @@
 import './index.scss'
 
+export * from './lib/avatar/avatar'
+
 export * from './lib/image/image'
 
 export * from './lib/tooltip/tooltip'

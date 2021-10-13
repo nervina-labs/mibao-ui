@@ -1,0 +1,43 @@
+.avatarContainer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  &.animation:before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    border-radius: 100%;
+    z-index: 0;
+    background-image: linear-gradient(
+        60deg,
+        rgb(205, 130, 15),
+        rgb(250, 190, 60),
+        rgb(205, 130, 15),
+        rgb(250, 190, 60),
+        rgb(205, 130, 15),
+        rgb(250, 190, 60)
+    );
+    background-size: 300%, 300%;
+    animation: background-animation 3s ease infinite alternate;
+    box-shadow: 0 0 5px rgba(250, 190, 60, 1);
+  }
+
+  @keyframes background-animation {
+    0% {
+      background-position: 0, 50%;
+    }
+
+    50% {
+      background-position: 100%, 50%;
+      box-shadow: 0 0 5px rgba(205, 130, 15, 1);
+    }
+
+    100% {
+      background-position: 0, 50%;
+    }
+  }
+}
