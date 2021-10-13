@@ -21,7 +21,8 @@
         "import/no-extraneous-dependencies": 0,
         "semi": ["error", "never"],
         "import/extensions": 0,
-        "@typescript-eslint/consistent-type-assertions": 0
+        "@typescript-eslint/consistent-type-assertions": 0,
+        "@typescript-eslint/explicit-function-return-type": 0
       }
     },
     {

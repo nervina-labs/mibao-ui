@@ -1,0 +1,26 @@
+name: Lint and Test
+
+on: [push, pull_request]
+
+jobs:
+  lint_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Lint
+        run: npx nx affected:lint --base=origin/main --parallel
+
+      - name: Test
+        run: npx nx affected:test --base=origin/main --parallel
+# TODO: add coverage
