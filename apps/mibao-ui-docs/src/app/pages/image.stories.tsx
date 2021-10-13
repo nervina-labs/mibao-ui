@@ -3,7 +3,7 @@ import {
   Image as MibaoImage,
   MibaoProvider
 } from 'mibao-ui'
-import { Skeleton } from '@chakra-ui/react'
+import { Skeleton, Stack } from '@chakra-ui/react'
 
 export default {
   component: MibaoImage,
@@ -32,9 +32,11 @@ export default {
 
 const Template: Story = (args) =>
   <MibaoProvider>
-    <MibaoImage {...args} />
-    <MibaoImage {...args} loader={<Skeleton width="100%" height="100%" />} />
-    <MibaoImage {...args} fallback={<div>Failed</div>} />
+    <Stack spacing={3} direction="row">
+      <MibaoImage {...args} />
+      <MibaoImage {...args} loader={<Skeleton width="100%" height="100%" />} />
+      <MibaoImage {...args} fallback={<div>Failed</div>} />
+    </Stack>
   </MibaoProvider>
 
 export const Image = Template.bind({})
