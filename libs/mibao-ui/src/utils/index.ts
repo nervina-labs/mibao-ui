@@ -18,10 +18,6 @@ export function addParamsToUrl (
   return decodeURIComponent(urlObj.toString())
 }
 
-export function omit (obj: {[key: string]: any}, keys: string[]) {
-  const keySet = new Set(keys)
-  return Object.keys(obj).filter(key => !keySet.has(key)).reduce<{[key: string]: any}>((acc, key) => {
-    acc[key] = obj[key]
-    return acc
-  }, {})
+export function omit<T extends {[key: string]: never}, K extends keyof T> (obj: T, keys: K[]): Omit<T, K> {
+  return keys.reduce((acc, key) => ({ ...acc, [key]: undefined }), obj)
 }
