@@ -26,6 +26,10 @@
     box-shadow: 0 0 5px rgba(250, 190, 60, 1);
   }
 
+  &.square.animation:before {
+    border-radius: 3px;
+  }
+
   @keyframes background-animation {
     0% {
       background-position: 0, 50%;
@@ -50,15 +54,16 @@
   height: auto;
   transform: translate(-20%, -20%);
 }
-.icon.topRight {
+.icon.token {
   right: 0;
   left: unset;
   transform: translate(20%, -20%);
 }
-.icon.bottomRight {
+.icon.verified {
+  width: 30%;
   right: 0;
   bottom: 0;
   top: unset;
   left: unset;
-  transform: translate(20%, 20%);
+  transform: translate(15%, 15%);
 }

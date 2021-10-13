@@ -1,6 +1,6 @@
 import { Story, Meta } from '@storybook/react'
 import {
-  Avatar as MibaoAvatar,
+  Avatar as MibaoAvatar, AVATAR_SHAPE_SET,
   AVATAR_TYPE_SET,
   AvatarProps,
   MibaoProvider
@@ -13,6 +13,10 @@ export default {
   argTypes: {
     type: {
       options: AVATAR_TYPE_SET,
+      control: { type: 'select' }
+    },
+    shape: {
+      options: AVATAR_SHAPE_SET,
       control: { type: 'select' }
     }
   }
@@ -29,5 +33,6 @@ export const Avatar = Template.bind({})
 Avatar.args = {
   src: 'https://goldenlegend.oss-cn-hangzhou.aliyuncs.com/production/a9017356-4ecf-4257-8345-6b14c1625ab7.gif',
   size: '64px',
-  type: 'token'
+  type: 'token',
+  shape: 'circle'
 }
