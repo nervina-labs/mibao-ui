@@ -1,5 +1,4 @@
 import { Story, Meta } from '@storybook/react'
-import React from 'react'
 import { Progress as P, MibaoProvider } from 'mibao-ui'
 import { Stack } from '@chakra-ui/react'
 
