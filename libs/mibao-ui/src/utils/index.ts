@@ -15,7 +15,7 @@ export function addParamsToUrl (
       urlSearchParams.set(key, params[key])
     }
   })
-  return decodeURIComponent(urlObj.toString())
+  return decodeURI(urlObj.toString())
 }
 
 export function omit<T extends {[key: string]: any}, K extends keyof T> (obj: T, keys: K[]): Omit<T, K> {
