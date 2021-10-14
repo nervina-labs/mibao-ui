@@ -2,12 +2,13 @@ import { Box, Spinner, Image as ChakraImage, ImageProps as ChakraImageProps } fr
 import styles from './image.module.scss'
 import { useState, useMemo, useEffect, useCallback, ReactNode } from 'react'
 import FALLBACK_SRC from '../../../assets/images/fallback.svg'
-import { addParamsToUrl, omit } from '../../utils'
+import { addParamsToUrl, disableImageContext, omit } from '../../utils'
 
 export interface ImageProps extends ChakraImageProps {
   aspectRatio?: boolean
   loader?: ReactNode
   srcQueryParams?: Record<string, string>
+  disableContextMenu?: boolean
 }
 
 export const Image = (props: ImageProps) => {
@@ -74,6 +75,7 @@ export const Image = (props: ImageProps) => {
         htmlHeight={props.height as string}
         fallbackSrc={isError ? fallbackSrc : undefined}
         fallback={isError ? props.fallback : undefined}
+        onContextMenu={props.disableContextMenu ? disableImageContext : undefined}
       />
     </Box>
   )
