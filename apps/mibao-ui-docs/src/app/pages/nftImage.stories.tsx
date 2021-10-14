@@ -23,7 +23,7 @@ export default {
 const Template: Story<NftImageProps> = (args) =>
   <MibaoProvider>
     <div style={{ width: '200px' }}>
-      <MibaoNftImage {...args} srcQueryParams={{ tid: 0 }} />
+      <MibaoNftImage {...args} />
     </div>
   </MibaoProvider>
 
