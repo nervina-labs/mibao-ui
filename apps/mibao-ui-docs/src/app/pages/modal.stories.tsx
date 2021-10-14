@@ -9,8 +9,7 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  ModalFooter,
-  ModalFooterButtonGroup
+  ModalFooter, ModalFooterButtonGroup
 } from 'mibao-ui'
 import { useDisclosure } from '@chakra-ui/react'
 
@@ -20,18 +19,18 @@ export default {
   argTypes: {}
 } as Meta
 
-const Template: Story<typeof ARGS> = (args) => {
+const ModalTemplate: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  return <MibaoProvider>
+  return <>
     <Button onClick={onOpen}>Open Modal</Button>
     <MibaoModal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>{args.title}</ModalHeader>
-        <ModalCloseButton />
+        <ModalHeader>Modal Title</ModalHeader>
+        <ModalCloseButton rounded="100%" border="2px" borderColor="var(--chakra-colors-gray-100)" top={8} right={8} />
         <ModalBody>
-          {args.body}
+          Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text.
         </ModalBody>
 
         <ModalFooter>
@@ -40,18 +39,18 @@ const Template: Story<typeof ARGS> = (args) => {
               Save
             </Button>
 
-            <Button isFullWidth onClick={onClose}>Cancel</Button>
+            <Button isFullWidth>Cancel</Button>
           </ModalFooterButtonGroup>
         </ModalFooter>
       </ModalContent>
     </MibaoModal>
-  </MibaoProvider>
+  </>
 }
 
-const ARGS = {
-  title: 'Modal Title',
-  body: 'Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text.'
-} as const
+const Template: Story = (args) => <MibaoProvider>
+  <ModalTemplate />
+</MibaoProvider>
 
 export const Modal = Template.bind({})
-Modal.args = ARGS
+Modal.args = {
+}
