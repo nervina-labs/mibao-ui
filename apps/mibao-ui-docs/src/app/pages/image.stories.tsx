@@ -47,5 +47,6 @@ Image.args = {
   width: '200px',
   height: '',
   objectFit: 'cover',
-  crossOrigin: ''
+  crossOrigin: '',
+  disableContextMenu: false
 }
