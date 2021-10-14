@@ -3,7 +3,7 @@ import {
   Image as MibaoImage,
   MibaoProvider
 } from 'mibao-ui'
-import { Skeleton, Stack } from '@chakra-ui/react'
+import { Spinner, Stack } from '@chakra-ui/react'
 
 export default {
   component: MibaoImage,
@@ -34,18 +34,20 @@ const Template: Story = (args) =>
   <MibaoProvider>
     <Stack spacing={3} direction="row">
       <MibaoImage {...args} />
-      <MibaoImage {...args} loader={<Skeleton width="100%" height="100%" />} />
+      <MibaoImage {...args} loader={<Spinner color="primary.600" emptyColor="gray.200" m="auto" />} />
       <MibaoImage {...args} fallback={<div>Failed</div>} />
     </Stack>
   </MibaoProvider>
 
 export const Image = Template.bind({})
 Image.args = {
-  src: 'https://images.pexels.com/photos/2635817/pexels-photo-2635817.jpeg',
+  src: 'https://oss.jinse.cc/production/bd7c7508-026e-4fcd-abf8-1fa1061f4d6c.png',
   alt: '',
   aspectRatio: true,
   width: '200px',
   height: '',
   objectFit: 'cover',
-  crossOrigin: ''
+  crossOrigin: '',
+  disableContextMenu: false,
+  resizeScale: 200
 }
