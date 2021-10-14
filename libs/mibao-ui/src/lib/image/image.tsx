@@ -2,41 +2,34 @@ import { Box, Spinner, Image as ChakraImage, ImageProps as ChakraImageProps } fr
 import styles from './image.module.scss'
 import { useState, useMemo, useEffect, useCallback, ReactNode } from 'react'
 import FALLBACK_SRC from '../../../assets/images/fallback.svg'
-import { addParamsToUrl } from '../../utils'
+import { addParamsToUrl, omit } from '../../utils'
 
 export interface ImageProps extends ChakraImageProps {
   aspectRatio?: boolean
   loader?: ReactNode
-  srcQueryParams?: { [key: string]: string }
+  srcQueryParams?: Record<string, string>
 }
 
 export const Image = (props: ImageProps) => {
   const { fallbackSrc = FALLBACK_SRC } = props
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [isError, setIsError] = useState(false)
-  // image classname
-  const classNames = useMemo(() =>
-    [
-      styles.image,
-      props.className,
-      !props.src ? styles.hide : undefined,
-      props.aspectRatio ? styles.aspectRatio : undefined
-    ].filter(c => c).join(' '),
-  [props])
   // loading element
   const loaderEl = useMemo(() => {
-    if (props.loader) {
-      return props.loader
-    }
+    if (props.loader) return props.loader
     return <Spinner className={styles.spinner} color="primary.600" emptyColor="gray.200" />
   }, [props.loader])
   // src
   const imageSrc = useMemo(() => {
-    if (!props.srcQueryParams || !props.src) {
-      return props.src
-    }
+    if (!props.srcQueryParams || !props.src) return props.src
     return addParamsToUrl(props.src, props.srcQueryParams)
   }, [props])
+  // omit props
+  const imageProps = useMemo(() => omit(props, [
+    'aspectRatio',
+    'loader',
+    'srcQueryParams'
+  ]), [props])
 
   useEffect(() => {
     if (props.src) {
@@ -69,9 +62,11 @@ export const Image = (props: ImageProps) => {
         )
       }
       <ChakraImage
-        {...props}
+        {...imageProps}
+        hide={!props.src}
+        data-aspect-ratio={props.aspectRatio}
         src={imageSrc}
-        className={classNames}
+        className={`${styles.image} ${props.className ? props.className : ''}`}
         onLoad={onLoaded}
         onError={onError}
         objectFit={props.objectFit ?? 'cover'}
