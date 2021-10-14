@@ -4,7 +4,10 @@ import React from 'react'
 export const theme = extendTheme({
   colors: {
     primary: {
-      600: '#5065e5'
+      100: '#cccfe8',
+      500: '#5065e5',
+      600: '#4050b6',
+      700: '#2a3579'
     },
     black: '#23262F',
     gray: {
