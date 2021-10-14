@@ -1,12 +1,12 @@
 .image {
 }
 
-.image.hide {
+.image[hide="true"] {
   opacity: 0;
   pointer-events: none;
 }
 
-.image.aspectRatio {
+.image[data-aspect-ratio="true"] {
   aspect-ratio: 1/1;
 }
 
