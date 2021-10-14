@@ -45,7 +45,7 @@ export const NftImage: React.FC<NftImageProps> = (props) => {
 
   return (
     <Box className={styles.nftImageContainer}>
-      <Image rounded="10%" {...props} aspectRatio />
+      <Image rounded="10%" w="full" {...props} aspectRatio />
 
       <Stack position="absolute" direction="column" top="8%" right="8%" spacing={2}>
         {icons}
