@@ -19,8 +19,8 @@ export const Image = (props: ImageProps) => {
   // loading element
   const loaderEl = useMemo(() => {
     if (props.loader) return props.loader
-    return <Skeleton width="100%" height="100%" />
-  }, [props.loader])
+    return <Skeleton width="100%" height="100%" rounded={props.rounded} />
+  }, [props.loader, props.rounded])
   // src
   const imageSrc = useMemo(() => {
     if (!props.src) return props.src
