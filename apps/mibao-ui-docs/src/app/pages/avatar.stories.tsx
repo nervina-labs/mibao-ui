@@ -34,5 +34,6 @@ Avatar.args = {
   src: 'https://goldenlegend.oss-cn-hangzhou.aliyuncs.com/production/a9017356-4ecf-4257-8345-6b14c1625ab7.gif',
   size: '64px',
   type: 'token',
-  shape: 'circle'
+  shape: 'circle',
+  resizeScale: 150
 }

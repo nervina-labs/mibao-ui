@@ -1,6 +1,6 @@
 import styles from './avatar.module.scss'
 import React from 'react'
-import { Image } from '../image/image'
+import { Image, ImageProps } from '../image/image'
 import { Box } from '@chakra-ui/react'
 import DIAMONDS_SRC from '../../../assets/images/nft-avatar-diamonds.svg'
 import VERIFIED_SRC from '../../../assets/images/avatar-verified.svg'
@@ -11,12 +11,12 @@ export type AvatarType = typeof AVATAR_TYPE_SET[number]
 export const AVATAR_SHAPE_SET = ['circle', 'square'] as const
 export type AvatarShape = typeof AVATAR_SHAPE_SET[number]
 
-export interface AvatarProps {
+export interface AvatarProps extends Pick<ImageProps, 'resizeScale'> {
   src: string
   type?: AvatarType
   shape?: AvatarShape
   size?: string
-  srcQueryParams?: Record<string, string>
+  srcQueryParams?: { tid: number, locale: string }
 }
 
 export const Avatar: React.FC<AvatarProps> = ({
@@ -24,7 +24,8 @@ export const Avatar: React.FC<AvatarProps> = ({
   type = 'image',
   shape = 'circle',
   size,
-  srcQueryParams
+  srcQueryParams,
+  resizeScale
 }) => {
   const isToken = type === 'token'
   const isVerified = type === 'image_verified'
@@ -40,6 +41,7 @@ export const Avatar: React.FC<AvatarProps> = ({
         width="100%"
         aspectRatio
         srcQueryParams={srcQueryParams}
+        resizeScale={resizeScale}
       />
       {
         isToken && <img className={`${styles.icon} ${styles.token}`} src={DIAMONDS_SRC} alt='diamonds' />
