@@ -1,6 +1,6 @@
 export function addParamsToUrl (
   url: string,
-  params: { [key: string]: string },
+  params: Record<string, string>,
   options?: {
     ignoreDuplicates?: boolean
   }

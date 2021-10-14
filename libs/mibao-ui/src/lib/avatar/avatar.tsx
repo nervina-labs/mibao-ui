@@ -16,7 +16,7 @@ export interface AvatarProps {
   type?: AvatarType
   shape?: AvatarShape
   size?: string
-  srcQueryParams?: { [key: string]: string }
+  srcQueryParams?: Record<string, string>
 }
 
 export const Avatar: React.FC<AvatarProps> = ({
