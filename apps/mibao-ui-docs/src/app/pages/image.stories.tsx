@@ -41,12 +41,13 @@ const Template: Story = (args) =>
 
 export const Image = Template.bind({})
 Image.args = {
-  src: 'https://images.pexels.com/photos/2635817/pexels-photo-2635817.jpeg',
+  src: 'https://oss.jinse.cc/production/bd7c7508-026e-4fcd-abf8-1fa1061f4d6c.png',
   alt: '',
   aspectRatio: true,
   width: '200px',
   height: '',
   objectFit: 'cover',
   crossOrigin: '',
-  disableContextMenu: false
+  disableContextMenu: false,
+  resizeScale: 200
 }

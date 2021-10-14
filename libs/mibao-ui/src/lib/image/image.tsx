@@ -2,13 +2,14 @@ import { Box, Image as ChakraImage, ImageProps as ChakraImageProps, Skeleton } f
 import styles from './image.module.scss'
 import { useState, useMemo, useEffect, useCallback, ReactNode } from 'react'
 import FALLBACK_SRC from '../../../assets/images/fallback.svg'
-import { addParamsToUrl, disableImageContext, omit } from '../../utils'
+import { addParamsToUrl, disableImageContext, getImagePreviewUrl, omit } from '../../utils'
 
 export interface ImageProps extends ChakraImageProps {
   aspectRatio?: boolean
   loader?: ReactNode
   srcQueryParams?: Record<string, string | number>
   disableContextMenu?: boolean
+  resizeScale?: number // Specifies the shortest edge of the target zoom graph.
 }
 
 export const Image = (props: ImageProps) => {
@@ -22,14 +23,19 @@ export const Image = (props: ImageProps) => {
   }, [props.loader])
   // src
   const imageSrc = useMemo(() => {
-    if (!props.srcQueryParams || !props.src) return props.src
-    return addParamsToUrl(props.src, props.srcQueryParams)
+    if (!props.src) return props.src
+    const srcQueryParams = props.srcQueryParams ?? {}
+    if (props.resizeScale) {
+      return addParamsToUrl(getImagePreviewUrl(props.src, props.resizeScale), srcQueryParams)
+    }
+    return addParamsToUrl(props.src, srcQueryParams)
   }, [props])
   // omit props
   const imageProps = useMemo(() => omit(props, [
     'aspectRatio',
     'loader',
-    'srcQueryParams'
+    'srcQueryParams',
+    'resizeScale'
   ]), [props])
 
   useEffect(() => {
