@@ -1,4 +1,4 @@
-import { Box, Spinner, Image as ChakraImage, ImageProps as ChakraImageProps } from '@chakra-ui/react'
+import { Box, Image as ChakraImage, ImageProps as ChakraImageProps, Skeleton } from '@chakra-ui/react'
 import styles from './image.module.scss'
 import { useState, useMemo, useEffect, useCallback, ReactNode } from 'react'
 import FALLBACK_SRC from '../../../assets/images/fallback.svg'
@@ -18,7 +18,7 @@ export const Image = (props: ImageProps) => {
   // loading element
   const loaderEl = useMemo(() => {
     if (props.loader) return props.loader
-    return <Spinner className={styles.spinner} color="primary.600" emptyColor="gray.200" />
+    return <Skeleton width="100%" height="100%" />
   }, [props.loader])
   // src
   const imageSrc = useMemo(() => {
