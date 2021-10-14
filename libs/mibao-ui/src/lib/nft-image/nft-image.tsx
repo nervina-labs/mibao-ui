@@ -10,9 +10,10 @@ import ICON_3D_SRC from '../../../assets/images/3d-icon.svg'
 export const NFT_IMAGE_TYPE_SET = ['image', 'video', 'audio', '3d'] as const
 export type NftImageType = typeof NFT_IMAGE_TYPE_SET[number]
 
-export interface NftImageProps extends Omit<ImageProps, 'aspectRatio'> {
+export interface NftImageProps extends Omit<ImageProps, 'aspectRatio' | 'srcQueryParams'> {
   type?: NftImageType
   hasCardBack?: boolean
+  srcQueryParams?: { tid: number, locale: string }
 }
 
 export const NftImage: React.FC<NftImageProps> = (props) => {
