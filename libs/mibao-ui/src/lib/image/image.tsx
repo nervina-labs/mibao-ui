@@ -7,7 +7,7 @@ import { addParamsToUrl, disableImageContext, omit } from '../../utils'
 export interface ImageProps extends ChakraImageProps {
   aspectRatio?: boolean
   loader?: ReactNode
-  srcQueryParams?: Record<string, string>
+  srcQueryParams?: Record<string, string | number>
   disableContextMenu?: boolean
 }
 

@@ -1,6 +1,6 @@
 export function addParamsToUrl (
   url: string,
-  params: { [key: string]: string },
+  params: Record<string, string | number>,
   options?: {
     ignoreDuplicates?: boolean
   }
@@ -12,7 +12,7 @@ export function addParamsToUrl (
   const urlSearchParams = urlObj.searchParams
   Object.keys(params).forEach((key) => {
     if (!urlSearchParams.has(key) || options?.ignoreDuplicates) {
-      urlSearchParams.set(key, params[key])
+      urlSearchParams.set(key, String(params[key]))
     }
   })
   return decodeURI(urlObj.toString())
