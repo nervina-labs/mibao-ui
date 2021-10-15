@@ -11,6 +11,7 @@ export const mibaoTheme = extendTheme({
     },
     black: '#23262F',
     gray: {
+      200: '#eee',
       800: '#23262F'
     },
     progress: {
