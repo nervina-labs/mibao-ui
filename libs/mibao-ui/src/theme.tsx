@@ -5,7 +5,9 @@ export const mibaoTheme = extendTheme({
   colors: {
     primary: {
       100: '#f5f6fc',
-      600: '#5065e5'
+      500: '#5065e5',
+      600: '#4050b6',
+      700: '#2a3579'
     },
     black: '#23262F',
     gray: {
