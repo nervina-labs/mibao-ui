@@ -1,7 +1,7 @@
 import { ChakraProvider, ChakraProviderProps, extendTheme } from '@chakra-ui/react'
 import React from 'react'
 
-export const theme = extendTheme({
+export const mibaoTheme = extendTheme({
   colors: {
     primary: {
       100: '#cccfe8',
@@ -12,6 +12,9 @@ export const theme = extendTheme({
     black: '#23262F',
     gray: {
       800: '#23262F'
+    },
+    progress: {
+      main: '#5065E5'
     }
   },
   shadows: {
@@ -19,4 +22,4 @@ export const theme = extendTheme({
   }
 })
 
-export const MibaoProvider: React.FC<ChakraProviderProps> = (props) => <ChakraProvider theme={theme} {...props}>{props.children}</ChakraProvider>
+export const MibaoProvider: React.FC<ChakraProviderProps> = (props) => <ChakraProvider theme={mibaoTheme} {...props}>{props.children}</ChakraProvider>
