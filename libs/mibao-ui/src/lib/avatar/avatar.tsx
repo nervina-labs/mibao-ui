@@ -5,11 +5,9 @@ import { Box } from '@chakra-ui/react'
 import DIAMONDS_SRC from '../../../assets/images/nft-avatar-diamonds.svg'
 import VERIFIED_SRC from '../../../assets/images/avatar-verified.svg'
 
-export const AVATAR_TYPE_SET = ['token', 'image', 'image_verified'] as const
-export type AvatarType = typeof AVATAR_TYPE_SET[number]
+export type AvatarType = 'token' | 'image' | 'image_verified'
 
-export const AVATAR_SHAPE_SET = ['circle', 'square'] as const
-export type AvatarShape = typeof AVATAR_SHAPE_SET[number]
+export type AvatarShape = 'circle' | 'square'
 
 export interface AvatarProps extends Pick<ImageProps, 'resizeScale'> {
   src: string

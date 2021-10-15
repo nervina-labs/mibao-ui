@@ -1,7 +1,6 @@
 import { Story, Meta } from '@storybook/react'
 import {
-  Avatar as MibaoAvatar, AVATAR_SHAPE_SET,
-  AVATAR_TYPE_SET,
+  Avatar as MibaoAvatar,
   AvatarProps,
   MibaoProvider
 } from 'mibao-ui'
@@ -12,11 +11,11 @@ export default {
   title: 'Components/Avatar',
   argTypes: {
     type: {
-      options: AVATAR_TYPE_SET,
+      options: ['token', 'image', 'image_verified'],
       control: { type: 'select' }
     },
     shape: {
-      options: AVATAR_SHAPE_SET,
+      options: ['circle', 'square'],
       control: { type: 'select' }
     }
   }
