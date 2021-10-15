@@ -105,6 +105,28 @@ const Template: Story<ButtonProps> = (args) => <MibaoProvider>
       </MibaoButton>
     </Box>
   </Box>
+
+  <Box mt={6}>
+    <h3>Button Colors</h3>
+
+    <Box m={3} />
+
+    <p>Danger</p>
+    <ButtonGroup spacing={6} mt={2} mb={4}>
+      <MibaoButton variant="solid" colorScheme="red">Primary</MibaoButton>
+      <MibaoButton variant="outline" colorScheme="red">Default</MibaoButton>
+      <MibaoButton variant="ghost" colorScheme="red">Ghost</MibaoButton>
+      <MibaoButton variant="link" colorScheme="red">Link</MibaoButton>
+    </ButtonGroup>
+
+    <p>Primary Color</p>
+    <ButtonGroup spacing={6} mt={2} mb={4}>
+      <MibaoButton variant="solid" colorScheme="primary">Primary</MibaoButton>
+      <MibaoButton variant="outline" colorScheme="primary">Default</MibaoButton>
+      <MibaoButton variant="ghost" colorScheme="primary">Ghost</MibaoButton>
+      <MibaoButton variant="link" colorScheme="primary">Link</MibaoButton>
+    </ButtonGroup>
+  </Box>
 </MibaoProvider>
 
 export const Button = Template.bind({})
