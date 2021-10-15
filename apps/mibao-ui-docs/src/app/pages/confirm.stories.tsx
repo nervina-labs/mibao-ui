@@ -3,30 +3,47 @@ import React from 'react'
 import {
   ConfirmProvider, MibaoProvider, useConfirm, Button as MibaoButton
 } from 'mibao-ui'
+import { ConfirmProps } from '../../../../../libs/mibao-ui/src'
+import { Box, Code } from '@chakra-ui/react'
 
 export default {
   component: ConfirmProvider,
   title: 'Components/Modal',
-  argTypes: {}
+  argTypes: {
+    onConfirm: {
+      action: 'onConfirm'
+    },
+    onCancel: {
+      action: 'onCancel'
+    }
+  }
 } as Meta
 
-const args = {
+const args: ConfirmProps = {
   title: '',
   content: 'Content Content Content Content Content Content Content Content',
   confirmText: 'OK',
   cancelText: 'Cancel'
 }
 
-const Button: React.FC<typeof args> = (args) => {
+const Button: React.FC<ConfirmProps> = (args) => {
   const showModal = useConfirm()
   return <MibaoButton onClick={() => showModal(args)}>Button</MibaoButton>
 }
 
-const Template: Story<typeof args> = (args) => <MibaoProvider>
-  <ConfirmProvider>
-    <Button {...args} />
-  </ConfirmProvider>
-</MibaoProvider>
+const Template: Story<ConfirmProps> = (args) => {
+  return <MibaoProvider>
+    <Box m={2}>
+      <Code>
+        {'const showModal = useConfirm()'} <br/>
+        {'return <MibaoButton onClick={() => showModal(args)}>Button</MibaoButton>'}
+      </Code>
+    </Box>
+    <ConfirmProvider>
+      <Button {...args} />
+    </ConfirmProvider>
+  </MibaoProvider>
+}
 
 export const Confirm = Template.bind({})
 Confirm.args = args

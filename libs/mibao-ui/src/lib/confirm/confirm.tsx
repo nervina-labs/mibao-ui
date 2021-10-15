@@ -17,7 +17,6 @@ export interface ConfirmProps {
   title?: ReactNode
   content?: ReactNode
   onConfirm?: () => void
-  onConfirmError?: () => void
   confirmText?: ReactNode
   onCancel?: () => void
   cancelText?: ReactNode
