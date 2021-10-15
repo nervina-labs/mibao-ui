@@ -20,16 +20,16 @@ export default {
   argTypes: {}
 } as Meta
 
-const ModalTemplate: React.FC<typeof ARGS> = (args) => {
+const Template: Story<typeof ARGS> = (args) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  return <>
+  return <MibaoProvider>
     <Button onClick={onOpen}>Open Modal</Button>
     <MibaoModal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{args.title}</ModalHeader>
-        <ModalCloseButton rounded="100%" border="2px" borderColor="var(--chakra-colors-gray-100)" top={8} right={8} />
+        <ModalCloseButton />
         <ModalBody>
           {args.body}
         </ModalBody>
@@ -45,12 +45,8 @@ const ModalTemplate: React.FC<typeof ARGS> = (args) => {
         </ModalFooter>
       </ModalContent>
     </MibaoModal>
-  </>
+  </MibaoProvider>
 }
-
-const Template: Story<typeof ARGS> = (args) => <MibaoProvider>
-  <ModalTemplate {...args} />
-</MibaoProvider>
 
 const ARGS = {
   title: 'Modal Title',
