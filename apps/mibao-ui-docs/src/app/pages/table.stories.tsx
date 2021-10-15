@@ -40,7 +40,7 @@ const args = {
   isNumeric: false,
   placement: 'bottom' as 'top' | 'bottom',
   variant: 'simple',
-  theadVariant: 'filled'
+  theadVariant: 'filled' as 'filled' | 'unstyled'
 }
 
 const Template: Story<typeof args> = (args) => <MibaoProvider>
