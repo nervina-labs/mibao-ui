@@ -8,7 +8,8 @@ export const mibaoTheme = extendTheme({
     },
     black: '#23262F',
     gray: {
-      800: '#23262F'
+      800: '#23262F',
+      main: '#777E91'
     },
     progress: {
       main: '#5065E5'
