@@ -36,13 +36,13 @@ const args = {
   isNumeric: false,
   placement: 'bottom' as 'top' | 'bottom',
   variant: 'simple',
-  defaultBg: false
+  unstyled: false
 }
 
 const Template: Story<typeof args> = (args) => <MibaoProvider>
   <MibaoTable size={args.size} variant={args.variant} colorScheme="primary">
     <TableCaption placement={args.placement}>Imperial to metric conversion factors</TableCaption>
-    <Thead defaultBg={args.defaultBg}>
+    <Thead unstyled={args.unstyled}>
       <Tr>
         <Th>Type</Th>
         <Th>Order</Th>
