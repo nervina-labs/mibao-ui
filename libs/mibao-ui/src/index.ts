@@ -1,5 +1,6 @@
 import './index.scss'
 
+export * from './lib/copyzone/copyzone'
 export * from './lib/nft-image/nft-image'
 export * from './lib/avatar/avatar'
 export * from './lib/image/image'
