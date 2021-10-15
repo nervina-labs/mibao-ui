@@ -1,0 +1,19 @@
+.nftImageContainer {
+  position: relative;
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+
+  img, svg {
+    width: 16px;
+    height: auto;
+    margin: auto;
+    object-fit: cover;
+  }
+}
