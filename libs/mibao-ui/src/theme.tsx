@@ -4,6 +4,7 @@ import React from 'react'
 export const mibaoTheme = extendTheme({
   colors: {
     primary: {
+      100: '#f5f6fc',
       600: '#5065e5'
     },
     black: '#23262F',
