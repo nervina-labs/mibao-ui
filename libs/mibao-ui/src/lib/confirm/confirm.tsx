@@ -16,7 +16,6 @@ import { Button } from '../button/button'
 export interface ConfirmProps {
   title?: ReactNode
   content?: ReactNode
-  icon?: string
   onConfirm?: () => void
   onConfirmError?: () => void
   confirmText?: ReactNode

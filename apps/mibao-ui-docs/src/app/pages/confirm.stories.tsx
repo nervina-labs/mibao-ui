@@ -10,16 +10,23 @@ export default {
   argTypes: {}
 } as Meta
 
-const Button: React.FC = () => {
-  const showModal = useConfirm()
-  return <MibaoButton onClick={() => showModal({ content: 'Content' })}>Button</MibaoButton>
+const args = {
+  title: '',
+  content: 'Content Content Content Content Content Content Content Content',
+  confirmText: 'OK',
+  cancelText: 'Cancel'
 }
 
-const Template: Story = (args) => <MibaoProvider>
+const Button: React.FC<typeof args> = (args) => {
+  const showModal = useConfirm()
+  return <MibaoButton onClick={() => showModal(args)}>Button</MibaoButton>
+}
+
+const Template: Story<typeof args> = (args) => <MibaoProvider>
   <ConfirmProvider>
-    <Button />
+    <Button {...args} />
   </ConfirmProvider>
 </MibaoProvider>
 
 export const Confirm = Template.bind({})
-Confirm.args = { }
+Confirm.args = args
