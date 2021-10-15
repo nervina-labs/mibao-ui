@@ -36,9 +36,10 @@ export {
   TableCaptionProps
 }
 
-export const Thead: React.FC<TableHeadProps & { unstyled?: boolean }> = (props) => {
+export const Thead: React.FC<TableHeadProps & { variant: 'filled' | 'unstyled' }> = (props) => {
+  const variant = props.variant ?? 'unstyled'
   return <ChakraThead
-    bg={props.unstyled ? undefined : 'var(--chakra-colors-primary-100)'}
+    bg={variant === 'filled' ? 'var(--chakra-colors-primary-100)' : undefined}
     {...props}
   >{props.children}</ChakraThead>
 }

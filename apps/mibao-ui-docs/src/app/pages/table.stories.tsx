@@ -27,6 +27,10 @@ export default {
     variant: {
       options: ['unstyled', 'simple', 'striped'],
       control: { type: 'select' }
+    },
+    theadVariant: {
+      options: ['filled', 'unstyled'],
+      control: { type: 'select' }
     }
   }
 } as Meta
@@ -36,13 +40,13 @@ const args = {
   isNumeric: false,
   placement: 'bottom' as 'top' | 'bottom',
   variant: 'simple',
-  unstyled: false
+  theadVariant: 'filled'
 }
 
 const Template: Story<typeof args> = (args) => <MibaoProvider>
   <MibaoTable size={args.size} variant={args.variant} colorScheme="primary">
     <TableCaption placement={args.placement}>Imperial to metric conversion factors</TableCaption>
-    <Thead unstyled={args.unstyled}>
+    <Thead variant={args.theadVariant}>
       <Tr>
         <Th>Type</Th>
         <Th>Order</Th>
