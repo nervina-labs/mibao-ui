@@ -1,6 +1,9 @@
 import './index.scss'
 
 export * from './lib/table/table'
+export * from './lib/copyzone/copyzone'
+export * from './lib/nft-image/nft-image'
+export * from './lib/avatar/avatar'
 export * from './lib/image/image'
 export * from './lib/drawer/drawer'
 export * from './lib/tooltip/tooltip'
