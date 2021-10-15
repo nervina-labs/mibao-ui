@@ -13,7 +13,7 @@ export const Copyzone: React.FC<CopyzoneProps> = ({ children, containerProps, va
   const { hasCopied, onCopy } = useClipboard(value)
   return (
     <Flex mb={2} alignItems="center" {...containerProps}>
-      <Text {...props}>{children}</Text>
+      <Text fontSize="13px" {...props}>{children}</Text>
       {hasCopied ? <CopiedIcon ml="8px" onClick={onCopy} /> : <CopyIcon ml="8px" cursor="pointer" onClick={onCopy} />}
     </Flex>
   )

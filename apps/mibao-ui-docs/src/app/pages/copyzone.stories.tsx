@@ -26,7 +26,7 @@ export const Custom: Story = () => {
   return (
     <MibaoProvider>
       <Copyzone value="Hello world" containerProps={{ as: 'span' }}>Container as span</Copyzone>
-      <Copyzone value="Hello world" color="red" fontSize="12px">Color and Font size</Copyzone>
+      <Copyzone value="Hello world" color="red">Custom Color</Copyzone>
     </MibaoProvider>
   )
 }
