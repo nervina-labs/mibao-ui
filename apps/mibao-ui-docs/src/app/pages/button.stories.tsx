@@ -41,7 +41,9 @@ const SubmitButton: React.FC = () => {
 const Template: Story<ButtonProps> = (args) => <MibaoProvider>
   <h1>Controls Button</h1>
 
-  <MibaoButton {...args}>Button</MibaoButton>
+  <Box mt={2}>
+    <MibaoButton {...args}>Button</MibaoButton>
+  </Box>
 
   <Box mt={6}>
     <h2>Button Style</h2>
