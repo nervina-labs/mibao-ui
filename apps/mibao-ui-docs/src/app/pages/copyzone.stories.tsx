@@ -7,11 +7,13 @@ export default {
   argTypes: {
     value: {
       type: 'string',
-      defaultValue: 'Hello World'
+      defaultValue: 'Hello World',
+      description: 'value that to be copied'
     },
     children: {
       type: 'string',
-      defaultValue: 'Hello World'
+      defaultValue: 'Hello World',
+      description: 'something that to be display'
     }
   }
 } as Meta
