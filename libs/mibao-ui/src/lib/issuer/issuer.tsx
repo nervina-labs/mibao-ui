@@ -3,6 +3,7 @@ import React from 'react'
 import { Avatar, AvatarProps } from '../avatar/avatar'
 import Copyzone from '../copyzone/copyzone'
 import { Flex, Stack, Text, TextProps } from '../typography/typography'
+import styles from './issuer.module.scss'
 
 export interface IssuerProps extends AvatarProps {
   name: string
@@ -39,7 +40,7 @@ export const Issuer: React.FC<IssuerProps> = ({
   const isOneline = id == null && verifiedTitle == null
   return (
     <Flex
-      className={className}
+      className={`${className ?? ''} ${styles.issuer}`}
       direction="row"
       alignItems="center"
       onClick={onClick}

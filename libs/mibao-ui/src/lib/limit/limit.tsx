@@ -7,11 +7,11 @@ export interface LimitProps extends TextProps {
   serialNumber?: number
   limitedText: string
   unlimitedText: string
-  isBaned?: string
-  lang?: string
+  isBaned?: boolean
+  locale?: string
 }
 
-export const Limited: React.FC<LimitProps> = ({ count, serialNumber, limitedText, unlimitedText, isBaned, lang = 'zh', ...rest }) => {
+export const Limited: React.FC<LimitProps> = ({ count, serialNumber, limitedText, unlimitedText, isBaned, locale = 'zh', ...rest }) => {
   const isUnlimited = count === '0' || count === 0
   const content = useMemo(() => {
     const no = serialNumber != null ? `#${serialNumber} / ` : ''
@@ -21,10 +21,10 @@ export const Limited: React.FC<LimitProps> = ({ count, serialNumber, limitedText
         ? unlimitedText
         : `${limitedText} ${formatCount(
             Number(count),
-            lang
+            locale
           )}`)
     )
-  }, [count, isUnlimited, lang, limitedText, serialNumber, unlimitedText])
+  }, [count, isUnlimited, locale, limitedText, serialNumber, unlimitedText])
 
   if (isBaned) {
     return null
