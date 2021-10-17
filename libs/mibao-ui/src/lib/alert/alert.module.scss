@@ -1,0 +1,34 @@
+// TODO: set color in theme
+.container {
+  padding: 20px 28px;
+  border-radius: 10px;
+  align-items: flex-start;
+  box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  &[data-status='success'] {
+    border-color: #45b26b;
+    background-color: #45b26b1a;
+    .icon {
+      color: #52c41a;
+    }
+  }
+  &[data-status='info'] {
+    border-color: #86cfff;
+    background-color: #e6f7ff;
+    .icon {
+      color: #1890ff;
+    }
+  }
+  &[data-status='warning'] {
+    border-color: #6d75ff;
+    background-color: #6a4bff0d;
+    .icon {
+      color: #ffa940;
+    }
+  }
+  &[data-status='error'] {
+    border-color: #fed7d7;
+    background-color: #fed7d78a;
+  }
+}
