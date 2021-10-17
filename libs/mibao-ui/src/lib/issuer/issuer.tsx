@@ -2,10 +2,14 @@ import { Link } from '@chakra-ui/react'
 import React from 'react'
 import { Avatar, AvatarProps } from '../avatar/avatar'
 import Copyzone from '../copyzone/copyzone'
-import { Flex, Stack, Text } from '../typography/typography'
+import { Flex, Stack, Text, TextProps } from '../typography/typography'
 
 export interface IssuerProps extends AvatarProps {
   name: string
+  className?: string
+  nameProps?: TextProps
+  isBaned?: boolean
+  bannedText?: string
   id?: string
   verifiedTitle?: string
   href?: string
@@ -22,15 +26,20 @@ export const Issuer: React.FC<IssuerProps> = ({
   href,
   onClick,
   displayId,
+  isBaned,
+  bannedText,
+  className,
+  nameProps,
   disableCopy = false,
   size = '60px',
   resizeScale = 150,
   ...avatarProps
 }) => {
-  const anchorProps = href ? { as: Link, href, isExternal: true } : undefined
+  const anchorProps = href && !isBaned ? { as: Link, href, isExternal: true } : undefined
   const isOneline = id == null && verifiedTitle == null
   return (
     <Flex
+      className={className}
       direction="row"
       alignItems="center"
       onClick={onClick}
@@ -40,12 +49,19 @@ export const Issuer: React.FC<IssuerProps> = ({
         isVerified={isVerified}
         resizeScale={resizeScale}
         size={size}
+        isBaned={isBaned}
         containerProps={{ mr: isOneline ? '4px' : '16px' }}
         {...avatarProps}
       />
       <Stack spacing="4px" direction="column" justifyContent="space-between">
-        <Text isTruncated fontSize={isOneline ? '12px' : '14px' } fontWeight={isOneline ? 'normal' : 500}>
-          {name}
+        <Text
+          isTruncated
+          color={isBaned ? 'banned.main' : undefined}
+          fontSize={isOneline ? '12px' : '14px' }
+          fontWeight={isOneline ? 'normal' : 500}
+          {...nameProps}
+        >
+          {isBaned ? bannedText : name}
         </Text>
         {id
           ? (

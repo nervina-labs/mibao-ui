@@ -14,6 +14,7 @@ export interface AvatarProps extends ImageProps {
   type?: AvatarType
   shape?: AvatarShape
   size?: string
+  isBaned?: boolean
   isVerified?: boolean
   srcQueryParams?: { tid: number, locale: string }
   containerProps?: BoxProps
@@ -24,6 +25,7 @@ export const Avatar: React.FC<AvatarProps> = ({
   type = 'image',
   shape = 'circle',
   size,
+  isBaned,
   isVerified,
   srcQueryParams,
   resizeScale,
@@ -31,7 +33,6 @@ export const Avatar: React.FC<AvatarProps> = ({
   ...imageProps
 }) => {
   const isToken = type === 'token'
-  console.log(isVerified)
   return (
     <Box
       className={`${styles.avatarContainer} ${isToken ? styles.animation : ''} ${shape === 'square' ? styles.square : ''}`}
@@ -41,7 +42,7 @@ export const Avatar: React.FC<AvatarProps> = ({
       {...containerProps}
     >
       <Image
-        src={src}
+        src={isBaned ? '' : src}
         rounded={shape === 'square' ? '3px' : '100%'}
         width="100%"
         aspectRatio
@@ -50,16 +51,18 @@ export const Avatar: React.FC<AvatarProps> = ({
         {...imageProps}
       />
       {
-        isToken && <img className={`${styles.icon} ${styles.token}`} src={DIAMONDS_SRC} alt='diamonds' />
+        isToken && !isBaned && <img className={`${styles.icon} ${styles.token}`} src={DIAMONDS_SRC} alt='diamonds' />
       }
       {
-        isVerified && (
+        isVerified && !isBaned
+          ? (
           <img
             className={`${styles.icon} ${styles.verified}`}
             src={VERIFIED_SRC}
             alt='verified'
           />
-        )
+            )
+          : null
       }
     </Box>
   )

@@ -14,34 +14,40 @@ export interface NftImageProps extends Omit<ImageProps, 'aspectRatio' | 'srcQuer
   type?: NftImageType
   hasCardBack?: boolean
   srcQueryParams?: { tid: number, locale: string }
+  isBaned?: boolean
 }
 
-export const NftImage: React.FC<NftImageProps> = (props) => {
-  const icons = useMemo(() => [
-    {
-      show: props.hasCardBack,
-      src: CARD_BACK_SRC
-    },
-    {
-      show: props.type === 'video',
-      src: VIDEO_SRC
-    },
-    {
-      show: props.type === 'audio',
-      src: AUDIO_SRC
-    },
-    {
-      show: props.type === '3d',
-      src: ICON_3D_SRC
+export const NftImage: React.FC<NftImageProps> = ({ isBaned, ...props }) => {
+  const icons = useMemo(() => {
+    if (isBaned) {
+      return null
     }
-  ]
-    .filter(item => item.show)
-    .map(item => (
-    <Flex className={styles.icon}>
-      <img src={item.src} alt='icon' />
-    </Flex>
-    ))
-  , [props])
+    return [
+      {
+        show: props.hasCardBack,
+        src: CARD_BACK_SRC
+      },
+      {
+        show: props.type === 'video',
+        src: VIDEO_SRC
+      },
+      {
+        show: props.type === 'audio',
+        src: AUDIO_SRC
+      },
+      {
+        show: props.type === '3d',
+        src: ICON_3D_SRC
+      }
+    ]
+      .filter(item => item.show)
+      .map(item => (
+      <Flex className={styles.icon}>
+        <img src={item.src} alt='icon' />
+      </Flex>
+      ))
+  }
+  , [props, isBaned])
 
   return (
     <Box className={styles.nftImageContainer}>

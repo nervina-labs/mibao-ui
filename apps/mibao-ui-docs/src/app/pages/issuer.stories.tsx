@@ -61,3 +61,18 @@ export const WithLink: Story = () =>
       />
     </Stack>
   </MibaoProvider>
+
+export const Baned: Story = () =>
+  <MibaoProvider>
+    <Stack spacing={10} direction="row">
+      <Issuer
+        size="25px"
+        src="https://goldenlegend.oss-cn-hangzhou.aliyuncs.com/production/a9017356-4ecf-4257-8345-6b14c1625ab7.gif"
+        name="Goodman"
+        href="https://mibao.net/issuer/47ea8b55-8dae-4cd5-9690-8995552a9201"
+        isVerified={true}
+        isBaned
+        bannedText="该用户暂不予显示"
+      />
+    </Stack>
+  </MibaoProvider>

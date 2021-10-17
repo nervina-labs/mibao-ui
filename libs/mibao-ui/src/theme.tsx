@@ -13,6 +13,9 @@ export const mibaoTheme = extendTheme({
     },
     progress: {
       main: '#5065E5'
+    },
+    banned: {
+      main: '#d03a3a'
     }
   },
   shadows: {
