@@ -1,5 +1,7 @@
 import './index.scss'
 
+export * from './lib/pagination/pagination'
+
 export * from './lib/table/table'
 export * from './lib/button/button'
 export * from './lib/modal/modal'
