@@ -1,5 +1,7 @@
-.issuer {
-  &:hover {
-    text-decoration: none;
+a {
+  &.issuer {
+    &:hover {
+      text-decoration: none;
+    }
   }
 }

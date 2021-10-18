@@ -77,7 +77,7 @@ export const Issuer: React.FC<IssuerProps> = ({
           : null}
         {verifiedTitle && isVerified
           ? (
-          <Text isTruncated value={id} fontSize="12px" color="gray.main">
+          <Text isTruncated fontSize="12px" color="gray.main">
             {verifiedTitle}
           </Text>
             )

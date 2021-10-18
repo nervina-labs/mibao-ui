@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import React, { useMemo } from 'react'
 import { Link } from '@chakra-ui/react'
 import { IssuerProps, Issuer } from '../issuer/issuer'
@@ -53,7 +52,7 @@ export const NFTCard: React.FC<NFTCardProps> = ({
   titleProps,
   ...rest
 }) => {
-  const isBanned = isIssuerBanned || isNFTBanned
+  const isBanned = !!isIssuerBanned || !!isNFTBanned
   const anchorProps = href && !isBanned ? { as: Link, href, isExternal: true } : undefined
 
   const info = useMemo(() => {
@@ -114,7 +113,7 @@ export const NFTCard: React.FC<NFTCardProps> = ({
         resizeScale={resizeScale}
         {...imageProps}
       />
-      <NFTTitle title={title} isBanned={isBanned} bannedText={bannedText} {...titleProps} />
+      <NFTTitle mt="16px" mb="8px" title={title} isBanned={isBanned} bannedText={bannedText} {...titleProps} />
       {info}
     </Flex>
   )

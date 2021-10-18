@@ -48,6 +48,7 @@ export const Avatar: React.FC<AvatarProps> = ({
         aspectRatio
         srcQueryParams={srcQueryParams}
         resizeScale={resizeScale}
+        minW={imageProps?.width}
         {...imageProps}
       />
       {
