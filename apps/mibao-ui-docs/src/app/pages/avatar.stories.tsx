@@ -11,12 +11,16 @@ export default {
   title: 'Components/Avatar',
   argTypes: {
     type: {
-      options: ['token', 'image', 'image_verified'],
+      options: ['token', 'image'],
       control: { type: 'select' }
     },
     shape: {
       options: ['circle', 'square'],
       control: { type: 'select' }
+    },
+    isVerified: {
+      type: 'boolean',
+      defaultValue: false
     }
   }
 } as Meta
