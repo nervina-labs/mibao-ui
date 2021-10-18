@@ -1,0 +1,19 @@
+span.container {
+  --primary: #5065e5;
+  --center-size: calc(100% - 2px);
+  border-width: 1px;
+  border-color: #92929d !important;
+  &[data-checked] {
+    background-color: #fff !important;
+    border-color: var(--primary) !important;
+    color: var(--primary) !important;
+    &:before {
+      width: var(--center-size) !important;
+      height: var(--center-size) !important;
+    }
+    &:hover {
+      background: #fff !important;
+      border-color: var(--primary) !important;
+    }
+  }
+}
