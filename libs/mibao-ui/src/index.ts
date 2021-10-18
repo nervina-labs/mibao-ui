@@ -2,6 +2,7 @@ import './index.scss'
 
 export * from './lib/select/select'
 export * from './lib/pagination/pagination'
+export * from './lib/alert/alert'
 
 export * from './lib/table/table'
 export * from './lib/button/button'
