@@ -13,7 +13,7 @@ export const Regular: Story = () => {
     <MibaoProvider>
       <Stack>
         <Like likeCount={12345} isLiked />
-        <Like likeCount={12345} isLiked={false} stroke="#23262F" fill="transparent" />
+        <Like likeCount={12345} isLiked={false} />
         <Like likeCount={12345} isLiked locale="zh" />
         <Like likeCount={12345} isLiked={false} locale="zh" />
       </Stack>
