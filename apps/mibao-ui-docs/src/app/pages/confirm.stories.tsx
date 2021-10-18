@@ -1,9 +1,8 @@
 import { Story, Meta } from '@storybook/react'
 import React from 'react'
 import {
-  ConfirmProvider, MibaoProvider, useConfirm, Button as MibaoButton
+  ConfirmProvider, MibaoProvider, useConfirm, Button as MibaoButton, ConfirmProps
 } from 'mibao-ui'
-import { ConfirmProps } from '../../../../../libs/mibao-ui/src'
 import { Box, Code } from '@chakra-ui/react'
 
 export default {
