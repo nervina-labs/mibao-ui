@@ -61,6 +61,8 @@
 }
 .icon.verified {
   width: 30%;
+  max-width: 30px;
+  min-width: 15px;
   right: 0;
   bottom: 0;
   top: unset;

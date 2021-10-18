@@ -1,0 +1,32 @@
+// TODO: set color in theme
+.container {
+  display: flex;
+  width: min-content;
+  padding: 2px;
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 55px;
+    height: 55px;
+    color: #5065e5;
+    font-size: 1.125rem;
+    appearance: none;
+    background: none;
+    border: none;
+    border-radius: 10px;
+    &[disabled] {
+      color: #666;
+    }
+    &:hover:not([disabled]) {
+      cursor: pointer;
+      background-color: #ffffff3a;
+    }
+    &[data-active='true'] {
+      color: #1d1b23;
+      background-color: #fff;
+    }
+  }
+  background-color: #eee;
+  border-radius: 10px;
+}

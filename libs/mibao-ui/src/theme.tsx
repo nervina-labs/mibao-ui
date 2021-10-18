@@ -4,10 +4,14 @@ import React from 'react'
 export const mibaoTheme = extendTheme({
   colors: {
     primary: {
-      600: '#5065e5'
+      100: '#f5f6fc',
+      500: '#5065e5',
+      600: '#4050b6',
+      700: '#2a3579'
     },
     black: '#23262F',
     gray: {
+      200: '#eee',
       800: '#23262F',
       main: '#777E91'
     },
