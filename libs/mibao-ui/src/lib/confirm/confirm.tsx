@@ -1,5 +1,5 @@
 import './confirm.module.scss'
-import React, { ReactNode, createContext, useState, useContext } from 'react'
+import React, { ReactNode, createContext, useState, useContext, useCallback } from 'react'
 import {
   Modal,
   ModalBody,
@@ -37,8 +37,12 @@ const ConfirmModal: React.FC<{
   onClose: () => void
 }> = (props) => {
   const context = useContext(ConfirmContext)
+  const onClose = useCallback(() => {
+    context.props?.onCancel?.()
+    props.onClose?.()
+  }, [context.props, props])
 
-  return <Modal isOpen={props.isOpen} onClose={props.onClose}>
+  return <Modal isOpen={props.isOpen} onClose={onClose}>
     <ModalOverlay />
     <ModalContent>
       <ModalHeader>{context.props?.title}</ModalHeader>
@@ -57,10 +61,7 @@ const ConfirmModal: React.FC<{
           </Button>
 
           {
-            context.props?.onCancel && <Button isFullWidth onClick={() => {
-              context.props?.onCancel?.()
-              props.onClose?.()
-            }}>
+            context.props?.onCancel && <Button isFullWidth onClick={onClose}>
               { context.props?.cancelText ?? 'Cancel' }
             </Button>
           }
