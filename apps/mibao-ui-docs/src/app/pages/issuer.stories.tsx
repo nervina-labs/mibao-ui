@@ -71,7 +71,7 @@ export const Baned: Story = () =>
         name="Goodman"
         href="https://mibao.net/issuer/47ea8b55-8dae-4cd5-9690-8995552a9201"
         isVerified={true}
-        isBaned
+        isBanned
         bannedText="该用户暂不予显示"
       />
     </Stack>

@@ -9,7 +9,7 @@ export interface IssuerProps extends AvatarProps {
   name: string
   className?: string
   nameProps?: TextProps
-  isBaned?: boolean
+  isBanned?: boolean
   bannedText?: string
   id?: string
   verifiedTitle?: string
@@ -27,7 +27,7 @@ export const Issuer: React.FC<IssuerProps> = ({
   href,
   onClick,
   displayId,
-  isBaned,
+  isBanned,
   bannedText,
   className,
   nameProps,
@@ -36,7 +36,7 @@ export const Issuer: React.FC<IssuerProps> = ({
   resizeScale = 150,
   ...avatarProps
 }) => {
-  const anchorProps = href && !isBaned ? { as: Link, href, isExternal: true } : undefined
+  const anchorProps = href && !isBanned ? { as: Link, href, isExternal: true } : undefined
   const isOneline = id == null && verifiedTitle == null
   return (
     <Flex
@@ -50,19 +50,19 @@ export const Issuer: React.FC<IssuerProps> = ({
         isVerified={isVerified}
         resizeScale={resizeScale}
         size={size}
-        isBaned={isBaned}
+        isBanned={isBanned}
         containerProps={{ mr: isOneline ? '4px' : '16px' }}
         {...avatarProps}
       />
       <Stack spacing="4px" direction="column" justifyContent="space-between">
         <Text
           isTruncated
-          color={isBaned ? 'banned.main' : undefined}
+          color={isBanned ? 'banned.main' : undefined}
           fontSize={isOneline ? '12px' : '14px' }
           fontWeight={isOneline ? 'normal' : 500}
           {...nameProps}
         >
-          {isBaned ? bannedText : name}
+          {isBanned ? bannedText : name}
         </Text>
         {id
           ? (

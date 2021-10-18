@@ -59,7 +59,7 @@ export const NFTCard: React.FC<NFTCardProps> = ({
     if (likeProps && issuerProps && limitProps) {
       return (
         <>
-          <Issuer size="25px" isBaned={isIssuerBanned} {...issuerProps} />
+          <Issuer size="25px" isBanned={isIssuerBanned} {...issuerProps} />
           <Flex mt="6px" direction="row" alignItems="center" justifyContent="space-between">
             <Limited locale={locale} isBaned={isBanned} {...limitProps} />
             <Like isBaned={isBanned} {...likeProps} />
@@ -78,7 +78,7 @@ export const NFTCard: React.FC<NFTCardProps> = ({
     if (issuerProps && likeProps) {
       return (
         <Flex direction="row" alignItems="center" justifyContent="space-between">
-          <Issuer size="25px" isBaned={isIssuerBanned} {...issuerProps} />
+          <Issuer size="25px" isBanned={isIssuerBanned} {...issuerProps} />
           <Like isBaned={isBanned} {...likeProps} />
         </Flex>
       )
@@ -86,7 +86,7 @@ export const NFTCard: React.FC<NFTCardProps> = ({
     if (issuerProps && limitProps) {
       return (
         <Flex direction="row" alignItems="center" justifyContent="space-between">
-          <Issuer size="25px" isBaned={isIssuerBanned} {...issuerProps} />
+          <Issuer size="25px" isBanned={isIssuerBanned} {...issuerProps} />
           <Limited locale={locale} isBaned={isBanned} {...limitProps} />
         </Flex>
       )

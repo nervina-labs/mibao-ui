@@ -80,7 +80,7 @@ export const NFTListItem: React.FC<NFTListItemProps> = ({
           {...titleProps}
         />
         {limitProps ? <Limited isBaned={isBanned} {...limitProps} /> : null}
-        <Issuer size="25px" isBaned={isIssuerBanned} {...issuerProps} />
+        <Issuer size="25px" isBanned={isIssuerBanned} {...issuerProps} />
       </Stack>
     </Flex>
   )

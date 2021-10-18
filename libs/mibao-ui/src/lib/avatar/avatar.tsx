@@ -14,7 +14,7 @@ export interface AvatarProps extends ImageProps {
   type?: AvatarType
   shape?: AvatarShape
   size?: string
-  isBaned?: boolean
+  isBanned?: boolean
   isVerified?: boolean
   srcQueryParams?: { tid: number, locale: string }
   containerProps?: BoxProps
@@ -25,7 +25,7 @@ export const Avatar: React.FC<AvatarProps> = ({
   type = 'image',
   shape = 'circle',
   size,
-  isBaned,
+  isBanned,
   isVerified,
   srcQueryParams,
   resizeScale,
@@ -42,7 +42,7 @@ export const Avatar: React.FC<AvatarProps> = ({
       {...containerProps}
     >
       <Image
-        src={isBaned ? '' : src}
+        src={isBanned ? '' : src}
         rounded={shape === 'square' ? '3px' : '100%'}
         width="100%"
         aspectRatio
@@ -52,10 +52,10 @@ export const Avatar: React.FC<AvatarProps> = ({
         {...imageProps}
       />
       {
-        isToken && !isBaned && <img className={`${styles.icon} ${styles.token}`} src={DIAMONDS_SRC} alt='diamonds' />
+        isToken && !isBanned && <img className={`${styles.icon} ${styles.token}`} src={DIAMONDS_SRC} alt='diamonds' />
       }
       {
-        isVerified && !isBaned
+        isVerified && !isBanned
           ? (
           <img
             className={`${styles.icon} ${styles.verified}`}
