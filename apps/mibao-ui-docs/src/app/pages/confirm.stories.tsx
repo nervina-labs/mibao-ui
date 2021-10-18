@@ -7,7 +7,7 @@ import { Box, Code } from '@chakra-ui/react'
 
 export default {
   component: ConfirmProvider,
-  title: 'Components/Modal',
+  title: 'Components/Confirm',
   argTypes: {
     onConfirm: {
       action: 'onConfirm'
@@ -25,7 +25,7 @@ const args: ConfirmProps = {
   cancelText: 'Cancel'
 }
 
-const Button: React.FC<ConfirmProps> = (args) => {
+const OpenModalButton: React.FC<ConfirmProps> = (args) => {
   const showModal = useConfirm()
   return <MibaoButton onClick={() => showModal(args)}>Button</MibaoButton>
 }
@@ -39,7 +39,7 @@ const Template: Story<ConfirmProps> = (args) => {
       </Code>
     </Box>
     <ConfirmProvider>
-      <Button {...args} />
+      <OpenModalButton {...args} />
     </ConfirmProvider>
   </MibaoProvider>
 }
