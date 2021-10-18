@@ -32,6 +32,7 @@ export const Like: React.FC<LikeProps> = ({ isLiked, isLoading, className, onCli
       className={className}
       direction="row"
       alignItems="center"
+      cursor={onClick ? 'pointer' : undefined}
       onClick={onClick}
     >
       {icon}

@@ -1,7 +1,7 @@
 import React from 'react'
 import { FlexProps, Flex, Stack } from '../typography/typography'
 import { IssuerProps, Issuer } from '../issuer/issuer'
-import { LimitProps, Limited } from '../limit/limit'
+import { LimitProps, Limited } from '../limited/limited'
 import { NFTTitle, NFTTitleProps } from '../nft-title/nft-title'
 import { NftImage, NftImageProps, NftImageType } from '../nft-image/nft-image'
 import { Link } from '@chakra-ui/react'

@@ -10,7 +10,7 @@ export type AvatarType = 'token' | 'image'
 export type AvatarShape = 'circle' | 'square'
 
 export interface AvatarProps extends ImageProps {
-  src: string
+  src?: string
   type?: AvatarType
   shape?: AvatarShape
   size?: string
