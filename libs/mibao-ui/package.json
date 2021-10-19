@@ -1,4 +1,18 @@
 {
-  "name": "mibao-ui",
-  "version": "0.0.1"
+  "name": "@mibao-ui/components",
+  "version": "0.0.2",
+  "description": "This is nervina labs component library",
+  "main": "src/index.ts",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nervina-labs/mibao-ui.git"
+  },
+  "author": "nervina-labs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nervina-labs/mibao-ui/issues"
+  },
+  "homepage": "https://mibao-ui.vercel.app/"
 }
