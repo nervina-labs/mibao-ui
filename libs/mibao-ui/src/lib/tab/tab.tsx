@@ -114,7 +114,7 @@ export const TabList: React.FC<TabListProps> = ({ children, ...tabListProps }) =
       setOffset(element?.offsetLeft ?? 0)
     }
   }, [index, variant])
-  const alignProps = useMemo(() => align === 'space-between' || align === 'space-around'
+  const alignProps = useMemo(() => ['space-between', 'space-around'].includes(align)
     ? {
         justifyContent: align,
         display: 'flex',
