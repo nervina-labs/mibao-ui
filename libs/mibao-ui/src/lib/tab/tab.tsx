@@ -11,13 +11,12 @@ import {
   Tabs as ChakraTabs,
   Tab as ChakraTab,
   TabList as ChakraTabList,
+  TabsProps as ChakraTabsProps,
+  TabProps as ChakraTabProps,
   TabPanels,
   TabPanel,
-  TabsProps as ChakraTabsProps,
   useTab,
-  Box,
-  TabProps as ChakraTabProps,
-  TabListProps
+  Box
 } from '@chakra-ui/react'
 import styles from './tab.module.scss'
 import { ThemeTypings } from '@chakra-ui/styled-system'
@@ -27,6 +26,7 @@ export { TabPanel, TabPanels }
 
 export type TabVariant = 'line' | 'unstyled' | 'enclosed' | 'enclosed-colored' | 'soft-rounded' | 'solid-rounded'
 export type TabsAlign = 'start' | 'end' | 'center' | 'space-between'
+type ColorSchemes = ThemeTypings['colorSchemes'] | string
 
 export interface TabsProps extends Omit<ChakraTabsProps, 'variant' | 'orientation' | 'align'> {
   variant?: TabVariant
@@ -36,10 +36,32 @@ export interface TabsProps extends Omit<ChakraTabsProps, 'variant' | 'orientatio
 const TABS_CONTEXT_VALUE = {
   index: 0,
   variant: 'line' as TabVariant,
-  colorScheme: 'primary' as ThemeTypings['colorSchemes'] | string,
+  colorScheme: 'primary' as ColorSchemes,
   align: 'start' as TabsAlign
 }
 const TabsContext = createContext(TABS_CONTEXT_VALUE)
+
+const TabActiveLine: React.FC<{
+  colorScheme: ColorSchemes
+  offset: number
+  width: number
+}> = ({
+  colorScheme,
+  offset,
+  width
+}) => (
+  <Box
+    w="1px"
+    bg={ colorScheme === 'black' ? 'black' : `${colorScheme}.600` }
+    h="2px"
+    position="absolute"
+    bottom="-2px"
+    left={0}
+    transformOrigin="left"
+    transition={'0.2s'}
+    transform={`translateX(${offset}px) scaleX(${width})`}
+  />
+)
 
 export const Tabs: React.FC<TabsProps> = (props) => {
   const [index, setIndex] = useState(props.defaultIndex ?? props.index ?? 0)
@@ -67,7 +89,7 @@ export const Tabs: React.FC<TabsProps> = (props) => {
   )
 }
 
-export const TabList: React.FC<TabListProps> = ({ children }) => {
+export const TabList: React.FC = ({ children }) => {
   const { index, variant, colorScheme, align } = useContext(TabsContext)
   const tabListRef = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState(0)
@@ -91,19 +113,7 @@ export const TabList: React.FC<TabListProps> = ({ children }) => {
   return <ChakraTabList ref={tabListRef} p={0} position="relative" {...alignProps}>
     {children}
     {
-      variant === 'line' && (
-        <Box
-          w="1px"
-          bg={`${colorScheme}.600`}
-          h="2px"
-          position="absolute"
-          bottom="-2px"
-          left={0}
-          transformOrigin="left"
-          transition={'0.2s'}
-          transform={`translateX(${offset}px) scaleX(${width})`}
-        />
-      )
+      variant === 'line' && <TabActiveLine width={width} offset={offset} colorScheme={colorScheme}/>
     }
   </ChakraTabList>
 }

@@ -36,6 +36,14 @@ export const LineTabs: Story = (args) => {
 
 export const ColorsTabs: Story = (args) => {
   return <MibaoProvider>
+    <MibaoUiTabs colorScheme="black" {...args}>
+      <TabList>
+        <Tab>One</Tab>
+        <Tab>Two</Tab>
+        <Tab>Long long Long Three</Tab>
+      </TabList>
+    </MibaoUiTabs>
+
     <MibaoUiTabs colorScheme="gray" {...args}>
       <TabList>
         <Tab>One</Tab>
