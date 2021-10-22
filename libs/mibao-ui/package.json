@@ -1,6 +1,6 @@
 {
   "name": "@mibao-ui/components",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "This is nervina labs component library",
   "main": "src/index.ts",
   "scripts": {
