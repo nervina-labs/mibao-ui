@@ -81,7 +81,7 @@ export const Tabs: React.FC<TabsProps> = (props) => {
 
   return (
     <ChakraTabs
-      {...omit(props, ['align'])}
+      {...omit(props, ['align', 'colorScheme', 'variant', 'onChange'])}
       aligh={align === 'space-between' ? undefined : align}
       colorScheme={colorScheme}
       variant={variant}
