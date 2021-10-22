@@ -47,10 +47,10 @@ export const Tabs: React.FC<TabsProps> = (props) => {
   const colorScheme = props.colorScheme ?? 'primary'
   const align = props.align ?? 'start'
 
-  const onChange = useCallback(() => {
+  const onChange = useCallback((index) => {
     props?.onChange?.(index)
     setIndex(index)
-  }, [index, props])
+  }, [props])
 
   return (
     <ChakraTabs
