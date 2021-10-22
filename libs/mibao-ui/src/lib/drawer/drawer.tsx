@@ -6,7 +6,8 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-  DrawerProps as RawDrawerProps
+  DrawerProps as RawDrawerProps,
+  DrawerContentProps
 } from '@chakra-ui/react'
 import styles from './drawer.module.scss'
 
@@ -17,6 +18,7 @@ export interface DrawerProps extends RawDrawerProps {
   footer?: React.ReactNode
   children: React.ReactNode
   rounded?: 'none' | 'md' | 'lg' | 'xl'
+  contentProps?: DrawerContentProps
 }
 
 export const Drawer = ({
@@ -26,6 +28,7 @@ export const Drawer = ({
   header,
   footer,
   children,
+  contentProps,
   ...props
 }: DrawerProps) => (
   <RawDrawer {...props}>
@@ -34,6 +37,7 @@ export const Drawer = ({
       className={styles.content}
       data-rounded={rounded}
       data-placement={props.placement}
+      {...contentProps}
     >
       {hasCloseBtn ? <DrawerCloseButton /> : null}
       {header !== undefined ? <DrawerHeader>{header}</DrawerHeader> : null}
