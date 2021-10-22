@@ -1,5 +1,5 @@
 import { Story, Meta } from '@storybook/react'
-import React from 'react'
+import React, { useState } from 'react'
 import {
   MibaoProvider,
   Tab,
@@ -173,6 +173,27 @@ export const SizeTabs: Story = (args) => {
         <Tab>One</Tab>
         <Tab>Two</Tab>
         <Tab>Long long Long Three</Tab>
+      </TabList>
+    </MibaoUiTabs>
+  </MibaoProvider>
+}
+
+export const ChangeTabs: Story = () => {
+  const [index, setIndex] = useState(0)
+
+  return <MibaoProvider>
+    <input
+      type="range"
+      min="0"
+      max="2"
+      value={index}
+      onChange={(event) => setIndex(parseInt(event.target.value, 10))}
+    />
+    <MibaoUiTabs index={index}>
+      <TabList>
+        <Tab>One</Tab>
+        <Tab>Two</Tab>
+        <Tab>Three</Tab>
       </TabList>
     </MibaoUiTabs>
   </MibaoProvider>

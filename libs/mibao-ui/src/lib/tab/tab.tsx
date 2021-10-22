@@ -12,6 +12,7 @@ import {
   Tab as ChakraTab,
   TabList as ChakraTabList,
   TabsProps as ChakraTabsProps,
+  TabListProps,
   TabProps as ChakraTabProps,
   TabPanels,
   TabPanel,
@@ -22,10 +23,10 @@ import styles from './tab.module.scss'
 import { ThemeTypings } from '@chakra-ui/styled-system'
 import { omit } from '../../utils'
 
-export { TabPanel, TabPanels }
+export { TabPanel, TabPanels, TabListProps }
 
 export type TabVariant = 'line' | 'unstyled' | 'enclosed' | 'enclosed-colored' | 'soft-rounded' | 'solid-rounded'
-export type TabsAlign = 'start' | 'end' | 'center' | 'space-between'
+export type TabsAlign = 'start' | 'end' | 'center' | 'space-between' | 'space-around'
 type ColorScheme = ThemeTypings['colorSchemes'] | string
 
 export interface TabsProps extends Omit<ChakraTabsProps, 'variant' | 'orientation' | 'align'> {
@@ -79,6 +80,12 @@ export const Tabs: React.FC<TabsProps> = (props) => {
     setIndex(index)
   }, [props])
 
+  useEffect(() => {
+    if (typeof props.index === 'number') {
+      setIndex(props.index)
+    }
+  }, [props.index])
+
   return (
     <ChakraTabs
       {...omit(props, ['align', 'colorScheme', 'variant', 'onChange'])}
@@ -94,7 +101,7 @@ export const Tabs: React.FC<TabsProps> = (props) => {
   )
 }
 
-export const TabList: React.FC = ({ children }) => {
+export const TabList: React.FC<TabListProps> = ({ children, ...tabListProps }) => {
   const { index, variant, colorScheme, align } = useContext(TabsContext)
   const tabListRef = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState(0)
@@ -107,15 +114,15 @@ export const TabList: React.FC = ({ children }) => {
       setOffset(element?.offsetLeft ?? 0)
     }
   }, [index, variant])
-  const alignProps = useMemo(() => align === 'space-between'
+  const alignProps = useMemo(() => align === 'space-between' || align === 'space-around'
     ? {
-        justifyContent: 'space-between',
+        justifyContent: align,
         display: 'flex',
         w: '100%'
       }
     : {}, [align])
 
-  return <ChakraTabList ref={tabListRef} p={0} position="relative" {...alignProps}>
+  return <ChakraTabList ref={tabListRef} position="relative" {...alignProps} {...tabListProps}>
     {children}
     {
       variant === 'line' && <TabActiveLine width={width} offset={offset} colorScheme={colorScheme}/>
