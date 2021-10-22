@@ -26,23 +26,28 @@ export { TabPanel, TabPanels }
 
 export type TabVariant = 'line' | 'unstyled' | 'enclosed' | 'enclosed-colored' | 'soft-rounded' | 'solid-rounded'
 export type TabsAlign = 'start' | 'end' | 'center' | 'space-between'
-type ColorSchemes = ThemeTypings['colorSchemes'] | string
+type ColorScheme = ThemeTypings['colorSchemes'] | string
 
 export interface TabsProps extends Omit<ChakraTabsProps, 'variant' | 'orientation' | 'align'> {
   variant?: TabVariant
   align?: TabsAlign
 }
 
-const TABS_CONTEXT_VALUE = {
+const TABS_CONTEXT_VALUE: {
+  index: number
+  variant: TabVariant
+  colorScheme: ColorScheme
+  align: TabsAlign
+} = {
   index: 0,
-  variant: 'line' as TabVariant,
-  colorScheme: 'primary' as ColorSchemes,
-  align: 'start' as TabsAlign
+  variant: 'line',
+  colorScheme: 'primary',
+  align: 'start'
 }
 const TabsContext = createContext(TABS_CONTEXT_VALUE)
 
 const TabActiveLine: React.FC<{
-  colorScheme: ColorSchemes
+  colorScheme: ColorScheme
   offset: number
   width: number
 }> = ({
