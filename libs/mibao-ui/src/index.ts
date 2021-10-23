@@ -1,6 +1,5 @@
 import './index.scss'
 
-export * from './lib/confirm/confirm'
 export * from './lib/select/select'
 export * from './lib/pagination/pagination'
 export * from './lib/alert/alert'

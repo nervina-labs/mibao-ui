@@ -18,5 +18,3 @@ export const Copyzone: React.FC<CopyzoneProps> = ({ children, containerProps, va
     </Flex>
   )
 }
-
-export default Copyzone

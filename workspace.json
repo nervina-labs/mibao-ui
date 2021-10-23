@@ -14,7 +14,7 @@
             "tsConfig": "libs/mibao-ui/tsconfig.lib.json",
             "project": "libs/mibao-ui/package.json",
             "entryFile": "libs/mibao-ui/src/index.ts",
-            "external": ["react/jsx-runtime"],
+            "external": ["react/jsx-runtime", "@chakra-ui/*"],
             "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
             "assets": [
               {

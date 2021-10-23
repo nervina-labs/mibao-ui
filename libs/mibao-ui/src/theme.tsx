@@ -13,13 +13,13 @@ export const mibaoTheme = extendTheme({
     gray: {
       200: '#eee',
       800: '#23262F',
-      main: '#777E91'
+      500: '#777E91'
     },
     progress: {
-      main: '#5065E5'
+      500: '#5065E5'
     },
     banned: {
-      main: '#d03a3a'
+      500: '#d03a3a'
     }
   },
   shadows: {

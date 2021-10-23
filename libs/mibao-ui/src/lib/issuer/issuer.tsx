@@ -1,7 +1,7 @@
 import { Link } from '@chakra-ui/react'
 import React from 'react'
 import { Avatar, AvatarProps } from '../avatar/avatar'
-import Copyzone from '../copyzone/copyzone'
+import { Copyzone } from '../copyzone/copyzone'
 import { Flex, Stack, Text, TextProps } from '../typography/typography'
 import styles from './issuer.module.scss'
 
@@ -57,7 +57,7 @@ export const Issuer: React.FC<IssuerProps> = ({
       <Stack spacing="4px" direction="column" justifyContent="space-between">
         <Text
           isTruncated
-          color={isBanned ? 'banned.main' : undefined}
+          color={isBanned ? 'banned.500' : undefined}
           fontSize={isOneline ? '12px' : '14px' }
           fontWeight={isOneline ? 'normal' : 500}
           {...nameProps}
@@ -67,17 +67,17 @@ export const Issuer: React.FC<IssuerProps> = ({
         {id
           ? (
               disableCopy
-                ? <Text fontSize="12px" color="gray.main">
+                ? <Text fontSize="12px" color="gray.500">
                     {displayId ?? id}
                   </Text>
-                : <Copyzone value={id} fontSize="12px" color="gray.main">
+                : <Copyzone value={id} fontSize="12px" color="gray.500">
                     {displayId ?? id}
                   </Copyzone>
             )
           : null}
         {verifiedTitle && isVerified
           ? (
-          <Text isTruncated fontSize="12px" color="gray.main">
+          <Text isTruncated fontSize="12px" color="gray.500">
             {verifiedTitle}
           </Text>
             )

@@ -13,7 +13,7 @@ export const NFTTitle: React.FC<NFTTitleProps> = ({ title, isBanned, bannedText,
       isTruncated
       fontWeight="500"
       fontSize="16px"
-      color={isBanned ? 'banned.main' : undefined}
+      color={isBanned ? 'banned.500' : undefined}
       {...props}
     >
       {!isBanned ? title : bannedText}

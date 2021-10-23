@@ -23,6 +23,18 @@
     "regenerator-runtime": "0.13.9",
     "tslib": "2.3.1"
   },
+  "browserslist": {
+    "production": [
+      "since 2015",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "devDependencies": {
     "@babel/core": "7.15.8",
     "@babel/preset-typescript": "7.15.0",

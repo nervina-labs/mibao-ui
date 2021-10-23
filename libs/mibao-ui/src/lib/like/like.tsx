@@ -36,7 +36,7 @@ export const Like: React.FC<LikeProps> = ({ isLiked, isLoading, className, onCli
       onClick={onClick}
     >
       {icon}
-      <Text color="gray.main" fontSize="12px" ml="6px" {...props}>
+      <Text color="gray.500" fontSize="12px" ml="6px" {...props}>
         {formatCount(likeCount, locale)}
       </Text>
     </Flex>

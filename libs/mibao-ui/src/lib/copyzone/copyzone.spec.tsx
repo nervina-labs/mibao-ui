@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
 import { MibaoProvider } from '../..'
 
-import Copyzone from './copyzone'
+import { Copyzone } from './copyzone'
 
 describe('Copyzone', () => {
   it('should render successfully', () => {
