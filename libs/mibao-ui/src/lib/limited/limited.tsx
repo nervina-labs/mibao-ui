@@ -30,7 +30,7 @@ export const Limited: React.FC<LimitProps> = ({ count, serialNumber, limitedText
     return null
   }
 
-  return <Text color="gray.500" fontSize="12px" {...rest}>
+  return <Text whiteSpace="nowrap" color="gray.500" fontSize="12px" {...rest}>
     {content}
   </Text>
 }

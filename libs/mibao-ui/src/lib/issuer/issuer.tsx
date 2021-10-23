@@ -57,7 +57,7 @@ export const Issuer: React.FC<IssuerProps> = ({
       <Stack spacing="4px" direction="column" justifyContent="space-between">
         <Text
           isTruncated
-          color={isBanned ? 'banned.500' : undefined}
+          color={isBanned ? 'banned.500' : isOneline ? 'gray.500' : undefined}
           fontSize={isOneline ? '12px' : '14px' }
           fontWeight={isOneline ? 'normal' : 500}
           {...nameProps}
