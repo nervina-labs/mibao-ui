@@ -53,7 +53,7 @@ export const NftImage: React.FC<NftImageProps> = ({ isBaned, ...props }) => {
     <Box className={styles.nftImageContainer}>
       <Image rounded="10%" w="full" aspectRatio {...props} src={isBaned ? '' : props.src} />
 
-      <Stack position="absolute" direction="column" top="8%" right="8%" spacing={2}>
+      <Stack position="absolute" direction="column" top="10px" right="10px" spacing={2}>
         {icons}
       </Stack>
     </Box>
