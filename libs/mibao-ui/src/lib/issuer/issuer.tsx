@@ -17,6 +17,7 @@ export interface IssuerProps extends AvatarProps {
   onClick?: React.MouseEventHandler<HTMLDivElement>
   disableCopy?: boolean
   displayId?: string
+  isLinkExternal?: boolean
 }
 
 export const Issuer: React.FC<IssuerProps> = ({
@@ -34,9 +35,10 @@ export const Issuer: React.FC<IssuerProps> = ({
   disableCopy = false,
   size = '60px',
   resizeScale = 150,
+  isLinkExternal = true,
   ...avatarProps
 }) => {
-  const anchorProps = href && !isBanned ? { as: Link, href, isExternal: true } : undefined
+  const anchorProps = href && !isBanned ? { as: Link, href, isExternal: isLinkExternal } : undefined
   const isOneline = id == null && verifiedTitle == null
   return (
     <Flex
