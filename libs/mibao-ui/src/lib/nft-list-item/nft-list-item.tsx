@@ -18,6 +18,7 @@ export interface NFTListItemProps extends FlexProps {
   title?: string
   bannedText?: string
   href?: string
+  isLinkExternal?: boolean
   srcQueryParams?: { tid: number, locale: string }
   src?: string
   locale?: string
@@ -44,10 +45,11 @@ export const NFTListItem: React.FC<NFTListItemProps> = ({
   issuerProps,
   limitProps,
   titleProps,
+  isLinkExternal = true,
   ...rest
 }) => {
   const isBanned = !!isIssuerBanned || !!isNFTBanned
-  const anchorProps = href && !isBanned ? { as: Link, href, isExternal: true } : undefined
+  const anchorProps = href && !isBanned ? { as: Link, href, isExternal: isLinkExternal } : undefined
 
   return (
     <Flex

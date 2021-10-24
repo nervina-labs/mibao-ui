@@ -28,6 +28,7 @@ export interface NFTCardProps extends FlexProps {
   likeProps?: LikeProps
   imageProps?: NftImageProps
   titleProps?: NFTTitleProps
+  isLinkExternal?: boolean
 }
 
 export const NFTCard: React.FC<NFTCardProps> = ({
@@ -50,10 +51,11 @@ export const NFTCard: React.FC<NFTCardProps> = ({
   issuerProps,
   limitProps,
   titleProps,
+  isLinkExternal = true,
   ...rest
 }) => {
   const isBanned = !!isIssuerBanned || !!isNFTBanned
-  const anchorProps = href && !isBanned ? { as: Link, href, isExternal: true } : undefined
+  const anchorProps = href && !isBanned ? { as: Link, href, isExternal: isLinkExternal } : undefined
 
   const info = useMemo(() => {
     if (likeProps && issuerProps && limitProps) {
