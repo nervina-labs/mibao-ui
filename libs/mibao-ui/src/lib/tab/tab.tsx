@@ -141,6 +141,7 @@ export const Tab: React.FC<ChakraTabProps> = (props) => {
       {...props}
       className={`${styles.tab} ${props.className ?? ''}`}
       borderBottom={ variant === 'line' ? 'none' : undefined }
+      _active={{ bg: 'none' }}
     >
       <Box as="span" opacity={isSelected ? 1 : 0.6}>
         {tabProps.children}
