@@ -74,7 +74,7 @@ export const Image = (props: ImageProps) => {
       }
       <ChakraImage
         {...imageProps}
-        hide={!imageProps}
+        hide={!imageSrc}
         data-aspect-ratio={props.aspectRatio}
         src={imageSrc}
         className={`${styles.image} ${props.className ? props.className : ''}`}

@@ -6,6 +6,10 @@
   pointer-events: none;
 }
 
+.image[src=""] {
+  opacity: 0;
+}
+
 .image[data-aspect-ratio="true"] {
   aspect-ratio: 1/1;
 }
