@@ -42,9 +42,9 @@ export const NftImage: React.FC<NftImageProps> = ({ isBaned, ...props }) => {
     ]
       .filter(item => item.show)
       .map(item => (
-      <Flex className={styles.icon}>
-        <img src={item.src} alt='icon' />
-      </Flex>
+        <Flex className={styles.icon}>
+          <img src={item.src} alt='icon' />
+        </Flex>
       ))
   }
   , [props, isBaned])
@@ -53,7 +53,7 @@ export const NftImage: React.FC<NftImageProps> = ({ isBaned, ...props }) => {
     <Box className={styles.nftImageContainer}>
       <Image rounded="10%" w="full" aspectRatio {...props} src={isBaned ? '' : props.src} />
 
-      <Stack position="absolute" direction="column" top="10px" right="10px" spacing={2}>
+      <Stack position="absolute" direction="column" top="5%" right="5%" spacing={2} w="8%" minW="25px" maxW="30px">
         {icons}
       </Stack>
     </Box>
