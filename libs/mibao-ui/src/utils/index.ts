@@ -1,8 +1,32 @@
 import {
+  BOWSER_BROWSER,
   OSS_IMG_HOSTS,
   OSS_IMG_PROCESS_QUERY_KEY,
+  OSS_IMG_PROCESS_QUERY_KEY_FORMAT_WEBP,
   OSS_IMG_PROCESS_QUERY_KEY_SCALE
 } from '../constants/env'
+
+function isSupportWebp (): boolean {
+  // https://caniuse.com/?search=webp
+  // https://x5.tencent.com/guide/caniuse/index.html
+  const supportedBrowsers = {
+    macos: {
+      safari: '>=14'
+    },
+    edge: '>=18',
+    android: {
+      wechat: '>=4'
+    },
+    mobile: {
+      safari: '>13.7',
+      'android browser': '>=4.2'
+    },
+    chrome: '>=32',
+    firefox: '>=65'
+  }
+
+  return !!BOWSER_BROWSER.satisfies(supportedBrowsers)
+}
 
 export function addParamsToUrl (
   url: string,
@@ -21,12 +45,15 @@ export function addParamsToUrl (
       urlSearchParams.set(key, String(params[key]))
     }
   })
-  return decodeURI(urlObj.toString())
+  return decodeURIComponent(urlObj.toString())
 }
 
 export function getImagePreviewUrl<U extends string | undefined> (
   url: U,
-  size = 300
+  options?: {
+    size?: number
+    webp?: boolean
+  }
 ): U {
   if (!url) {
     return url
@@ -37,8 +64,10 @@ export function getImagePreviewUrl<U extends string | undefined> (
   if (!isOssHost || isSvgOrWebp) {
     return url
   }
+  const webpParam = isSupportWebp() && options?.webp ? OSS_IMG_PROCESS_QUERY_KEY_FORMAT_WEBP : ''
   const params: Record<string, string | number> = {}
-  params[OSS_IMG_PROCESS_QUERY_KEY] = `${OSS_IMG_PROCESS_QUERY_KEY_SCALE}${size}`
+  const size = options?.size ?? 300
+  params[OSS_IMG_PROCESS_QUERY_KEY] = `${OSS_IMG_PROCESS_QUERY_KEY_SCALE}${size}${webpParam}`
   return addParamsToUrl(url, params) as U
 }
 

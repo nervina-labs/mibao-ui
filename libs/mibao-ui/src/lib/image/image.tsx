@@ -10,6 +10,7 @@ export interface ImageProps extends ChakraImageProps {
   srcQueryParams?: Record<string, string | number>
   disableContextMenu?: boolean
   resizeScale?: number // Specifies the shortest edge of the target zoom graph.
+  webp?: boolean
 }
 
 export const Image = (props: ImageProps) => {
@@ -26,7 +27,10 @@ export const Image = (props: ImageProps) => {
     if (!props.src) return props.src
     const srcQueryParams = props.srcQueryParams ?? {}
     if (props.resizeScale) {
-      return addParamsToUrl(getImagePreviewUrl(props.src, props.resizeScale), srcQueryParams)
+      return addParamsToUrl(getImagePreviewUrl(props.src, {
+        size: props.resizeScale,
+        webp: props.webp
+      }), srcQueryParams)
     }
     return addParamsToUrl(props.src, srcQueryParams)
   }, [props])
