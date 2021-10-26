@@ -4,6 +4,7 @@ import {
   MibaoProvider
 } from 'mibao-ui'
 import { Spinner, Stack } from '@chakra-ui/react'
+import { useEffect, useState } from '@storybook/addons'
 
 export default {
   component: MibaoImage,
@@ -49,5 +50,22 @@ Image.args = {
   objectFit: 'cover',
   crossOrigin: '',
   disableContextMenu: false,
-  resizeScale: 200
+  resizeScale: 200,
+  webp: false
+}
+
+export const AsyncLoadingImage: Story = (args) => {
+  const [src, setSrc] = useState<string | undefined>(undefined)
+  useEffect(() => {
+    const timer = setTimeout(() => setSrc('https://oss.jinse.cc/production/6e3a54bf-1bbb-4c49-b5ae-b66031252357.png'), 2000)
+    return () => {
+      clearTimeout(timer)
+    }
+  })
+
+  return (
+    <MibaoProvider>
+      <MibaoImage src={src} />
+    </MibaoProvider>
+  )
 }
