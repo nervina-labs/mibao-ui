@@ -48,3 +48,22 @@ export const StyledInputs: Story<InputProps> = (args) => {
     </MibaoProvider>
   )
 }
+
+export const ReadonlyInput: Story<InputProps> = (args) => {
+  const variants = ['outline', 'filled', 'flushed', 'unstyled']
+  return (
+    <MibaoProvider>
+      <Stack spacing={3}>
+        {variants.map((v) => (
+          <Input
+            isReadOnly
+            key={v}
+            variant={v}
+            placeholder={`variant=${v}`}
+            {...args}
+          />
+        ))}
+      </Stack>
+    </MibaoProvider>
+  )
+}

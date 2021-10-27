@@ -52,3 +52,22 @@ export const ResizableTextareas: Story<TextareaProps> = (args) => {
     </MibaoProvider>
   )
 }
+
+export const ReadonlyTextareas: Story<TextareaProps> = (args) => {
+  const variants = ['outline', 'filled', 'flushed', 'unstyled']
+  return (
+    <MibaoProvider>
+      <Stack spacing={3}>
+        {variants.map((v) => (
+          <Textarea
+            isReadOnly
+            key={v}
+            variant={v}
+            placeholder={`variant=${v}`}
+            {...args}
+          />
+        ))}
+      </Stack>
+    </MibaoProvider>
+  )
+}

@@ -3,4 +3,8 @@
   &::placeholder {
     color: #92929d;
   }
+  &[readonly] {
+    background: #f6f9fc;
+    border: 1px solid #e6e8ec;
+  }
 }
