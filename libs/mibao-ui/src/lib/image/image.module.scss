@@ -1,30 +1,12 @@
 .image {
 }
 
-.image[hide="true"] {
+.image[hide="true"], .image[src=""], .image:not([src]) {
   opacity: 0;
   pointer-events: none;
-}
-
-.image[src=""] {
-  opacity: 0;
 }
 
 .image[data-aspect-ratio="true"] {
   aspect-ratio: 1/1;
 }
 
-.loading {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-}
-
-.container {
-  position: relative;
-  width: auto;
-  height: auto;
-}

@@ -1,4 +1,4 @@
-import { Box, Image as ChakraImage, ImageProps as ChakraImageProps, Skeleton } from '@chakra-ui/react'
+import { Box, Flex, Image as ChakraImage, ImageProps as ChakraImageProps, Skeleton } from '@chakra-ui/react'
 import styles from './image.module.scss'
 import { useState, useMemo, useEffect, useCallback, ReactNode } from 'react'
 import FALLBACK_SRC from '../../../assets/images/fallback.svg'
@@ -20,8 +20,8 @@ export const Image = (props: ImageProps) => {
   // loading element
   const loaderEl = useMemo(() => {
     if (props.loader) return props.loader
-    return <Skeleton width="100%" height="100%" rounded={props.rounded} />
-  }, [props.loader, props.rounded])
+    return <Skeleton width="100%" height="100%" rounded={props.rounded} borderRadius={props.borderRadius} />
+  }, [props.borderRadius, props.loader, props.rounded])
   // src
   const imageSrc = useMemo(() => {
     if (!props.src) return props.src
@@ -61,18 +61,24 @@ export const Image = (props: ImageProps) => {
   }, [props])
 
   return (
-    <Box className={styles.container} style={{
-      width: props.width as string,
-      height: props.height as string
-    }}>
+    <Box
+      w={props.width ?? props.h ?? 'auto'}
+      h={props.height ?? props.h ?? 'auto'}
+      position="relative">
       {
         isLoading && (
-          <Box className={styles.loading}>
+          <Flex
+            w="full"
+            h="full"
+            position="absolute"
+            zIndex={0}>
             {loaderEl}
-          </Box>
+          </Flex>
         )
       }
       <ChakraImage
+        position="relative"
+        zIndex={1}
         {...imageProps}
         hide={!imageSrc}
         data-aspect-ratio={props.aspectRatio}
