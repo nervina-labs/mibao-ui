@@ -5,6 +5,7 @@ import {
   MibaoProvider,
   NFT_IMAGE_TYPE_SET
 } from 'mibao-ui'
+import React, { useState, useCallback } from 'react'
 
 export default {
   component: MibaoNftImage,
@@ -20,12 +21,29 @@ export default {
   }
 } as Meta
 
-const Template: Story<NftImageProps> = (args) =>
-  <MibaoProvider>
-    <div style={{ width: '200px' }}>
-      <MibaoNftImage {...args} />
-    </div>
-  </MibaoProvider>
+const Template: Story<NftImageProps> = (args) => {
+  const [size, setSize] = useState(200)
+
+  const handleSliderChange = useCallback<React.ChangeEventHandler<HTMLInputElement>>((event) => {
+    setSize(parseInt(event.target.value, 10))
+  }, [setSize])
+
+  return (
+    <MibaoProvider>
+       <input
+        type="range"
+        min="100"
+        max="1000"
+        value={size}
+        onChange={handleSliderChange}
+      />
+
+      <div style={{ width: `${size}px` }}>
+        <MibaoNftImage {...args} />
+      </div>
+    </MibaoProvider>
+  )
+}
 
 export const NftImage = Template.bind({})
 NftImage.args = {

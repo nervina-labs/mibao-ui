@@ -3,5 +3,10 @@
     "source.fixAll.eslint": true
   },
   "typescript.inlayHints.parameterNames.enabled": "all",
-  "typescript.inlayHints.functionLikeReturnTypes.enabled": true
+  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "cSpell.words": [
+    "aligh",
+    "chakra",
+    "unstyled"
+  ]
  }

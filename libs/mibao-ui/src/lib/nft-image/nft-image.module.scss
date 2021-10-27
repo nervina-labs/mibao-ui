@@ -3,17 +3,19 @@
 }
 
 .icon {
-  width: 25px;
-  height: 25px;
+  width: 100%;
+  aspect-ratio: 1;
   border-radius: 100%;
   box-sizing: border-box;
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(10px);
+  padding: 10%;
 
   img, svg {
-    width: 16px;
+    width: 80%;
     height: auto;
+    aspect-ratio: 1;
+    object-fit: contain;
     margin: auto;
-    object-fit: cover;
   }
 }
