@@ -22,20 +22,21 @@ const args: ConfirmProps = {
   title: '',
   content: 'Content Content Content Content Content Content Content Content',
   confirmText: 'OK',
-  cancelText: 'Cancel'
+  cancelText: 'Cancel',
+  isCentered: false
 }
 
 const OpenModalButton: React.FC<ConfirmProps> = (args) => {
-  const showModal = useConfirm()
-  return <MibaoButton onClick={() => showModal(args)}>Button</MibaoButton>
+  const { openModal } = useConfirm()
+  return <MibaoButton onClick={() => openModal(args)}>Button</MibaoButton>
 }
 
 const Template: Story<ConfirmProps> = (args) => {
   return <MibaoProvider>
     <Box m={2}>
       <Code>
-        {'const showModal = useConfirm()'} <br/>
-        {'return <MibaoButton onClick={() => showModal(args)}>Button</MibaoButton>'}
+        {'const { openModal } = useConfirm()'} <br/>
+        {'return <MibaoButton onClick={() => openModal(args)}>Button</MibaoButton>'}
       </Code>
     </Box>
     <ConfirmProvider>
