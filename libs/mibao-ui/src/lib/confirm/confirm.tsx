@@ -20,12 +20,22 @@ export interface ConfirmProps {
   confirmText?: ReactNode
   onCancel?: () => void
   cancelText?: ReactNode
+  isCentered?: boolean
 }
 
-const ConfirmContext = createContext<{ props: ConfirmProps | null, showModal: (props: ConfirmProps) => void}>({
+interface ConfirmContextValue {
+  props: ConfirmProps | null
+  openModal: (props: ConfirmProps) => void
+  closeModal: () => void
+}
+
+const ConfirmContext = createContext<ConfirmContextValue>({
   props: null,
-  showModal (props: ConfirmProps) {
+  openModal (props: ConfirmProps) {
     this.props = props
+  },
+  closeModal () {
+    this.props = null
   }
 })
 
@@ -42,7 +52,7 @@ const ConfirmModal: React.FC<{
     props.onClose?.()
   }, [context.props, props])
 
-  return <Modal isOpen={props.isOpen} onClose={onClose}>
+  return <Modal isOpen={props.isOpen} onClose={onClose} isCentered={context.props?.isCentered}>
     <ModalOverlay />
     <ModalContent>
       <ModalHeader>{context.props?.title}</ModalHeader>
@@ -74,14 +84,19 @@ const ConfirmModal: React.FC<{
 export const ConfirmProvider: React.FC = (props) => {
   const [modalProps, setModalProps] = useState<ConfirmProps | null>(null)
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const openModal = useCallback((value) => {
+    onOpen()
+    setModalProps(value)
+  }, [onOpen])
+  const closeModal = useCallback(() => {
+    onClose()
+  }, [onClose])
 
   return (
     <ConfirmContextProvider value={{
       props: modalProps,
-      showModal: (props) => {
-        onOpen()
-        setModalProps(props)
-      }
+      openModal,
+      closeModal
     }}>
       <ConfirmModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
       {props.children}
@@ -90,6 +105,9 @@ export const ConfirmProvider: React.FC = (props) => {
 }
 
 export function useConfirm () {
-  const context = useContext(ConfirmContext)
-  return context.showModal
+  const { openModal, closeModal } = useContext(ConfirmContext)
+  return {
+    openModal,
+    closeModal
+  }
 }
