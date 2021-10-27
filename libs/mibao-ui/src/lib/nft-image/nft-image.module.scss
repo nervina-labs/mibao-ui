@@ -3,10 +3,10 @@
 }
 
 .icon {
-  width: 100%;
+  width: 80%;
   aspect-ratio: 1;
   border-radius: 100%;
-  box-sizing: border-box;
+  box-sizing: content-box;
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(10px);
   padding: 10%;
