@@ -3,7 +3,7 @@ import {
   Image as MibaoImage,
   MibaoProvider
 } from 'mibao-ui'
-import { Box, Spinner, Stack } from '@chakra-ui/react'
+import { Spinner, Stack } from '@chakra-ui/react'
 import { useEffect, useState } from '@storybook/addons'
 
 export default {
