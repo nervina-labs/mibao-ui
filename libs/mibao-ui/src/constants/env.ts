@@ -10,4 +10,4 @@ export const OSS_IMG_HOSTS = process.env.OSS_IMG_HOSTS
       'https://goldenlegend.oss-accelerate.aliyuncs.com'
     ]
 
-export const BOWSER_BROWSER = Bowser.getParser(window.navigator.userAgent)
+export const BOWSER_BROWSER = typeof window === 'undefined' ? undefined : Bowser.getParser(window.navigator.userAgent)
