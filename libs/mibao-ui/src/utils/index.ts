@@ -7,6 +7,9 @@ import {
 } from '../constants/env'
 
 function isSupportWebp (): boolean {
+  if (!BOWSER_BROWSER) {
+    return false
+  }
   // https://caniuse.com/?search=webp
   // https://x5.tencent.com/guide/caniuse/index.html
   const supportedBrowsers = {
