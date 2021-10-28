@@ -3,7 +3,7 @@ import {
   Image as MibaoImage,
   MibaoProvider
 } from 'mibao-ui'
-import { Spinner, Stack } from '@chakra-ui/react'
+import { Box, Spinner, Stack } from '@chakra-ui/react'
 import { useEffect, useState } from '@storybook/addons'
 
 export default {
@@ -33,18 +33,20 @@ export default {
 
 const Template: Story = (args) =>
   <MibaoProvider>
-    <Stack spacing={3} direction="row">
+    <Stack spacing={3}>
       <MibaoImage {...args} />
       <MibaoImage {...args} loader={<Spinner color="primary.600" emptyColor="gray.200" m="auto" />} />
       <MibaoImage {...args} fallback={<div>Failed</div>} />
+
+      <h1>Ratio: 1:1: </h1>
+      <MibaoImage {...args} fallback={<div>Failed</div>} containerProps={{ ratio: 1 / 1 }} />
     </Stack>
   </MibaoProvider>
 
 export const Image = Template.bind({})
 Image.args = {
-  src: 'https://oss.jinse.cc/production/bd7c7508-026e-4fcd-abf8-1fa1061f4d6c.png',
+  src: 'https://oss.jinse.cc/production/e5a85cb5-bdd3-40c5-94de-c3335a704ab8.jpg',
   alt: '',
-  aspectRatio: true,
   width: '200px',
   height: '',
   objectFit: 'cover',

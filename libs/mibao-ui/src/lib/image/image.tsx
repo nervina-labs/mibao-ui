@@ -1,17 +1,16 @@
-import { Box, BoxProps, Flex, Image as ChakraImage, ImageProps as ChakraImageProps, Skeleton } from '@chakra-ui/react'
+import { AspectRatio, AspectRatioProps, Flex, Image as ChakraImage, ImageProps as ChakraImageProps, Skeleton } from '@chakra-ui/react'
 import styles from './image.module.scss'
 import { useState, useMemo, useEffect, useCallback, ReactNode } from 'react'
 import FALLBACK_SRC from '../../../assets/images/fallback.svg'
 import { addParamsToUrl, disableImageContext, getImagePreviewUrl, omit } from '../../utils'
 
 export interface ImageProps extends ChakraImageProps {
-  aspectRatio?: boolean
   loader?: ReactNode
   srcQueryParams?: Record<string, string | number>
   disableContextMenu?: boolean
   resizeScale?: number // Specifies the shortest edge of the target zoom graph.
   webp?: boolean
-  containerProps?: BoxProps
+  containerProps?: AspectRatioProps
 }
 
 export const Image: React.FC<ImageProps> = ({ containerProps, ...props }) => {
@@ -37,7 +36,6 @@ export const Image: React.FC<ImageProps> = ({ containerProps, ...props }) => {
   }, [props])
   // omit props
   const imageProps = useMemo(() => omit(props, [
-    'aspectRatio',
     'loader',
     'srcQueryParams',
     'resizeScale'
@@ -62,40 +60,41 @@ export const Image: React.FC<ImageProps> = ({ containerProps, ...props }) => {
   }, [props])
 
   return (
-    <Box
+    <AspectRatio
       w={props.width ?? props.w ?? 'auto'}
       h={props.height ?? props.h ?? 'auto'}
       position="relative"
       {...containerProps}
-      >
-      {
-        isLoading && (
-          <Flex
-            w="full"
-            h="full"
-            position="absolute"
-            zIndex={0}>
-            {loaderEl}
-          </Flex>
-        )
-      }
-      <ChakraImage
-        position="relative"
-        zIndex={1}
-        {...imageProps}
-        hide={!imageSrc}
-        data-aspect-ratio={props.aspectRatio}
-        src={imageSrc}
-        className={`${styles.image} ${props.className ? props.className : ''}`}
-        onLoad={onLoaded}
-        onError={onError}
-        objectFit={props.objectFit ?? 'cover'}
-        htmlWidth={props.width as string}
-        htmlHeight={props.height as string}
-        fallbackSrc={isError ? fallbackSrc : undefined}
-        fallback={isError ? props.fallback : undefined}
-        onContextMenu={props.disableContextMenu ? disableImageContext : undefined}
-      />
-    </Box>
+    >
+      <>
+        {
+          isLoading && (
+            <Flex
+              w="full"
+              h="full"
+              position="absolute"
+              zIndex={0}>
+              {loaderEl}
+            </Flex>
+          )
+        }
+        <ChakraImage
+          position="relative"
+          zIndex={1}
+          {...imageProps}
+          hide={!imageSrc}
+          src={imageSrc}
+          className={`${styles.image} ${props.className ? props.className : ''}`}
+          onLoad={onLoaded}
+          onError={onError}
+          objectFit={props.objectFit ?? 'cover'}
+          htmlWidth={props.width as string}
+          htmlHeight={props.height as string}
+          fallbackSrc={isError ? fallbackSrc : undefined}
+          fallback={isError ? props.fallback : undefined}
+          onContextMenu={props.disableContextMenu ? disableImageContext : undefined}
+        />
+      </>
+    </AspectRatio>
   )
 }
