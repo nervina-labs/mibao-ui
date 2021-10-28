@@ -1,4 +1,4 @@
-import { Box, Flex, Image as ChakraImage, ImageProps as ChakraImageProps, Skeleton } from '@chakra-ui/react'
+import { Box, BoxProps, Flex, Image as ChakraImage, ImageProps as ChakraImageProps, Skeleton } from '@chakra-ui/react'
 import styles from './image.module.scss'
 import { useState, useMemo, useEffect, useCallback, ReactNode } from 'react'
 import FALLBACK_SRC from '../../../assets/images/fallback.svg'
@@ -11,9 +11,10 @@ export interface ImageProps extends ChakraImageProps {
   disableContextMenu?: boolean
   resizeScale?: number // Specifies the shortest edge of the target zoom graph.
   webp?: boolean
+  containerProps?: BoxProps
 }
 
-export const Image = (props: ImageProps) => {
+export const Image: React.FC<ImageProps> = ({ containerProps, ...props }) => {
   const { fallbackSrc = FALLBACK_SRC } = props
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [isError, setIsError] = useState(false)
@@ -62,9 +63,11 @@ export const Image = (props: ImageProps) => {
 
   return (
     <Box
-      w={props.width ?? props.h ?? 'auto'}
+      w={props.width ?? props.w ?? 'auto'}
       h={props.height ?? props.h ?? 'auto'}
-      position="relative">
+      position="relative"
+      {...containerProps}
+      >
       {
         isLoading && (
           <Flex
