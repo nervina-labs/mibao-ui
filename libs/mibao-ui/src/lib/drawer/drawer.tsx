@@ -7,7 +7,8 @@ import {
   DrawerContent,
   DrawerCloseButton,
   DrawerProps as RawDrawerProps,
-  DrawerContentProps
+  DrawerContentProps,
+  ModalBodyProps
 } from '@chakra-ui/react'
 import styles from './drawer.module.scss'
 
@@ -19,6 +20,7 @@ export interface DrawerProps extends RawDrawerProps {
   children: React.ReactNode
   rounded?: 'none' | 'md' | 'lg' | 'xl'
   contentProps?: DrawerContentProps
+  bodyProps?: ModalBodyProps
 }
 
 export const Drawer = ({
@@ -29,6 +31,7 @@ export const Drawer = ({
   footer,
   children,
   contentProps,
+  bodyProps,
   ...props
 }: DrawerProps) => (
   <RawDrawer {...props}>
@@ -41,7 +44,7 @@ export const Drawer = ({
     >
       {hasCloseBtn ? <DrawerCloseButton /> : null}
       {header !== undefined ? <DrawerHeader>{header}</DrawerHeader> : null}
-      <DrawerBody>{children}</DrawerBody>
+      <DrawerBody {...bodyProps}>{children}</DrawerBody>
       {footer !== undefined ? <DrawerFooter>Footer</DrawerFooter> : null}
     </DrawerContent>
   </RawDrawer>
