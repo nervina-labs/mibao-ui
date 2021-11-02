@@ -9,7 +9,7 @@ import {
 import styles from './image.module.scss'
 import { useState, useMemo, useEffect, useCallback, ReactNode } from 'react'
 import FALLBACK_SRC from '../../../assets/images/fallback.svg'
-import { addParamsToUrl, disableImageContext, getImagePreviewUrl, omit } from '../../utils'
+import { addParamsToUrl, disableImageContext, getImagePreviewUrl } from '../../utils'
 
 export interface ImageProps extends ChakraImageProps {
   loader?: ReactNode
@@ -20,40 +20,41 @@ export interface ImageProps extends ChakraImageProps {
   containerProps?: BoxProps
 }
 
-export const Image: React.FC<ImageProps> = ({ containerProps, ...props }) => {
+export const Image: React.FC<ImageProps> = ({
+  containerProps,
+  srcQueryParams = {},
+  resizeScale,
+  loader,
+  webp,
+  src,
+  ...props
+}) => {
   const { fallbackSrc = FALLBACK_SRC } = props
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [isError, setIsError] = useState(false)
-  // loading element
+
   const loaderEl = useMemo(() => {
-    if (props.loader) return props.loader
+    if (loader) return loader
     return <Skeleton width="100%" height="100%" rounded={props.rounded} borderRadius={props.borderRadius} />
-  }, [props.borderRadius, props.loader, props.rounded])
-  // src
+  }, [loader, props.borderRadius, props.rounded])
+
   const imageSrc = useMemo(() => {
-    if (!props.src) return props.src
-    const srcQueryParams = props.srcQueryParams ?? {}
-    if (props.resizeScale) {
-      return addParamsToUrl(getImagePreviewUrl(props.src, {
-        size: props.resizeScale,
-        webp: props.webp
+    if (!src) return src
+    if (resizeScale) {
+      return addParamsToUrl(getImagePreviewUrl(src, {
+        size: resizeScale,
+        webp
       }), srcQueryParams)
     }
-    return addParamsToUrl(props.src, srcQueryParams)
-  }, [props])
-  // omit props
-  const imageProps = useMemo(() => omit(props, [
-    'loader',
-    'srcQueryParams',
-    'resizeScale'
-  ]), [props])
+    return addParamsToUrl(src, srcQueryParams)
+  }, [resizeScale, src, webp, srcQueryParams])
 
   useEffect(() => {
-    if (props.src) {
+    if (src) {
       setIsLoading(true)
       setIsError(false)
     }
-  }, [props.src])
+  }, [src])
 
   const onLoaded = useCallback((event) => {
     setIsLoading(false)
@@ -88,8 +89,8 @@ export const Image: React.FC<ImageProps> = ({ containerProps, ...props }) => {
         <ChakraImage
           position="relative"
           zIndex={1}
-          {...imageProps}
-          hide={!imageSrc}
+          opacity={!imageSrc ? 0 : 1}
+          {...props}
           src={imageSrc}
           className={`${styles.image} ${props.className ? props.className : ''}`}
           onLoad={onLoaded}

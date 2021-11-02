@@ -1,4 +1,3 @@
-import styles from './nft-image.module.scss'
 import React, { useMemo } from 'react'
 import { ImageProps, Image } from '../image/image'
 import { AspectRatio, Box, Stack } from '@chakra-ui/react'
@@ -43,16 +42,14 @@ export const NftImage: React.FC<NftImageProps> = ({ isBaned, hasCardBack, type, 
       .filter(item => item.show)
       .map(item => (
         <AspectRatio
-          w="80%"
+          w="100%"
           h="auto"
           ratio={1 / 1}
           bg="rgba(0, 0, 0, 0.7)"
           backdropFilter="blur(10px)"
-          p="10%"
-          rounded="full"
-          className={styles.icon}
+          rounded="100%"
         >
-          <img src={item.src} alt='icon' />
+          <Image src={item.src} w="60%" h="60%" m="auto" objectFit="contain" />
         </AspectRatio>
       ))
   }
@@ -76,6 +73,7 @@ export const NftImage: React.FC<NftImageProps> = ({ isBaned, hasCardBack, type, 
         right="5%"
         spacing={2}
         w="8%"
+        h="auto"
         minW="25px"
         maxW="30px"
         zIndex={2}>
