@@ -22,11 +22,11 @@ export const Pagination: React.FC<PaginationProps> = ({
     let list = new Array(Math.min(total, COUNT)).fill(undefined)
 
     switch (true) {
-      case current <= COUNT: {
+      case current < COUNT: {
         list = list.map((_, i) => i + 1)
         break
       }
-      case current > total - COUNT: {
+      case current > total - COUNT + 1: {
         list = list.map((_, i) => total - COUNT + i + 1)
         break
       }
