@@ -23,6 +23,7 @@ export const Alert: React.FC<AlertProps> = ({ title, description, status }) => (
       height="16px"
       marginTop="3px"
       className={styles.icon}
+      alignSelf="flex-start"
     />
     <Box>
       <AlertTitle
