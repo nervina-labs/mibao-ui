@@ -40,7 +40,7 @@ export const NftImage: React.FC<NftImageProps> = ({ isBaned, hasCardBack, type, 
       }
     ]
       .filter(item => item.show)
-      .map(item => (
+      .map((item, i) => (
         <AspectRatio
           w="100%"
           h="auto"
@@ -48,6 +48,7 @@ export const NftImage: React.FC<NftImageProps> = ({ isBaned, hasCardBack, type, 
           bg="rgba(0, 0, 0, 0.7)"
           backdropFilter="blur(10px)"
           rounded="100%"
+          key={i}
         >
           <Image src={item.src} w="60%" h="60%" m="auto" objectFit="contain" />
         </AspectRatio>
