@@ -45,7 +45,8 @@ export const Avatar: React.FC<AvatarProps> = ({
         <Image
           src={isBanned ? '' : src}
           rounded={shape === 'square' ? '3px' : '100%'}
-          width="100%"
+          w="full"
+          h="full"
           srcQueryParams={srcQueryParams}
           resizeScale={resizeScale}
           minW={imageProps?.width}
