@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { ImageProps, Image } from '../image/image'
-import { AspectRatio, Box, Stack } from '@chakra-ui/react'
+import { AspectRatio, Box, Stack, Image as RowImage } from '@chakra-ui/react'
 import CARD_BACK_SRC from '../../../assets/images/cardback-icon.svg'
 import VIDEO_SRC from '../../../assets/images/video-icon.svg'
 import AUDIO_SRC from '../../../assets/images/audio-icon.svg'
@@ -42,22 +42,23 @@ export const NftImage: React.FC<NftImageProps> = ({ isBaned, hasCardBack, type, 
       .filter(item => item.show)
       .map((item, i) => (
         <AspectRatio
-          w="100%"
-          h="auto"
+          w="full"
           ratio={1 / 1}
           bg="rgba(0, 0, 0, 0.7)"
           backdropFilter="blur(10px)"
           rounded="100%"
           key={i}
         >
-          <Image src={item.src} w="60%" h="60%" m="auto" objectFit="contain" />
+          <Box w="full" h="full">
+            <RowImage src={item.src} w="60%" h="60%" m="auto" objectFit="contain" />
+          </Box>
         </AspectRatio>
       ))
   }
   , [isBaned, hasCardBack, type])
 
   return (
-    <Box position="relative">
+    <Box position="relative" w={props.w ?? props.width} h={props.h ?? props.height}>
       <AspectRatio ratio={1 / 1}>
         <Image
           rounded="10%"
