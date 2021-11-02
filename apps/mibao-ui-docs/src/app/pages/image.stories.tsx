@@ -37,9 +37,6 @@ const Template: Story = (args) =>
       <MibaoImage {...args} />
       <MibaoImage {...args} loader={<Spinner color="primary.600" emptyColor="gray.200" m="auto" />} />
       <MibaoImage {...args} fallback={<div>Failed</div>} />
-
-      <h1>Ratio: 1:1: </h1>
-      <MibaoImage {...args} fallback={<div>Failed</div>} containerProps={{ ratio: 1 / 1 }} />
     </Stack>
   </MibaoProvider>
 

@@ -1,7 +1,7 @@
 import styles from './avatar.module.scss'
 import React from 'react'
 import { Image, ImageProps } from '../image/image'
-import { Box, BoxProps } from '@chakra-ui/react'
+import { AspectRatio, Box, BoxProps } from '@chakra-ui/react'
 import DIAMONDS_SRC from '../../../assets/images/nft-avatar-diamonds.svg'
 import VERIFIED_SRC from '../../../assets/images/avatar-verified.svg'
 
@@ -41,18 +41,18 @@ export const Avatar: React.FC<AvatarProps> = ({
       maxH={size}
       {...containerProps}
     >
-      <Image
-        src={isBanned ? '' : src}
-        rounded={shape === 'square' ? '3px' : '100%'}
-        width="100%"
-        srcQueryParams={srcQueryParams}
-        resizeScale={resizeScale}
-        minW={imageProps?.width}
-        containerProps={{
-          ratio: 1 / 1
-        }}
-        {...imageProps}
-      />
+      <AspectRatio ratio={1 / 1}>
+        <Image
+          src={isBanned ? '' : src}
+          rounded={shape === 'square' ? '3px' : '100%'}
+          w="full"
+          h="full"
+          srcQueryParams={srcQueryParams}
+          resizeScale={resizeScale}
+          minW={imageProps?.width}
+          {...imageProps}
+        />
+      </AspectRatio>
       {
         isToken && !isBanned && <img className={`${styles.icon} ${styles.token}`} src={DIAMONDS_SRC} alt='diamonds' />
       }

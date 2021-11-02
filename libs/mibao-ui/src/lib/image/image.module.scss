@@ -1,7 +1,4 @@
-.image {
-}
-
-.image[hide="true"], .image[src=""], .image:not([src]) {
+.image[src=""], .image:not([src]) {
   opacity: 0;
   pointer-events: none;
 }

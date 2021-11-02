@@ -1,7 +1,6 @@
-import styles from './nft-image.module.scss'
 import React, { useMemo } from 'react'
 import { ImageProps, Image } from '../image/image'
-import { Box, Flex, Stack } from '@chakra-ui/react'
+import { AspectRatio, Box, Stack } from '@chakra-ui/react'
 import CARD_BACK_SRC from '../../../assets/images/cardback-icon.svg'
 import VIDEO_SRC from '../../../assets/images/video-icon.svg'
 import AUDIO_SRC from '../../../assets/images/audio-icon.svg'
@@ -10,56 +9,63 @@ import ICON_3D_SRC from '../../../assets/images/3d-icon.svg'
 export const NFT_IMAGE_TYPE_SET = ['image', 'video', 'audio', '3d'] as const
 export type NftImageType = typeof NFT_IMAGE_TYPE_SET[number]
 
-export interface NftImageProps extends Omit<ImageProps, 'aspectRatio' | 'srcQueryParams'> {
+export interface NftImageProps extends Omit<ImageProps, 'srcQueryParams'> {
   type?: NftImageType
   hasCardBack?: boolean
   srcQueryParams?: { tid: number, locale: string }
   isBaned?: boolean
 }
 
-export const NftImage: React.FC<NftImageProps> = ({ isBaned, ...props }) => {
+export const NftImage: React.FC<NftImageProps> = ({ isBaned, hasCardBack, type, ...props }) => {
   const icons = useMemo(() => {
     if (isBaned) {
       return null
     }
     return [
       {
-        show: props.hasCardBack,
+        show: hasCardBack,
         src: CARD_BACK_SRC
       },
       {
-        show: props.type === 'video',
+        show: type === 'video',
         src: VIDEO_SRC
       },
       {
-        show: props.type === 'audio',
+        show: type === 'audio',
         src: AUDIO_SRC
       },
       {
-        show: props.type === '3d',
+        show: type === '3d',
         src: ICON_3D_SRC
       }
     ]
       .filter(item => item.show)
       .map(item => (
-        <Flex className={styles.icon}>
-          <img src={item.src} alt='icon' />
-        </Flex>
+        <AspectRatio
+          w="100%"
+          h="auto"
+          ratio={1 / 1}
+          bg="rgba(0, 0, 0, 0.7)"
+          backdropFilter="blur(10px)"
+          rounded="100%"
+        >
+          <Image src={item.src} w="60%" h="60%" m="auto" objectFit="contain" />
+        </AspectRatio>
       ))
   }
-  , [props, isBaned])
+  , [isBaned, hasCardBack, type])
 
   return (
-    <Box className={styles.nftImageContainer}>
-      <Image
-        rounded="10%"
-        w="full"
-        containerProps={{
-          ratio: 1 / 1
-        }}
-        {...props}
-        src={isBaned ? '' : props.src}
-      />
+    <Box position="relative">
+      <AspectRatio ratio={1 / 1}>
+        <Image
+          rounded="10%"
+          w="full"
+          h="full"
+          {...props}
+          src={isBaned ? '' : props.src}
+        />
+      </AspectRatio>
       <Stack
         position="absolute"
         direction="column"
@@ -67,6 +73,7 @@ export const NftImage: React.FC<NftImageProps> = ({ isBaned, ...props }) => {
         right="5%"
         spacing={2}
         w="8%"
+        h="auto"
         minW="25px"
         maxW="30px"
         zIndex={2}>
