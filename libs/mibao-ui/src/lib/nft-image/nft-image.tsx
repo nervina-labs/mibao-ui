@@ -1,7 +1,7 @@
 import styles from './nft-image.module.scss'
 import React, { useMemo } from 'react'
 import { ImageProps, Image } from '../image/image'
-import { Box, Flex, Stack } from '@chakra-ui/react'
+import { AspectRatio, Box, Flex, Stack } from '@chakra-ui/react'
 import CARD_BACK_SRC from '../../../assets/images/cardback-icon.svg'
 import VIDEO_SRC from '../../../assets/images/video-icon.svg'
 import AUDIO_SRC from '../../../assets/images/audio-icon.svg'
@@ -51,15 +51,15 @@ export const NftImage: React.FC<NftImageProps> = ({ isBaned, ...props }) => {
 
   return (
     <Box className={styles.nftImageContainer}>
-      <Image
-        rounded="10%"
-        w="full"
-        containerProps={{
-          ratio: 1 / 1
-        }}
-        {...props}
-        src={isBaned ? '' : props.src}
-      />
+      <AspectRatio ratio={1 / 1}>
+        <Image
+          rounded="10%"
+          w="full"
+          h="full"
+          {...props}
+          src={isBaned ? '' : props.src}
+        />
+      </AspectRatio>
       <Stack
         position="absolute"
         direction="column"

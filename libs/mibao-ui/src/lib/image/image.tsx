@@ -1,4 +1,11 @@
-import { AspectRatio, AspectRatioProps, Flex, Image as ChakraImage, ImageProps as ChakraImageProps, Skeleton } from '@chakra-ui/react'
+import {
+  Box,
+  BoxProps,
+  Flex,
+  Image as ChakraImage,
+  ImageProps as ChakraImageProps,
+  Skeleton
+} from '@chakra-ui/react'
 import styles from './image.module.scss'
 import { useState, useMemo, useEffect, useCallback, ReactNode } from 'react'
 import FALLBACK_SRC from '../../../assets/images/fallback.svg'
@@ -10,7 +17,7 @@ export interface ImageProps extends ChakraImageProps {
   disableContextMenu?: boolean
   resizeScale?: number // Specifies the shortest edge of the target zoom graph.
   webp?: boolean
-  containerProps?: AspectRatioProps
+  containerProps?: BoxProps
 }
 
 export const Image: React.FC<ImageProps> = ({ containerProps, ...props }) => {
@@ -60,7 +67,7 @@ export const Image: React.FC<ImageProps> = ({ containerProps, ...props }) => {
   }, [props])
 
   return (
-    <AspectRatio
+    <Box
       w={props.width ?? props.w ?? 'auto'}
       h={props.height ?? props.h ?? 'auto'}
       position="relative"
@@ -95,6 +102,6 @@ export const Image: React.FC<ImageProps> = ({ containerProps, ...props }) => {
           onContextMenu={props.disableContextMenu ? disableImageContext : undefined}
         />
       </>
-    </AspectRatio>
+    </Box>
   )
 }
