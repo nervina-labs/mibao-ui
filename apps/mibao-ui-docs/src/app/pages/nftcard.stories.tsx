@@ -1,9 +1,10 @@
 import { Story, Meta } from '@storybook/react'
 import {
   NFTCard,
-  MibaoProvider
+  MibaoProvider,
+  mibaoTheme
 } from 'mibao-ui'
-import { Stack, SimpleGrid } from '@chakra-ui/react'
+import { Stack, SimpleGrid, extendTheme } from '@chakra-ui/react'
 
 export default {
   component: NFTCard,
@@ -13,8 +14,18 @@ export default {
 const imgSrc = 'https://goldenlegend.oss-cn-hangzhou.aliyuncs.com/production/a9017356-4ecf-4257-8345-6b14c1625ab7.gif'
 const nftName = '收藏者个人主页'
 
+const theme = extendTheme(mibaoTheme, {
+  locales: {
+    nft: {
+      cardBackTooltips: '该 NFT 卡背设置有信息，仅持有人可见',
+      limited: '限量',
+      unlimited: '不限量'
+    }
+  }
+})
+
 export const AllKindOfCard: Story = (args) =>
-  <MibaoProvider>
+  <MibaoProvider theme={theme}>
     <Stack spacing="30px" direction="column" w="360px" maxW="360px">
       <NFTCard
         src={imgSrc}
@@ -31,7 +42,7 @@ export const AllKindOfCard: Story = (args) =>
         type="audio"
         locale="zh"
         issuerProps={{ name: 'GoodMan', src: imgSrc }}
-        limitProps={{ limitedText: '限量', unlimitedText: '未限量', count: '12345', serialNumber: 5 }}
+        limitProps={{ count: '12345', serialNumber: 5 }}
       />
       <NFTCard
         src={imgSrc}
@@ -40,7 +51,7 @@ export const AllKindOfCard: Story = (args) =>
         type="audio"
         locale="zh"
         issuerProps={{ name: 'GoodMan', src: imgSrc }}
-        limitProps={{ limitedText: '限量', unlimitedText: '未限量', count: '12345', serialNumber: 5 }}
+        limitProps={{ count: '12345', serialNumber: 5 }}
         likeProps={{ likeCount: 56, isLiked: true }}
       />
       <NFTCard

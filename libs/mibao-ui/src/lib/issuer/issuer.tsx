@@ -1,4 +1,4 @@
-import { Link } from '@chakra-ui/react'
+import { Link, useToken } from '@chakra-ui/react'
 import React from 'react'
 import { Avatar, AvatarProps } from '../avatar/avatar'
 import { Copyzone } from '../copyzone/copyzone'
@@ -40,6 +40,7 @@ export const Issuer: React.FC<IssuerProps> = ({
 }) => {
   const anchorProps = href && !isBanned ? { as: Link, href, isExternal: isLinkExternal } : undefined
   const isOneline = id == null && verifiedTitle == null
+  const banned = useToken('locales', 'issuer.banned')
   return (
     <Flex
       className={`${className ?? ''} ${styles.issuer}`}
@@ -64,7 +65,7 @@ export const Issuer: React.FC<IssuerProps> = ({
           fontWeight={isOneline ? 'normal' : 500}
           {...nameProps}
         >
-          {isBanned ? bannedText : name}
+          {isBanned ? bannedText ?? banned : name}
         </Text>
         {id
           ? (
