@@ -1,6 +1,5 @@
 import '@google/model-viewer'
 import { useEffect, useRef } from 'react'
-import styles from './preview.module.scss'
 
 interface ThreeDPreviewProps {
   src: string
@@ -21,11 +20,11 @@ export const ThreeDPreview: React.FC<ThreeDPreviewProps> = ({
   const ref = useRef<any>()
   useEffect(() => {
     const modelViewerElement = ref.current
-    if (onLoad && modelViewerElement) {
+    if (Boolean(onLoad) && Boolean(modelViewerElement)) {
       modelViewerElement.addEventListener('load', onLoad)
     }
     return () => {
-      if (onLoad && modelViewerElement) {
+      if (Boolean(onLoad) && Boolean(modelViewerElement)) {
         modelViewerElement.removeEventListener('load', onLoad)
       }
     }
@@ -33,11 +32,11 @@ export const ThreeDPreview: React.FC<ThreeDPreviewProps> = ({
 
   useEffect(() => {
     const modelViewerElement = ref.current
-    if (onError && modelViewerElement) {
+    if (Boolean(onError) && Boolean(modelViewerElement)) {
       modelViewerElement.addEventListener('error', onError)
     }
     return () => {
-      if (onError && modelViewerElement) {
+      if (Boolean(onError) && Boolean(modelViewerElement)) {
         modelViewerElement.removeEventListener('error', onError)
       }
     }
@@ -46,7 +45,6 @@ export const ThreeDPreview: React.FC<ThreeDPreviewProps> = ({
   return (
     <model-viewer
       {...props}
-      className={styles.component}
       shadow-intensity="1"
       camera-controls
       auto-rotate

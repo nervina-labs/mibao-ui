@@ -1,9 +1,8 @@
 import { Modal, ModalCloseButton, ModalContent, ModalOverlay } from '@chakra-ui/react'
-import { MouseEvent, useCallback } from 'react'
+import React, { MouseEvent, useCallback, useMemo } from 'react'
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 import { AudioPreview } from './audio'
 import styles from './preview.module.scss'
-import { ThreeDPreview } from './three-d'
 import { VideoPreview } from './video'
 import { Image, ImageProps } from '../image/image'
 
@@ -15,6 +14,7 @@ export interface PreviewProps {
   bgImgUrl?: string
   renderer: string
   imageProps?: ImageProps
+  render3D: (renderer: string) => React.ReactNode
 }
 
 export const Preview: React.FC<PreviewProps> = ({
@@ -24,6 +24,7 @@ export const Preview: React.FC<PreviewProps> = ({
   onClose,
   onError,
   renderer,
+  render3D,
   imageProps
 }) => {
   const onClickModalContent = useCallback(
@@ -36,6 +37,11 @@ export const Preview: React.FC<PreviewProps> = ({
     },
     [onClose, type]
   )
+  const threeDElement = useMemo(() => {
+    const el = render3D(renderer)
+    console.log(el)
+    return el
+  }, [render3D, renderer])
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -69,7 +75,7 @@ export const Preview: React.FC<PreviewProps> = ({
         }
         {
           (type === '3d' || type === 'three_d') && renderer
-            ? (<ThreeDPreview src={renderer} onError={onError} />)
+            ? threeDElement
             : null
         }
       </ModalContent>

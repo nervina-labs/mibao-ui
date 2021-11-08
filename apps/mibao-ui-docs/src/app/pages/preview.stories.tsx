@@ -4,6 +4,7 @@ import {
   Preview as MibaoPreview
 } from 'mibao-ui'
 import { Image, useDisclosure } from '@chakra-ui/react'
+import { ThreeDPreview } from '../../components/three-d'
 
 export default {
   component: MibaoPreview,
@@ -27,6 +28,7 @@ export const Preview: Story = (args) => {
         onClose={onClose}
         bgImgUrl={imgSrc}
         renderer={imgSrc}
+        render3D={(renderer) => <ThreeDPreview src={renderer} />}
       />
     </MibaoProvider>
   )
@@ -44,6 +46,7 @@ export const Audio: Story = (args) => {
         bgImgUrl={imgSrc}
         renderer={audioSrc}
         type="audio"
+        render3D={(renderer) => <ThreeDPreview src={renderer} />}
       />
     </MibaoProvider>
   )
@@ -61,6 +64,7 @@ export const Video: Story = () => {
         bgImgUrl={imgSrc}
         renderer={videoSrc}
         type="video"
+        render3D={(renderer) => <ThreeDPreview src={renderer} />}
       />
     </MibaoProvider>
   )
@@ -78,6 +82,7 @@ export const ThreeD: Story = () => {
         bgImgUrl={imgSrc}
         renderer={threeDSrc}
         type="3d"
+        render3D={(renderer) => <ThreeDPreview src={renderer} />}
       />
     </MibaoProvider>
   )
