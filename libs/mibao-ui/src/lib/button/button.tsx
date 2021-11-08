@@ -8,6 +8,6 @@ export interface ButtonProps extends ChakraButtonProps {
 
 export const Button: React.FC<ButtonProps> = (props) => {
   return (
-    <ChakraButton variant="outline" {...props}>{props.children}</ChakraButton>
+    <ChakraButton variant="outline" fontWeight="normal" {...props}>{props.children}</ChakraButton>
   )
 }
