@@ -5,6 +5,7 @@ import { AudioPreview } from './audio'
 import styles from './preview.module.scss'
 import { ThreeDPreview } from './three-d'
 import { VideoPreview } from './video'
+import { Image, ImageProps } from '../image/image'
 
 export interface PreviewProps {
   isOpen: boolean
@@ -13,6 +14,7 @@ export interface PreviewProps {
   type?: 'image' | 'video' | 'audio' | '3d' | 'three_d'
   bgImgUrl?: string
   renderer: string
+  imageProps?: ImageProps
 }
 
 export const Preview: React.FC<PreviewProps> = ({
@@ -21,7 +23,8 @@ export const Preview: React.FC<PreviewProps> = ({
   bgImgUrl,
   onClose,
   onError,
-  renderer
+  renderer,
+  imageProps
 }) => {
   const onClickModalContent = useCallback(
     (e: MouseEvent<HTMLDivElement>) => {
@@ -48,7 +51,7 @@ export const Preview: React.FC<PreviewProps> = ({
                 minScale={0.2}
               >
                 <TransformComponent wrapperClass={styles.wrapper} contentClass={`${styles.component} ${styles.image}`}>
-                  <img src={bgImgUrl} alt="test" onError={onError} />
+                  <Image src={bgImgUrl} onError={onError} {...imageProps} />
                 </TransformComponent>
               </TransformWrapper>
               )
