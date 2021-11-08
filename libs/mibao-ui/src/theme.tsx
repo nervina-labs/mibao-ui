@@ -1,4 +1,5 @@
 import { ChakraProvider, ChakraProviderProps, extendTheme } from '@chakra-ui/react'
+import FALL_BACK_SRC from '../assets/images/fallback.svg'
 import React from 'react'
 
 export const mibaoTheme = extendTheme({
@@ -24,6 +25,22 @@ export const mibaoTheme = extendTheme({
   },
   shadows: {
     outline: 'none'
+  },
+  // custom token
+  locales: {
+    issuer: {
+      banned: 'Invalid Issuer'
+    },
+    nft: {
+      banned: 'Invalid NFT',
+      cardBackTooltips: 'Include card back content which can only be revealed by the owner of this NFT',
+      limited: 'Limited',
+      unlimited: 'Unlimited'
+    }
+  },
+  fallbacks: {
+    avatar: FALL_BACK_SRC,
+    nft: FALL_BACK_SRC
   }
 })
 

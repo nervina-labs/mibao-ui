@@ -1,9 +1,9 @@
 import styles from './avatar.module.scss'
 import React from 'react'
 import { Image, ImageProps } from '../image/image'
-import { AspectRatio, Box, BoxProps } from '@chakra-ui/react'
-import DIAMONDS_SRC from '../../../assets/images/nft-avatar-diamonds.svg'
-import VERIFIED_SRC from '../../../assets/images/avatar-verified.svg'
+import { AspectRatio, Box, BoxProps, useToken } from '@chakra-ui/react'
+import { ReactComponent as DiamondSvg } from '../../../assets/images/nft-avatar-diamonds.svg'
+import { ReactComponent as VerifiedSvg } from '../../../assets/images/avatar-verified.svg'
 
 export type AvatarType = 'token' | 'image'
 
@@ -33,6 +33,8 @@ export const Avatar: React.FC<AvatarProps> = ({
   ...imageProps
 }) => {
   const isToken = type === 'token'
+  const fallbackSrc = useToken('fallbacks', 'avatar')
+
   return (
     <Box
       className={`${styles.avatarContainer} ${isToken ? styles.animation : ''} ${shape === 'square' ? styles.square : ''}`}
@@ -41,7 +43,7 @@ export const Avatar: React.FC<AvatarProps> = ({
       maxH={size}
       {...containerProps}
     >
-      <AspectRatio ratio={1 / 1}>
+      <AspectRatio ratio={1 / 1} width={size} maxW={size} maxH={size}>
         <Image
           src={isBanned ? '' : src}
           rounded={shape === 'square' ? '3px' : '100%'}
@@ -50,20 +52,18 @@ export const Avatar: React.FC<AvatarProps> = ({
           srcQueryParams={srcQueryParams}
           resizeScale={resizeScale}
           minW={imageProps?.width}
+          fallbackSrc={fallbackSrc}
+          border="3px solid #f6f6f6"
           {...imageProps}
         />
       </AspectRatio>
       {
-        isToken && !isBanned && <img className={`${styles.icon} ${styles.token}`} src={DIAMONDS_SRC} alt='diamonds' />
+        isToken && !isBanned && <DiamondSvg className={`${styles.icon} ${styles.token}`} />
       }
       {
         isVerified && !isBanned
           ? (
-          <img
-            className={`${styles.icon} ${styles.verified}`}
-            src={VERIFIED_SRC}
-            alt='verified'
-          />
+            <VerifiedSvg className={`${styles.icon} ${styles.verified}`} />
             )
           : null
       }
