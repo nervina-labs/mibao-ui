@@ -1,5 +1,6 @@
 import React from 'react'
 import { Text, TextProps } from '../typography/typography'
+import { useToken } from '@chakra-ui/react'
 
 export interface NFTTitleProps extends TextProps {
   title?: string
@@ -8,6 +9,7 @@ export interface NFTTitleProps extends TextProps {
 }
 
 export const NFTTitle: React.FC<NFTTitleProps> = ({ title, isBanned, bannedText, ...props }) => {
+  const banned = useToken('locales', 'nft.banned')
   return (
     <Text
       isTruncated
@@ -16,7 +18,7 @@ export const NFTTitle: React.FC<NFTTitleProps> = ({ title, isBanned, bannedText,
       color={isBanned ? 'banned.500' : undefined}
       {...props}
     >
-      {!isBanned ? title : bannedText}
+      {!isBanned ? title : bannedText ?? banned}
     </Text>
   )
 }
