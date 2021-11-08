@@ -1,5 +1,5 @@
 import { Modal, ModalCloseButton, ModalContent, ModalOverlay } from '@chakra-ui/react'
-import React, { MouseEvent, useCallback, useMemo } from 'react'
+import React, { MouseEvent, useCallback } from 'react'
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 import { AudioPreview } from './audio'
 import styles from './preview.module.scss'
@@ -37,11 +37,6 @@ export const Preview: React.FC<PreviewProps> = ({
     },
     [onClose, type]
   )
-  const threeDElement = useMemo(() => {
-    const el = render3D(renderer)
-    console.log(el)
-    return el
-  }, [render3D, renderer])
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -75,7 +70,7 @@ export const Preview: React.FC<PreviewProps> = ({
         }
         {
           (type === '3d' || type === 'three_d') && renderer
-            ? threeDElement
+            ? render3D(renderer)
             : null
         }
       </ModalContent>
