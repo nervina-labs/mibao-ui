@@ -14,7 +14,7 @@ export interface PreviewProps {
   bgImgUrl?: string
   renderer: string
   imageProps?: ImageProps
-  render3D: (renderer: string) => React.ReactNode
+  render3D: (renderer: string, bgImgUrl?: string) => React.ReactNode
 }
 
 export const Preview: React.FC<PreviewProps> = ({
@@ -70,7 +70,7 @@ export const Preview: React.FC<PreviewProps> = ({
         }
         {
           (type === '3d' || type === 'three_d') && renderer
-            ? render3D(renderer)
+            ? render3D(renderer, bgImgUrl)
             : null
         }
       </ModalContent>
