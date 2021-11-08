@@ -6,7 +6,7 @@ import VIDEO_SRC from '../../../assets/images/video-icon.svg'
 import AUDIO_SRC from '../../../assets/images/audio-icon.svg'
 import ICON_3D_SRC from '../../../assets/images/3d-icon.svg'
 
-export const NFT_IMAGE_TYPE_SET = ['image', 'video', 'audio', '3d'] as const
+export const NFT_IMAGE_TYPE_SET = ['image', 'video', 'audio', '3d', 'three_d'] as const
 export type NftImageType = typeof NFT_IMAGE_TYPE_SET[number]
 
 export interface NftImageProps extends Omit<ImageProps, 'srcQueryParams'> {
@@ -35,7 +35,7 @@ export const NftImage: React.FC<NftImageProps> = ({ isBaned, hasCardBack, type, 
         src: AUDIO_SRC
       },
       {
-        show: type === '3d',
+        show: type === '3d' || type === 'three_d',
         src: ICON_3D_SRC
       }
     ]
