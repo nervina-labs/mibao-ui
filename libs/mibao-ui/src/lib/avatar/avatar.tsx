@@ -53,7 +53,7 @@ export const Avatar: React.FC<AvatarProps> = ({
           resizeScale={resizeScale}
           minW={imageProps?.width}
           fallbackSrc={fallbackSrc}
-          border="3px solid #f6f6f6"
+          border={isToken ? undefined : '3px solid #f6f6f6'}
           {...imageProps}
         />
       </AspectRatio>
