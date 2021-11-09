@@ -8,7 +8,7 @@ module.exports = options => {
       ...options.plugins,
       url(),
       // bundle svg as react component like CRA
-      svgr()
+      svgr({ icon: true })
     ]
   }
 }
