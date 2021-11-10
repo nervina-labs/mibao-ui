@@ -65,9 +65,7 @@ export const Preview: React.FC<PreviewProps> = ({
                 minScale={0.2}
               >
                 <TransformComponent wrapperClass={styles.wrapper} contentClass={`${styles.component} ${styles.image}`}>
-                  {
-                    <MibaoImage src={imgSrc} onError={onError} {...imageProps} />
-                  }
+                  <MibaoImage src={imgSrc} onError={onError} {...imageProps} />
                 </TransformComponent>
               </TransformWrapper>
               )
