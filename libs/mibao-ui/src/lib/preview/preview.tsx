@@ -55,37 +55,43 @@ export const Preview: React.FC<PreviewProps> = ({
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
       <ModalContent w="100%" h="100%" bg="rgba(0, 0, 0, 0)" maxW="unset" maxH="unset" m="0" onClick={onClickModalContent}>
-        <ModalCloseButton zIndex={1} color="white" />
-        {
-          type === 'image' || (type === 'audio' && bgImgUrl)
-            ? (
-              <TransformWrapper
-                centerOnInit
-                centerZoomedOut
-                minScale={0.2}
-              >
-                <TransformComponent wrapperClass={styles.wrapper} contentClass={`${styles.component} ${styles.image}`}>
-                  <MibaoImage src={imgSrc} onError={onError} {...imageProps} />
-                </TransformComponent>
-              </TransformWrapper>
-              )
-            : null
-        }
-        {
-          type === 'audio'
-            ? (<AudioPreview renderer={renderer} onError={onError} />)
-            : null
-        }
-        {
-          type === 'video'
-            ? (<VideoPreview renderer={renderer} onError={onError} />)
-            : null
-        }
-        {
-          (type === '3d' || type === 'three_d') && renderer
-            ? render3D(renderer, bgImgUrl)
-            : null
-        }
+      <ModalCloseButton zIndex={1} color="white" />
+      {
+        isOpen
+          ? <>
+            {
+              type === 'image' || (type === 'audio' && bgImgUrl)
+                ? (
+                  <TransformWrapper
+                    centerOnInit
+                    centerZoomedOut
+                    minScale={0.2}
+                  >
+                    <TransformComponent wrapperClass={styles.wrapper} contentClass={`${styles.component} ${styles.image}`}>
+                      <MibaoImage src={imgSrc} onError={onError} {...imageProps} />
+                    </TransformComponent>
+                  </TransformWrapper>
+                  )
+                : null
+            }
+            {
+              type === 'audio'
+                ? (<AudioPreview renderer={renderer} onError={onError} />)
+                : null
+            }
+            {
+              type === 'video'
+                ? (<VideoPreview renderer={renderer} onError={onError} />)
+                : null
+            }
+            {
+              (type === '3d' || type === 'three_d') && renderer
+                ? render3D(renderer, bgImgUrl)
+                : null
+            }
+          </>
+          : null
+      }
       </ModalContent>
     </Modal>
   )
