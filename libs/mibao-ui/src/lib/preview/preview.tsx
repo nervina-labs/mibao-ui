@@ -1,10 +1,10 @@
 import { Modal, ModalCloseButton, ModalContent, ModalOverlay } from '@chakra-ui/react'
-import React, { MouseEvent, useCallback } from 'react'
+import React, { MouseEvent, useCallback, useEffect, useState } from 'react'
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 import { AudioPreview } from './audio'
 import styles from './preview.module.scss'
 import { VideoPreview } from './video'
-import { Image, ImageProps } from '../image/image'
+import { Image as MibaoImage, ImageProps } from '../image/image'
 
 export interface PreviewProps {
   isOpen: boolean
@@ -15,6 +15,7 @@ export interface PreviewProps {
   renderer: string
   imageProps?: ImageProps
   render3D: (renderer: string, bgImgUrl?: string) => React.ReactNode
+  preload?: boolean
 }
 
 export const Preview: React.FC<PreviewProps> = ({
@@ -25,7 +26,8 @@ export const Preview: React.FC<PreviewProps> = ({
   onError,
   renderer,
   render3D,
-  imageProps
+  imageProps,
+  preload = true
 }) => {
   const onClickModalContent = useCallback(
     (e: MouseEvent<HTMLDivElement>) => {
@@ -37,9 +39,20 @@ export const Preview: React.FC<PreviewProps> = ({
     },
     [onClose, type]
   )
+  const [imgSrc, setImgSrc] = useState<string |undefined>(undefined)
+  useEffect(() => {
+    if (preload) {
+      const image = new Image()
+      image.src = bgImgUrl ?? ''
+      image.onload = () => setImgSrc(bgImgUrl)
+      if (onError) {
+        image.onerror = onError
+      }
+    }
+  }, [bgImgUrl, isOpen, onError, preload])
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
       <ModalContent w="100%" h="100%" bg="rgba(0, 0, 0, 0)" maxW="unset" maxH="unset" m="0" onClick={onClickModalContent}>
         <ModalCloseButton zIndex={1} color="white" />
@@ -52,7 +65,9 @@ export const Preview: React.FC<PreviewProps> = ({
                 minScale={0.2}
               >
                 <TransformComponent wrapperClass={styles.wrapper} contentClass={`${styles.component} ${styles.image}`}>
-                  <Image src={bgImgUrl} onError={onError} {...imageProps} />
+                  {
+                    <MibaoImage src={imgSrc} onError={onError} {...imageProps} />
+                  }
                 </TransformComponent>
               </TransformWrapper>
               )
