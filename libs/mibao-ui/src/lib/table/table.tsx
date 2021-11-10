@@ -2,13 +2,13 @@ import './table.module.scss'
 
 import {
   Table,
-  Thead as ChakraThead,
+  Thead as RowThead,
   Tbody,
   Tfoot,
   Tr,
-  Th,
+  Th as RowTh,
   Td,
-  TableCaption,
+  TableCaption as RowTableCaption,
   TableHeadProps,
   TableBodyProps,
   TableProps,
@@ -24,9 +24,7 @@ export {
   Tbody,
   Tfoot,
   Tr,
-  Th,
   Td,
-  TableCaption,
   TableHeadProps,
   TableBodyProps,
   TableProps,
@@ -38,8 +36,24 @@ export {
 
 export const Thead: React.FC<TableHeadProps & { variant: 'filled' | 'unstyled' }> = (props) => {
   const variant = props.variant ?? 'unstyled'
-  return <ChakraThead
+  return <RowThead
     bg={variant === 'filled' ? 'var(--chakra-colors-primary-100)' : undefined}
     {...props}
-  >{props.children}</ChakraThead>
+  >{props.children}</RowThead>
+}
+
+export const Th: React.FC<TableColumnHeaderProps> = (props) => {
+  return (
+    <RowTh
+      textTransform="none"
+    >{props.children}</RowTh>
+  )
+}
+
+export const TableCaption: React.FC<TableCaptionProps> = (props) => {
+  return (
+    <RowTableCaption
+      textTransform="none"
+    >{props.children}</RowTableCaption>
+  )
 }
