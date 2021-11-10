@@ -52,7 +52,7 @@ export function omit<T extends {[key: string]: any}, K extends keyof T> (obj: T,
   return keys.reduce((acc, key) => ({ ...acc, [key]: undefined }), obj)
 }
 
-export const disableImageContext = (e: any): boolean => {
+export function disableImageContext (e: any): boolean {
   e?.preventDefault?.()
   e?.stopPropagation?.()
   return false
@@ -77,4 +77,18 @@ export const formatCount = (count: number, lang = 'en'): number | string => {
     return `${roundDown(count / MILLION)}m`
   }
   return count >= 1000 ? `${roundDown(count / 1000)}k` : count
+}
+
+export function debounce<Params extends unknown[]> (
+  func: (...args: Params) => unknown,
+  timeout: number
+): (...args: Params) => NodeJS.Timeout {
+  let timer: NodeJS.Timeout
+  return (...args: Params) => {
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      func(...args)
+    }, timeout)
+    return timer
+  }
 }
