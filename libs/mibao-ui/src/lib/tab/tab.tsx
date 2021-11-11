@@ -21,7 +21,7 @@ import {
 } from '@chakra-ui/react'
 import styles from './tab.module.scss'
 import { ThemeTypings } from '@chakra-ui/styled-system'
-import { omit } from '../../utils'
+import { debounce } from '../../utils'
 
 export { TabPanel, TabPanels, TabListProps }
 
@@ -57,7 +57,7 @@ const TabActiveLine: React.FC<{
   width
 }) => (
   <Box
-    w="1px"
+    w={`${width}px`}
     bg={ colorScheme === 'black' ? 'black' : `${colorScheme}.600` }
     h="2px"
     position="absolute"
@@ -65,20 +65,23 @@ const TabActiveLine: React.FC<{
     left={0}
     transformOrigin="left"
     transition={'0.2s'}
-    transform={`translateX(${offset}px) scaleX(${width})`}
+    transform={`translateX(${offset}px)`}
   />
 )
 
-export const Tabs: React.FC<TabsProps> = (props) => {
+export const Tabs: React.FC<TabsProps> = ({
+  align = 'start',
+  colorScheme = 'primary',
+  variant = 'line',
+  onChange,
+  ...props
+}) => {
   const [index, setIndex] = useState(props.defaultIndex ?? props.index ?? 0)
-  const variant = props.variant ?? 'line'
-  const colorScheme = props.colorScheme ?? 'primary'
-  const align = props.align ?? 'start'
 
-  const onChange = useCallback((index) => {
-    props?.onChange?.(index)
+  const onTabsChange = useCallback((index) => {
+    onChange?.(index)
     setIndex(index)
-  }, [props])
+  }, [onChange])
 
   useEffect(() => {
     if (typeof props.index === 'number') {
@@ -88,11 +91,11 @@ export const Tabs: React.FC<TabsProps> = (props) => {
 
   return (
     <ChakraTabs
-      {...omit(props, ['align', 'colorScheme', 'variant', 'onChange'])}
+      {...props}
       aligh={align === 'space-between' ? undefined : align}
       colorScheme={colorScheme}
       variant={variant}
-      onChange={onChange}
+      onChange={onTabsChange}
     >
       <TabsContext.Provider value={{ index, variant, colorScheme, align }}>
         {props.children}
@@ -106,7 +109,7 @@ export const TabList: React.FC<TabListProps> = ({ children, ...tabListProps }) =
   const tabListRef = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState(0)
   const [offset, setOffset] = useState(0)
-  useEffect(() => {
+  const setActiveLineSize = useCallback(() => {
     if (tabListRef.current && variant === 'line') {
       const elements = Array.from<HTMLButtonElement>(tabListRef.current.querySelectorAll(`.${styles.tab}`))
       const element = elements[index ?? 0]
@@ -114,6 +117,14 @@ export const TabList: React.FC<TabListProps> = ({ children, ...tabListProps }) =
       setOffset(element?.offsetLeft ?? 0)
     }
   }, [index, variant])
+  useEffect(setActiveLineSize, [setActiveLineSize])
+  useEffect(() => {
+    const fn = debounce(setActiveLineSize, 300)
+    window.addEventListener('resize', fn)
+    return () => {
+      window.removeEventListener('resize', fn)
+    }
+  }, [setActiveLineSize])
   const alignProps = useMemo(() => ['space-between', 'space-around'].includes(align)
     ? {
         justifyContent: align,
@@ -122,12 +133,14 @@ export const TabList: React.FC<TabListProps> = ({ children, ...tabListProps }) =
       }
     : {}, [align])
 
-  return <ChakraTabList ref={tabListRef} position="relative" {...alignProps} {...tabListProps}>
-    {children}
-    {
-      variant === 'line' && <TabActiveLine width={width} offset={offset} colorScheme={colorScheme}/>
-    }
-  </ChakraTabList>
+  return (
+    <ChakraTabList ref={tabListRef} position="relative" {...alignProps} {...tabListProps}>
+      {children}
+      {
+        variant === 'line' && <TabActiveLine width={width} offset={offset} colorScheme={colorScheme}/>
+      }
+    </ChakraTabList>
+  )
 }
 
 export const Tab: React.FC<ChakraTabProps> = (props) => {
