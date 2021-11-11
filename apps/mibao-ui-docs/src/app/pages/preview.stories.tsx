@@ -17,16 +17,18 @@ const audioSrc = 'https://oss.jinse.cc/production/1b17d121-ffaa-4ef9-9d61-cdc287
 const videoSrc = 'https://oss.jinse.cc/production/583b109e-1fc3-42bd-937f-f4935ae80167.mp4'
 const threeDSrc = 'https://oss.jinse.cc/production/35ab636d-8340-4349-ae19-a929c4732f95.glb'
 
+const ram = new Date().getTime()
+
 export const Preview: Story = (args) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <MibaoProvider>
-      <Image src={imgSrc} onClick={onOpen} />
+      <Image src={`${imgSrc}?r=${ram}`} onClick={onOpen} />
       <MibaoPreview
         isOpen={isOpen}
         onClose={onClose}
-        bgImgUrl={imgSrc}
+        bgImgUrl={`${imgSrc}?r=${ram + 1}`}
         renderer={imgSrc}
         render3D={(renderer) => <ThreeDPreview src={renderer} />}
       />
