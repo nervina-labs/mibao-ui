@@ -10,8 +10,8 @@ import styles from './alert.module.scss'
 
 export { AlertStatus }
 export interface AlertProps {
-  title: React.ReactNode
-  description: React.ReactNode
+  title?: React.ReactNode
+  description?: React.ReactNode
   status: AlertStatus
 }
 
@@ -26,22 +26,30 @@ export const Alert: React.FC<AlertProps> = ({ title, description, status }) => (
       alignSelf="flex-start"
     />
     <Box>
-      <AlertTitle
-        fontWeight="500"
-        fontSize="1.125rem"
-        lineHeight="1.375rem"
-        color="#000000d9"
-      >
-        {title}
-      </AlertTitle>
-      <AlertDescription
-        fontWeight="400"
-        fontSize="0.875rem"
-        lineHeight="1.5rem"
-        color="#777e90"
-      >
-        {description}
-      </AlertDescription>
+      {title
+        ? (
+        <AlertTitle
+          fontWeight="500"
+          fontSize="1rem"
+          lineHeight="1.375rem"
+          color="#000000d9"
+        >
+          {title}
+        </AlertTitle>
+          )
+        : null}
+      {description
+        ? (
+        <AlertDescription
+          fontWeight="400"
+          fontSize="0.875rem"
+          lineHeight="1.5rem"
+          color="#777e90"
+        >
+          {description}
+        </AlertDescription>
+          )
+        : null}
     </Box>
   </RawAlert>
 )
