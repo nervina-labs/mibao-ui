@@ -31,4 +31,10 @@
     border-color: #fed7d7;
     background-color: #fed7d78a;
   }
+
+  &[data-is-plain='true'] {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+  }
 }
