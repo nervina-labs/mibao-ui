@@ -89,7 +89,6 @@ export const Image: React.FC<ImageProps> = ({
         <ChakraImage
           position="relative"
           zIndex={1}
-          loading="lazy"
           {...props}
           src={imageSrc}
           className={`${styles.image} ${props.className ? props.className : ''}`}
