@@ -3,7 +3,8 @@ import {
   NftImage as MibaoNftImage,
   NftImageProps,
   MibaoProvider,
-  NFT_IMAGE_TYPE_SET
+  NFT_IMAGE_TYPE_SET,
+  Flex
 } from 'mibao-ui'
 import React, { useState, useCallback } from 'react'
 
@@ -51,4 +52,25 @@ NftImage.args = {
   hasCardBack: true,
   rounded: '10%',
   type: 'image'
+}
+
+export const ManyNftImage: Story = () => {
+  return (
+    <MibaoProvider>
+      <Flex wrap="wrap">
+        {
+          new Array(40).fill(0).map(() => (
+            <MibaoNftImage
+              w="300px"
+              h="300px"
+              src="https://goldenlegend.oss-cn-hangzhou.aliyuncs.com/production/a9017356-4ecf-4257-8345-6b14c1625ab7.gif"
+              type="three_d"
+              hasCardBack
+            />
+          ))
+        }
+      </Flex>
+
+    </MibaoProvider>
+  )
 }

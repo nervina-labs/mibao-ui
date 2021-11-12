@@ -16,14 +16,14 @@ export interface NftImageProps extends Omit<ImageProps, 'srcQueryParams'> {
   hasCardBack?: boolean
   srcQueryParams?: { tid: number, locale: string }
   isBaned?: boolean
-  useCardBackTooltipLabel?: boolean
+  isCardBackTooltipLabel?: boolean
 }
 
 export const NftImage: React.FC<NftImageProps> = ({
   isBaned,
   hasCardBack,
   type,
-  useCardBackTooltipLabel = true,
+  isCardBackTooltipLabel: useCardBackTooltipLabel = true,
   ...props
 }) => {
   const cardBackTooltipLabel = useToken('locales', 'nft.cardBackTooltips')
