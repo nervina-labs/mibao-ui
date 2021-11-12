@@ -22,7 +22,7 @@ export interface ImageProps extends ChakraImageProps {
 
 export const Image: React.FC<ImageProps> = ({
   containerProps,
-  srcQueryParams = {},
+  srcQueryParams,
   resizeScale,
   loader,
   webp,
@@ -44,9 +44,9 @@ export const Image: React.FC<ImageProps> = ({
       return addParamsToUrl(getImagePreviewUrl(src, {
         size: resizeScale,
         webp
-      }), srcQueryParams)
+      }), srcQueryParams ?? {})
     }
-    return addParamsToUrl(src, srcQueryParams)
+    return src
   }, [resizeScale, src, webp, srcQueryParams])
 
   useEffect(() => {

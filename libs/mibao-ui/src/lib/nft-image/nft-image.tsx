@@ -16,10 +16,17 @@ export interface NftImageProps extends Omit<ImageProps, 'srcQueryParams'> {
   hasCardBack?: boolean
   srcQueryParams?: { tid: number, locale: string }
   isBaned?: boolean
+  isCardBackTooltipLabel?: boolean
 }
 
-export const NftImage: React.FC<NftImageProps> = ({ isBaned, hasCardBack, type, ...props }) => {
-  const carbackTooltipLabel = useToken('locales', 'nft.cardBackTooltips')
+export const NftImage: React.FC<NftImageProps> = ({
+  isBaned,
+  hasCardBack,
+  type,
+  isCardBackTooltipLabel = true,
+  ...props
+}) => {
+  const cardBackTooltipLabel = useToken('locales', 'nft.cardBackTooltips')
   const icons = useMemo(() => {
     if (isBaned) {
       return null
@@ -45,29 +52,28 @@ export const NftImage: React.FC<NftImageProps> = ({ isBaned, hasCardBack, type, 
     ]
       .filter(item => item.show)
       .map((item, i) => {
-        const box = (
-          <Box w="full" h="full" className={styles.icon} cursor={item.isCardBack ? 'pointer' : undefined}>
-            <item.Comp />
-          </Box>
-        )
         return (
           <AspectRatio
             w="full"
+            h="full"
             ratio={1 / 1}
             bg="rgba(0, 0, 0, 0.7)"
-            backdropFilter="blur(10px)"
+            className={styles.icon}
+            cursor={item.isCardBack ? 'pointer' : undefined}
             rounded="100%"
             key={i}
           >
-            {item.isCardBack
-              ? <Tooltip hasArrow label={carbackTooltipLabel} placement="top">{box}</Tooltip>
-              : box
+            {item.isCardBack && isCardBackTooltipLabel
+              ? (<Tooltip hasArrow label={cardBackTooltipLabel} placement="top">
+                  <item.Comp />
+                </Tooltip>)
+              : <item.Comp />
             }
           </AspectRatio>
         )
       })
   }
-  , [isBaned, hasCardBack, type, carbackTooltipLabel])
+  , [isBaned, hasCardBack, type, isCardBackTooltipLabel, cardBackTooltipLabel])
 
   const fallbackSrc = useToken('fallbacks', 'nft')
 
