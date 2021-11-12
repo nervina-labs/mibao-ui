@@ -13,11 +13,12 @@ export interface AlertProps {
   title?: React.ReactNode
   description?: React.ReactNode
   status: AlertStatus
+  isPlain?: boolean
 }
 
 // TODO: set color in theme
-export const Alert: React.FC<AlertProps> = ({ title, description, status }) => (
-  <RawAlert status={status} className={styles.container} data-status={status}>
+export const Alert: React.FC<AlertProps> = ({ title, description, status, isPlain = false }) => (
+  <RawAlert status={status} className={styles.container} data-status={status} data-is-plain={isPlain.toString()} >
     <AlertIcon
       width="16px"
       height="16px"
