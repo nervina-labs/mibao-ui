@@ -23,7 +23,7 @@ export const NftImage: React.FC<NftImageProps> = ({
   isBaned,
   hasCardBack,
   type,
-  isCardBackTooltipLabel: useCardBackTooltipLabel = true,
+  isCardBackTooltipLabel = true,
   ...props
 }) => {
   const cardBackTooltipLabel = useToken('locales', 'nft.cardBackTooltips')
@@ -63,7 +63,7 @@ export const NftImage: React.FC<NftImageProps> = ({
             rounded="100%"
             key={i}
           >
-            {item.isCardBack && useCardBackTooltipLabel
+            {item.isCardBack && isCardBackTooltipLabel
               ? (<Tooltip hasArrow label={cardBackTooltipLabel} placement="top">
                   <item.Comp />
                 </Tooltip>)
@@ -73,7 +73,7 @@ export const NftImage: React.FC<NftImageProps> = ({
         )
       })
   }
-  , [isBaned, hasCardBack, type, useCardBackTooltipLabel, cardBackTooltipLabel])
+  , [isBaned, hasCardBack, type, isCardBackTooltipLabel, cardBackTooltipLabel])
 
   const fallbackSrc = useToken('fallbacks', 'nft')
 
