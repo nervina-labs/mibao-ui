@@ -52,6 +52,11 @@ export const NftImage: React.FC<NftImageProps> = ({
     ]
       .filter(item => item.show)
       .map((item, i) => {
+        const box = (
+          <Box w="full" h="full" className={styles.icon} cursor={item.isCardBack ? 'pointer' : undefined}>
+            <item.Comp />
+          </Box>
+        )
         return (
           <AspectRatio
             w="full"
@@ -64,11 +69,8 @@ export const NftImage: React.FC<NftImageProps> = ({
             key={i}
           >
             {item.isCardBack && isCardBackTooltipLabel
-              ? (<Tooltip hasArrow label={cardBackTooltipLabel} placement="top">
-                  <item.Comp />
-                </Tooltip>)
-              : <item.Comp />
-            }
+              ? <Tooltip label={cardBackTooltipLabel} placement="top">{box}</Tooltip>
+              : box}
           </AspectRatio>
         )
       })
