@@ -2,10 +2,10 @@ import { Link, useToken } from '@chakra-ui/react'
 import React from 'react'
 import { Avatar, AvatarProps } from '../avatar/avatar'
 import { Copyzone } from '../copyzone/copyzone'
-import { Flex, Stack, Text, TextProps } from '../typography/typography'
+import { BoxProps, FlexProps, Grid, Stack, Text, TextProps } from '../typography/typography'
 import styles from './issuer.module.scss'
 
-export interface IssuerProps extends AvatarProps {
+export interface IssuerProps extends Omit<AvatarProps, 'containerProps'> {
   name: string
   className?: string
   nameProps?: TextProps
@@ -18,6 +18,8 @@ export interface IssuerProps extends AvatarProps {
   disableCopy?: boolean
   displayId?: string
   isLinkExternal?: boolean
+  avatarProps?: BoxProps
+  containerProps?: FlexProps
 }
 
 export const Issuer: React.FC<IssuerProps> = ({
@@ -36,28 +38,30 @@ export const Issuer: React.FC<IssuerProps> = ({
   size = '60px',
   resizeScale = 150,
   isLinkExternal = true,
-  ...avatarProps
+  containerProps,
+  avatarProps,
+  ...avatarContainerProps
 }) => {
   const anchorProps = href && !isBanned ? { as: Link, href, isExternal: isLinkExternal } : undefined
   const isOneline = id == null && verifiedTitle == null
   const banned = useToken('locales', 'issuer.banned')
   return (
-    <Flex
+    <Grid
       className={`${className ?? ''} ${styles.issuer}`}
-      direction="row"
-      alignItems="center"
+      templateColumns="auto 1fr"
       onClick={onClick}
       {...anchorProps}
+      {...containerProps}
     >
       <Avatar
         isVerified={isVerified}
         resizeScale={resizeScale}
         size={size}
         isBanned={isBanned}
-        containerProps={{ mr: isOneline ? '4px' : '16px' }}
-        {...avatarProps}
+        containerProps={{ ...{ mr: isOneline ? '4px' : '16px', my: 'auto' }, ...avatarProps }}
+        {...avatarContainerProps}
       />
-      <Stack spacing="4px" direction="column" justifyContent="space-between">
+      <Stack spacing="4px" direction="column" justifyContent="center" overflow="hidden">
         <Text
           isTruncated
           color={isBanned ? 'banned.500' : isOneline ? 'gray.500' : undefined}
@@ -86,6 +90,6 @@ export const Issuer: React.FC<IssuerProps> = ({
             )
           : null}
       </Stack>
-    </Flex>
+    </Grid>
   )
 }
