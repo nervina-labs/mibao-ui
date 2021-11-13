@@ -51,7 +51,7 @@ export const Online: Story = () =>
 
 export const WithLink: Story = () =>
   <MibaoProvider>
-    <Stack spacing={10} direction="row">
+    <Stack spacing={10} direction="row" w="100px">
       <Issuer
         size="25px"
         src="https://goldenlegend.oss-cn-hangzhou.aliyuncs.com/production/a9017356-4ecf-4257-8345-6b14c1625ab7.gif"
@@ -60,6 +60,21 @@ export const WithLink: Story = () =>
         isVerified={false}
       />
     </Stack>
+  </MibaoProvider>
+
+export const LongUsername: Story = () =>
+  <MibaoProvider>
+  <Stack spacing={10} direction="row" w="100px">
+    <Issuer
+      size="25px"
+      src="https://goldenlegend.oss-cn-hangzhou.aliyuncs.com/production/a9017356-4ecf-4257-8345-6b14c1625ab7.gif"
+      name="Goodman+Goodman+Goodman+Goodman+Goodman"
+      href="https://mibao.net/issuer/47ea8b55-8dae-4cd5-9690-8995552a9201"
+      isVerified={false}
+      containerProps={{ w: '100%' }}
+      avatarProps={{ mr: '20px' }}
+    />
+  </Stack>
   </MibaoProvider>
 
 export const Baned: Story = () =>
