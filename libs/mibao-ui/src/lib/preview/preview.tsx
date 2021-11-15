@@ -16,7 +16,7 @@ export interface PreviewProps {
   imageProps?: ImageProps
   render3D: (renderer: string, bgImgUrl?: string) => React.ReactNode
   preload?: boolean
-  imageOnError?: <T>(error: T) => void
+  bgImageOnError?: <T>(error: T) => void
 }
 
 export const Preview: React.FC<PreviewProps> = ({
@@ -28,7 +28,7 @@ export const Preview: React.FC<PreviewProps> = ({
   renderer,
   render3D,
   imageProps,
-  imageOnError,
+  bgImageOnError,
   preload = true
 }) => {
   const onClickModalContent = useCallback(
@@ -47,11 +47,11 @@ export const Preview: React.FC<PreviewProps> = ({
       const image = new Image()
       image.src = bgImgUrl ?? ''
       image.onload = () => setImgSrc(bgImgUrl)
-      if (imageOnError) {
-        image.onerror = imageOnError
+      if (bgImageOnError) {
+        image.onerror = bgImageOnError
       }
     }
-  }, [bgImgUrl, isOpen, imageOnError, preload])
+  }, [bgImgUrl, isOpen, bgImageOnError, preload])
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -70,7 +70,7 @@ export const Preview: React.FC<PreviewProps> = ({
                     minScale={0.2}
                   >
                     <TransformComponent wrapperClass={styles.wrapper} contentClass={`${styles.component} ${styles.image}`}>
-                      <MibaoImage src={imgSrc} onError={onError} {...imageProps} />
+                      <MibaoImage src={imgSrc} onError={bgImageOnError} {...imageProps} />
                     </TransformComponent>
                   </TransformWrapper>
                   )
