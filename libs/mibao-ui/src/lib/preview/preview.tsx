@@ -16,6 +16,7 @@ export interface PreviewProps {
   imageProps?: ImageProps
   render3D: (renderer: string, bgImgUrl?: string) => React.ReactNode
   preload?: boolean
+  imageOnError?: <T>(error: T) => void
 }
 
 export const Preview: React.FC<PreviewProps> = ({
@@ -27,6 +28,7 @@ export const Preview: React.FC<PreviewProps> = ({
   renderer,
   render3D,
   imageProps,
+  imageOnError,
   preload = true
 }) => {
   const onClickModalContent = useCallback(
@@ -45,11 +47,11 @@ export const Preview: React.FC<PreviewProps> = ({
       const image = new Image()
       image.src = bgImgUrl ?? ''
       image.onload = () => setImgSrc(bgImgUrl)
-      if (onError) {
-        image.onerror = onError
+      if (imageOnError) {
+        image.onerror = imageOnError
       }
     }
-  }, [bgImgUrl, isOpen, onError, preload])
+  }, [bgImgUrl, isOpen, imageOnError, preload])
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
