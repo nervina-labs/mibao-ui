@@ -18,7 +18,7 @@ export interface LikeProps extends TextProps {
 export const Like: React.FC<LikeProps> = ({ isLiked, isLoading, className, onClick, locale, likeCount, isBaned, ...props }) => {
   const icon = useMemo(() => {
     if (isLoading) {
-      return <Loading width="16px" />
+      return <Loading w="16px" h="16px" />
     }
     return isLiked ? <LikeIcon /> : <UnlikeIcon />
   }, [isLiked, isLoading])
