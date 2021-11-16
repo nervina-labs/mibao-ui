@@ -70,6 +70,4 @@ export const mibaoTheme = extendTheme({
   }
 })
 
-console.log(mibaoTheme)
-
 export const MibaoProvider: React.FC<ChakraProviderProps> = (props) => <ChakraProvider theme={mibaoTheme} {...props}>{props.children}</ChakraProvider>
