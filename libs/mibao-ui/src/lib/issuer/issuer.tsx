@@ -50,6 +50,7 @@ export const Issuer: React.FC<IssuerProps> = ({
       className={`${className ?? ''} ${styles.issuer}`}
       templateColumns="auto 1fr"
       onClick={onClick}
+      h={size}
       {...anchorProps}
       {...containerProps}
     >
