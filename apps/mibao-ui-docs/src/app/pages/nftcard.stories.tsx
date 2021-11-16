@@ -73,6 +73,20 @@ export const AllKindOfCard: Story = (args) =>
         price="$188.00"
         likeProps={{ likeCount: 56, isLiked: true }}
       />
+      <NFTCard
+        src={imgSrc}
+        title={nftName}
+        hasCardback
+        type="audio"
+        locale="zh"
+        issuerProps={{ name: 'GoodMan', src: imgSrc }}
+        price="$188.00"
+        likeProps={{ likeCount: 56, isLiked: true }}
+        limitProps={{
+          count: 10,
+          serialNumber: 10
+        }}
+      />
     </Stack>
   </MibaoProvider>
 
