@@ -6,9 +6,9 @@ import {
   Tbody,
   Tfoot,
   Tr,
-  Th as RowTh,
+  Th,
   Td,
-  TableCaption as RowTableCaption,
+  TableCaption,
   TableHeadProps,
   TableBodyProps,
   TableProps,
@@ -18,13 +18,16 @@ import {
   TableCaptionProps
 } from '@chakra-ui/react'
 import React from 'react'
+import styled from '@emotion/styled'
 
 export {
   Table,
   Tbody,
   Tfoot,
   Tr,
+  Th,
   Td,
+  TableCaption,
   TableHeadProps,
   TableBodyProps,
   TableProps,
@@ -34,26 +37,29 @@ export {
   TableCaptionProps
 }
 
+const TheadStyled = styled(RowThead)`
+  ${({ _variant }: { _variant: 'filled' | 'unstyled' }) => _variant === 'filled'
+      ? `
+      position: relative;
+      &::before {
+        content: ' ';
+        background-color: var(--chakra-colors-primary-100);
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        border-radius: 6px 6px 0 0;
+        z-index: -1;
+      }`
+      : undefined
+    }
+  
+`
+
 export const Thead: React.FC<TableHeadProps & { variant: 'filled' | 'unstyled' }> = (props) => {
   const variant = props.variant ?? 'unstyled'
-  return <RowThead
-    bg={variant === 'filled' ? 'var(--chakra-colors-primary-100)' : undefined}
+  return <TheadStyled
+    _variant={variant}
     {...props}
-  >{props.children}</RowThead>
-}
-
-export const Th: React.FC<TableColumnHeaderProps> = (props) => {
-  return (
-    <RowTh
-      textTransform="none"
-    >{props.children}</RowTh>
-  )
-}
-
-export const TableCaption: React.FC<TableCaptionProps> = (props) => {
-  return (
-    <RowTableCaption
-      textTransform="none"
-    >{props.children}</RowTableCaption>
-  )
+  >{props.children}</TheadStyled>
 }

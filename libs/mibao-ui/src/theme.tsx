@@ -41,7 +41,35 @@ export const mibaoTheme = extendTheme({
   fallbacks: {
     avatar: FALL_BACK_SRC,
     nft: FALL_BACK_SRC
+  },
+  components: {
+    Table: {
+      baseStyle: {
+        th: {
+          textTransform: 'none'
+        }
+      },
+      sizes: {
+        sm: {
+          td: {
+            fontSize: '12px'
+          }
+        },
+        md: {
+          td: {
+            fontSize: '14px'
+          }
+        },
+        lg: {
+          td: {
+            fontSize: '14px'
+          }
+        }
+      }
+    }
   }
 })
+
+console.log(mibaoTheme)
 
 export const MibaoProvider: React.FC<ChakraProviderProps> = (props) => <ChakraProvider theme={mibaoTheme} {...props}>{props.children}</ChakraProvider>
