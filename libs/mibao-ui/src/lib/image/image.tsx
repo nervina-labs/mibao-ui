@@ -40,13 +40,14 @@ export const Image: React.FC<ImageProps> = ({
 
   const imageSrc = useMemo(() => {
     if (!src) return src
+    const url = addParamsToUrl(src, srcQueryParams ?? {})
     if (resizeScale) {
-      return addParamsToUrl(getImagePreviewUrl(src, {
+      return getImagePreviewUrl(url, {
         size: resizeScale,
         webp
-      }), srcQueryParams ?? {})
+      })
     }
-    return src
+    return url
   }, [resizeScale, src, webp, srcQueryParams])
 
   useEffect(() => {
