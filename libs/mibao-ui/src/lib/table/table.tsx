@@ -1,7 +1,7 @@
 import './table.module.scss'
 
 import {
-  Table as RowTable,
+  Table as RawTable,
   Thead,
   Tbody,
   Tfoot,
@@ -11,7 +11,7 @@ import {
   TableCaption,
   TableHeadProps,
   TableBodyProps,
-  TableProps as RowTableProps,
+  TableProps as RawTableProps,
   TableRowProps,
   TableColumnHeaderProps,
   TableCellProps,
@@ -36,11 +36,11 @@ export {
   TableCaptionProps
 }
 
-export interface TableProps extends RowTableProps {
-  variant: RowTableProps['variant'] | 'filled'
+export interface TableProps extends RawTableProps {
+  variant: RawTableProps['variant'] | 'filled'
 }
 
-const TableStyled = styled(RowTable)`
+const TableStyled = styled(RawTable)`
   ${({ _variant }: TableProps & { _variant?: TableProps['variant'] }) => _variant === 'filled'
     ? `
 thead, tfoot {
