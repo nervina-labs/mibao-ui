@@ -1,8 +1,8 @@
 import './table.module.scss'
 
 import {
-  Table,
-  Thead as RowThead,
+  Table as RowTable,
+  Thead,
   Tbody,
   Tfoot,
   Tr,
@@ -11,7 +11,7 @@ import {
   TableCaption,
   TableHeadProps,
   TableBodyProps,
-  TableProps,
+  TableProps as RowTableProps,
   TableRowProps,
   TableColumnHeaderProps,
   TableCellProps,
@@ -21,7 +21,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 export {
-  Table,
+  Thead,
   Tbody,
   Tfoot,
   Tr,
@@ -30,36 +30,53 @@ export {
   TableCaption,
   TableHeadProps,
   TableBodyProps,
-  TableProps,
   TableRowProps,
   TableColumnHeaderProps,
   TableCellProps,
   TableCaptionProps
 }
 
-const TheadStyled = styled(RowThead)`
-  ${({ _variant }: { _variant: 'filled' | 'unstyled' }) => _variant === 'filled'
-      ? `
-      position: relative;
-      &::before {
-        content: ' ';
-        background-color: var(--chakra-colors-primary-100);
-        display: block;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        border-radius: 6px 6px 0 0;
-        z-index: -1;
-      }`
-      : undefined
-    }
-  
+export interface TableProps extends RowTableProps {
+  variant: RowTableProps['variant'] | 'filled'
+}
+
+const TableStyled = styled(RowTable)`
+  ${({ _variant }: TableProps & { _variant?: TableProps['variant'] }) => _variant === 'filled'
+    ? `
+thead, tfoot {
+  th {
+    background-color: var(--chakra-colors-primary-100);
+  }
+}
+thead {
+  th:first-child {
+    border-top-left-radius: 6px;
+  }
+  th:last-child {
+    border-top-right-radius: 6px;
+  }
+}
+tfoot {
+  th:first-child {
+    border-bottom-left-radius: 6px;
+  }
+  th:last-child {
+    border-bottom-right-radius: 6px;
+  }
+}
+`
+    : undefined
+  }
 `
 
-export const Thead: React.FC<TableHeadProps & { variant: 'filled' | 'unstyled' }> = (props) => {
-  const variant = props.variant ?? 'unstyled'
-  return <TheadStyled
+export const Table: React.FC<TableProps> = ({
+  children,
+  variant = 'simple',
+  ...props
+}) => {
+  return <TableStyled
+    variant={variant === 'filled' ? 'simple' : variant}
     _variant={variant}
     {...props}
-  >{props.children}</TheadStyled>
+    >{children}</TableStyled>
 }
