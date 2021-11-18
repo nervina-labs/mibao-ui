@@ -15,14 +15,18 @@ export function addParamsToUrl (
   if (!url) {
     return url
   }
-  const urlObj = new URL(url)
-  const urlSearchParams = urlObj.searchParams
-  Object.keys(params).forEach((key) => {
-    if (!urlSearchParams.has(key) || options?.ignoreDuplicates) {
-      urlSearchParams.set(key, String(params[key]))
-    }
-  })
-  return decodeURIComponent(urlObj.toString())
+  try {
+    const urlObj = new URL(url)
+    const urlSearchParams = urlObj.searchParams
+    Object.keys(params).forEach((key) => {
+      if (!urlSearchParams.has(key) || options?.ignoreDuplicates) {
+        urlSearchParams.set(key, String(params[key]))
+      }
+    })
+    return decodeURIComponent(urlObj.toString())
+  } catch {
+    return url
+  }
 }
 
 export function getImagePreviewUrl<U extends string | undefined> (
@@ -35,10 +39,17 @@ export function getImagePreviewUrl<U extends string | undefined> (
   if (!url) {
     return url
   }
-  const urlObj = new URL(url)
+  try {
+    const urlObj = new URL(url)
+    const isSvgOrWebp = /\.(svg|webp)$/i.test(urlObj.pathname)
+    if (isSvgOrWebp) {
+      return url
+    }
+  } catch {
+    return url
+  }
   const isOssHost = OSS_IMG_HOSTS.some((host) => url?.startsWith(host))
-  const isSvgOrWebp = /\.(svg|webp)$/i.test(urlObj.pathname)
-  if (!isOssHost || isSvgOrWebp) {
+  if (!isOssHost) {
     return url
   }
   const webpParam = options?.webp ? OSS_IMG_PROCESS_QUERY_KEY_FORMAT_WEBP : ''
