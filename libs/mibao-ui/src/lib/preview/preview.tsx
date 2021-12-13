@@ -1,6 +1,6 @@
 import { Modal, ModalCloseButton, ModalContent, ModalOverlay } from '@chakra-ui/react'
 import React, { MouseEvent, useCallback, useEffect, useState } from 'react'
-import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
+import { ReactZoomPanPinchProps, TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 import { AudioPreview } from './audio'
 import styles from './preview.module.scss'
 import { VideoPreview } from './video'
@@ -17,6 +17,7 @@ export interface PreviewProps {
   render3D: (renderer: string, bgImgUrl?: string) => React.ReactNode
   preload?: boolean
   bgImageOnError?: <T>(error: T) => void
+  imagePreviewProps?: ReactZoomPanPinchProps
 }
 
 export const Preview: React.FC<PreviewProps> = ({
@@ -28,6 +29,7 @@ export const Preview: React.FC<PreviewProps> = ({
   renderer,
   render3D,
   imageProps,
+  imagePreviewProps,
   bgImageOnError,
   preload = true
 }) => {
@@ -68,6 +70,7 @@ export const Preview: React.FC<PreviewProps> = ({
                     centerOnInit
                     centerZoomedOut
                     minScale={0.2}
+                    {...imagePreviewProps}
                   >
                     <TransformComponent wrapperClass={styles.wrapper} contentClass={`${styles.component} ${styles.image}`}>
                       <MibaoImage src={imgSrc} onError={bgImageOnError} {...imageProps} />
