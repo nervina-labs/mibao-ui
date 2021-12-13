@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nx serve",
-    "start:docs": "nx run mibao-ui-docs:storybook",
+    "start:docs": "nx run mibao-ui-docs:storybook --host 0.0.0.0",
     "build": "nx build",
     "build:docs": "nx build-storybook",
     "test": "nx test",
