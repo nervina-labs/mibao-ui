@@ -3,7 +3,7 @@ import {
   Image as MibaoImage,
   MibaoProvider
 } from 'mibao-ui'
-import { Spinner, Stack } from '@chakra-ui/react'
+import { Heading, Spinner, Stack } from '@chakra-ui/react'
 import { useEffect, useState } from '@storybook/addons'
 
 export default {
@@ -23,6 +23,10 @@ export default {
     },
     crossOrigin: {
       options: ['', 'anonymous', 'use-credentials'],
+      control: { type: 'select' }
+    },
+    customizedFixedSize: {
+      options: ['favicon', 'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'xxx-large'],
       control: { type: 'select' }
     }
   },
@@ -67,4 +71,31 @@ export const AsyncLoadingImage: Story = (args) => {
       <MibaoImage src={src} />
     </MibaoProvider>
   )
+}
+
+export const SrcExternalQueryParams: Story = (args) => {
+  return (
+    <MibaoProvider>
+      <MibaoImage
+        width="300px"
+        srcExternalQueryParams={{
+          customizedFixedSize: 'large'
+        }}
+        {...args}
+      />
+      <MibaoImage
+        width="300px"
+        srcExternalQueryParams={{
+          customizedAnySize: '10x10'
+        }}
+        {...args}
+      />
+    </MibaoProvider>
+  )
+}
+
+SrcExternalQueryParams.args = {
+  src: 'https://oss.jinse.cc/production/e5a85cb5-bdd3-40c5-94de-c3335a704ab8.jpg',
+  customizedAnySize: '10x10',
+  customizedFixedSize: 'large'
 }

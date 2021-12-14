@@ -11,13 +11,19 @@ import { useState, useMemo, useEffect, useCallback, ReactNode } from 'react'
 import FALLBACK_SRC from '../../../assets/images/fallback.svg'
 import { addParamsToUrl, disableImageContext, getImagePreviewUrl } from '../../utils'
 
+export type ImageSize = 'favicon' | 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | 'xxx-large'
+
 export interface ImageProps extends ChakraImageProps {
   loader?: ReactNode
   srcQueryParams?: Record<string, string | number>
   disableContextMenu?: boolean
-  resizeScale?: number // Specifies the shortest edge of the target zoom graph.
+  resizeScale?: number // OSS: Specifies the shortest edge of the target zoom graph.
   webp?: boolean
   containerProps?: BoxProps
+  srcExternalQueryParams?: {
+    customizedFixedSize?: ImageSize // From user customized renderer for fixed size
+    customizedAnySize?: string
+  }
 }
 
 export const Image: React.FC<ImageProps> = ({
@@ -27,6 +33,7 @@ export const Image: React.FC<ImageProps> = ({
   loader,
   webp,
   src,
+  srcExternalQueryParams,
   ...props
 }) => {
   const { fallbackSrc = FALLBACK_SRC } = props
@@ -40,7 +47,12 @@ export const Image: React.FC<ImageProps> = ({
 
   const imageSrc = useMemo(() => {
     if (!src) return src
-    const url = addParamsToUrl(src, srcQueryParams ?? {})
+    const { customizedFixedSize, customizedAnySize } = srcExternalQueryParams ?? {}
+    const url = addParamsToUrl(src, {
+      ...srcQueryParams,
+      ...customizedFixedSize ? { size: customizedFixedSize } : {},
+      ...customizedAnySize ? { size: customizedAnySize } : {}
+    })
     if (resizeScale) {
       return getImagePreviewUrl(url, {
         size: resizeScale,
@@ -48,7 +60,7 @@ export const Image: React.FC<ImageProps> = ({
       })
     }
     return url
-  }, [resizeScale, src, webp, srcQueryParams])
+  }, [src, srcQueryParams, srcExternalQueryParams, resizeScale, webp])
 
   useEffect(() => {
     if (src) {
