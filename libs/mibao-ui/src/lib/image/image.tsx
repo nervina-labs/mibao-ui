@@ -20,9 +20,9 @@ export interface ImageProps extends ChakraImageProps {
   resizeScale?: number // OSS: Specifies the shortest edge of the target zoom graph.
   webp?: boolean
   containerProps?: BoxProps
-  srcExternalQueryParams?: {
-    customizedFixedSize?: ImageSize // From user customized renderer for fixed size
-    customizedAnySize?: string
+  customizedSize?: {
+    fixed?: ImageSize
+    lambda?: string
   }
 }
 
@@ -33,7 +33,7 @@ export const Image: React.FC<ImageProps> = ({
   loader,
   webp,
   src,
-  srcExternalQueryParams,
+  customizedSize,
   ...props
 }) => {
   const { fallbackSrc = FALLBACK_SRC } = props
@@ -47,11 +47,10 @@ export const Image: React.FC<ImageProps> = ({
 
   const imageSrc = useMemo(() => {
     if (!src) return src
-    const { customizedFixedSize, customizedAnySize } = srcExternalQueryParams ?? {}
     const url = addParamsToUrl(src, {
       ...srcQueryParams,
-      ...customizedFixedSize ? { size: customizedFixedSize } : {},
-      ...customizedAnySize ? { size: customizedAnySize } : {}
+      ...customizedSize?.fixed ? { size: customizedSize.fixed } : {},
+      ...customizedSize?.lambda ? { size: customizedSize.lambda } : {}
     })
     if (resizeScale) {
       return getImagePreviewUrl(url, {
@@ -60,7 +59,7 @@ export const Image: React.FC<ImageProps> = ({
       })
     }
     return url
-  }, [src, srcQueryParams, srcExternalQueryParams, resizeScale, webp])
+  }, [src, srcQueryParams, customizedSize, resizeScale, webp])
 
   useEffect(() => {
     if (src) {
