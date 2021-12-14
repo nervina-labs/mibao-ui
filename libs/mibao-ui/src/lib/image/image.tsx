@@ -11,7 +11,7 @@ import { useState, useMemo, useEffect, useCallback, ReactNode } from 'react'
 import FALLBACK_SRC from '../../../assets/images/fallback.svg'
 import { addParamsToUrl, disableImageContext, getImagePreviewUrl } from '../../utils'
 
-export type ImageSize = 'favicon' | 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | 'xxx-large'
+export type CustomizedImageSize = 'favicon' | 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | 'xxx-large'
 
 export interface ImageProps extends ChakraImageProps {
   loader?: ReactNode
@@ -21,7 +21,7 @@ export interface ImageProps extends ChakraImageProps {
   webp?: boolean
   containerProps?: BoxProps
   customizedSize?: {
-    fixed?: ImageSize
+    fixed?: CustomizedImageSize
     lambda?: string
   }
 }
