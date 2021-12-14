@@ -78,15 +78,15 @@ export const SrcExternalQueryParams: Story = (args) => {
     <MibaoProvider>
       <MibaoImage
         width="300px"
-        srcExternalQueryParams={{
-          customizedFixedSize: 'large'
+        customizedSize={{
+          fixed: 'large'
         }}
         {...args}
       />
       <MibaoImage
         width="300px"
-        srcExternalQueryParams={{
-          customizedAnySize: '10x10'
+        customizedSize={{
+          lambda: '10x10'
         }}
         {...args}
       />
@@ -96,6 +96,6 @@ export const SrcExternalQueryParams: Story = (args) => {
 
 SrcExternalQueryParams.args = {
   src: 'https://oss.jinse.cc/production/e5a85cb5-bdd3-40c5-94de-c3335a704ab8.jpg',
-  customizedAnySize: '10x10',
+  customizedLambdaSize: '10x10',
   customizedFixedSize: 'large'
 }
