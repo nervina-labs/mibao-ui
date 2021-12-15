@@ -11,13 +11,19 @@ import { useState, useMemo, useEffect, useCallback, ReactNode } from 'react'
 import FALLBACK_SRC from '../../../assets/images/fallback.svg'
 import { addParamsToUrl, disableImageContext, getImagePreviewUrl } from '../../utils'
 
+export type CustomizedImageSize = 'favicon' | 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | 'xxx-large'
+
 export interface ImageProps extends ChakraImageProps {
   loader?: ReactNode
   srcQueryParams?: Record<string, string | number>
   disableContextMenu?: boolean
-  resizeScale?: number // Specifies the shortest edge of the target zoom graph.
+  resizeScale?: number // OSS: Specifies the shortest edge of the target zoom graph.
   webp?: boolean
   containerProps?: BoxProps
+  customizedSize?: {
+    fixed?: CustomizedImageSize
+    lambda?: string
+  }
 }
 
 export const Image: React.FC<ImageProps> = ({
@@ -27,6 +33,7 @@ export const Image: React.FC<ImageProps> = ({
   loader,
   webp,
   src,
+  customizedSize,
   ...props
 }) => {
   const { fallbackSrc = FALLBACK_SRC } = props
@@ -40,7 +47,11 @@ export const Image: React.FC<ImageProps> = ({
 
   const imageSrc = useMemo(() => {
     if (!src) return src
-    const url = addParamsToUrl(src, srcQueryParams ?? {})
+    const url = addParamsToUrl(src, {
+      ...srcQueryParams,
+      ...customizedSize?.fixed ? { size: customizedSize.fixed } : {},
+      ...customizedSize?.lambda ? { size: customizedSize.lambda } : {}
+    })
     if (resizeScale) {
       return getImagePreviewUrl(url, {
         size: resizeScale,
@@ -48,7 +59,7 @@ export const Image: React.FC<ImageProps> = ({
       })
     }
     return url
-  }, [resizeScale, src, webp, srcQueryParams])
+  }, [src, srcQueryParams, customizedSize, resizeScale, webp])
 
   useEffect(() => {
     if (src) {

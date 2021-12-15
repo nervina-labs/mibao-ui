@@ -24,6 +24,10 @@ export default {
     crossOrigin: {
       options: ['', 'anonymous', 'use-credentials'],
       control: { type: 'select' }
+    },
+    customizedFixedSize: {
+      options: ['favicon', 'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'xxx-large'],
+      control: { type: 'select' }
     }
   },
   parameters: {
@@ -67,4 +71,31 @@ export const AsyncLoadingImage: Story = (args) => {
       <MibaoImage src={src} />
     </MibaoProvider>
   )
+}
+
+export const SrcExternalQueryParams: Story = (args) => {
+  return (
+    <MibaoProvider>
+      <MibaoImage
+        width="300px"
+        customizedSize={{
+          fixed: 'large'
+        }}
+        {...args}
+      />
+      <MibaoImage
+        width="300px"
+        customizedSize={{
+          lambda: '10x10'
+        }}
+        {...args}
+      />
+    </MibaoProvider>
+  )
+}
+
+SrcExternalQueryParams.args = {
+  src: 'https://oss.jinse.cc/production/e5a85cb5-bdd3-40c5-94de-c3335a704ab8.jpg',
+  customizedLambdaSize: '10x10',
+  customizedFixedSize: 'large'
 }
