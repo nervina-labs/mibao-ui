@@ -43,11 +43,9 @@ export const Preview: React.FC<PreviewProps> = ({
     },
     [onClose, type]
   )
+  const initialSize = Math.min(window.innerWidth, window.innerHeight)
   const [imgSrc, setImgSrc] = useState<string | undefined>(undefined)
-  const [imgSize, setImgSize] = useState<{ width: number, height: number }>({
-    width: 300,
-    height: 300
-  })
+  const [imgSize, setImgSize] = useState<{ width: number, height: number }>({ width: initialSize, height: initialSize })
   useEffect(() => {
     if (preload) {
       const image = new Image()
@@ -61,6 +59,10 @@ export const Preview: React.FC<PreviewProps> = ({
       }
     }
   }, [bgImgUrl, isOpen, bgImageOnError, preload])
+  useEffect(() => {
+    const currentInitialSize = Math.min(window.innerWidth, window.innerHeight)
+    setImgSize({ width: currentInitialSize, height: currentInitialSize })
+  }, [bgImgUrl])
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
