@@ -9,7 +9,7 @@ import {
 import styles from './image.module.scss'
 import { useState, useMemo, useEffect, useCallback, ReactNode } from 'react'
 import FALLBACK_SRC from '../../../assets/images/fallback.svg'
-import { addParamsToUrl, disableImageContext, getImagePreviewUrl } from '../../utils'
+import { addParamsToUrl, disableImageContext, getImagePreviewUrl, isAddableOssResizeParams } from '../../utils'
 
 export type CustomizedImageSize = 'favicon' | 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | 'xxx-large'
 
@@ -48,15 +48,22 @@ export const Image: React.FC<ImageProps> = ({
   const imageSrc = useMemo(() => {
     if (!src) return src
     const url = addParamsToUrl(src, {
-      ...srcQueryParams,
-      ...customizedSize?.fixed ? { size: customizedSize.fixed } : {},
-      ...customizedSize?.lambda ? { size: customizedSize.lambda } : {}
+      ...srcQueryParams
     })
-    if (resizeScale) {
-      return getImagePreviewUrl(url, {
-        size: resizeScale,
-        webp
-      })
+    if (Boolean(resizeScale) || Boolean(customizedSize?.fixed) || Boolean(customizedSize?.lambda)) {
+      const isAddableOssResize = isAddableOssResizeParams(url)
+      if (resizeScale && isAddableOssResize) {
+        return getImagePreviewUrl(url, {
+          size: resizeScale,
+          webp
+        })
+      }
+      if (Boolean(customizedSize?.fixed) || Boolean(customizedSize?.lambda)) {
+        return addParamsToUrl(url, {
+          ...customizedSize?.lambda ? { size: customizedSize.lambda } : {},
+          ...customizedSize?.fixed ? { size: customizedSize.fixed } : {}
+        })
+      }
     }
     return url
   }, [src, srcQueryParams, customizedSize, resizeScale, webp])

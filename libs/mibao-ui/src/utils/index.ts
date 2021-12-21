@@ -29,6 +29,20 @@ export function addParamsToUrl (
   }
 }
 
+export function isAddableOssResizeParams (url?: string): boolean {
+  if (!url) return false
+  try {
+    const urlObj = new URL(url)
+    const isSvgOrWebp = /\.(svg|webp)$/i.test(urlObj.pathname)
+    if (isSvgOrWebp) return false
+  } catch {
+    return false
+  }
+  const isOssHost = OSS_IMG_HOSTS.some((host) => url?.startsWith(host))
+  if (!isOssHost) return false
+  return true
+}
+
 export function getImagePreviewUrl<U extends string | undefined> (
   url: U,
   options?: {
@@ -36,27 +50,14 @@ export function getImagePreviewUrl<U extends string | undefined> (
     webp?: boolean
   }
 ): U {
-  if (!url) {
-    return url
-  }
-  try {
-    const urlObj = new URL(url)
-    const isSvgOrWebp = /\.(svg|webp)$/i.test(urlObj.pathname)
-    if (isSvgOrWebp) {
-      return url
-    }
-  } catch {
-    return url
-  }
-  const isOssHost = OSS_IMG_HOSTS.some((host) => url?.startsWith(host))
-  if (!isOssHost) {
+  if (!isAddableOssResizeParams(url)) {
     return url
   }
   const webpParam = options?.webp ? OSS_IMG_PROCESS_QUERY_KEY_FORMAT_WEBP : ''
   const params: Record<string, string | number> = {}
   const size = options?.size ?? 300
   params[OSS_IMG_PROCESS_QUERY_KEY] = `${OSS_IMG_PROCESS_QUERY_KEY_SCALE}${size}${webpParam}`
-  return addParamsToUrl(url, params) as U
+  return addParamsToUrl(url as string, params) as U
 }
 
 export function omit<T extends {[key: string]: any}, K extends keyof T> (obj: T, keys: K[]): Omit<T, K> {
