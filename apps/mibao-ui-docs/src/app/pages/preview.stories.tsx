@@ -19,21 +19,25 @@ const threeDSrc = 'https://oss.jinse.cc/production/35ab636d-8340-4349-ae19-a929c
 
 const ram = new Date().getTime()
 
-export const Preview: Story = (args) => {
+export const Preview: Story<{ src: string }> = ({ src }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <MibaoProvider>
-      <Image src={`${imgSrc}?r=${ram}`} onClick={onOpen} />
+      <Image src={`${src}?r=${ram}`} onClick={onOpen} />
       <MibaoPreview
         isOpen={isOpen}
         onClose={onClose}
-        bgImgUrl={`${imgSrc}?r=${ram + 1}`}
-        renderer={imgSrc}
+        bgImgUrl={`${src}?r=${ram + 1}`}
+        renderer={src}
         render3D={(renderer) => <ThreeDPreview src={renderer} />}
       />
     </MibaoProvider>
   )
+}
+
+Preview.args = {
+  src: imgSrc
 }
 
 export const Audio: Story = (args) => {

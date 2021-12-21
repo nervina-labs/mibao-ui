@@ -43,17 +43,26 @@ export const Preview: React.FC<PreviewProps> = ({
     },
     [onClose, type]
   )
-  const [imgSrc, setImgSrc] = useState<string |undefined>(undefined)
+  const initialSize = Math.min(window.innerWidth, window.innerHeight)
+  const [imgSrc, setImgSrc] = useState<string | undefined>(undefined)
+  const [imgSize, setImgSize] = useState<{ width: number, height: number }>({ width: initialSize, height: initialSize })
   useEffect(() => {
     if (preload) {
       const image = new Image()
       image.src = bgImgUrl ?? ''
-      image.onload = () => setImgSrc(bgImgUrl)
+      image.onload = () => {
+        setImgSrc(bgImgUrl)
+        setImgSize({ width: image.width, height: image.height })
+      }
       if (bgImageOnError) {
         image.onerror = bgImageOnError
       }
     }
   }, [bgImgUrl, isOpen, bgImageOnError, preload])
+  useEffect(() => {
+    const currentInitialSize = Math.min(window.innerWidth, window.innerHeight)
+    setImgSize({ width: currentInitialSize, height: currentInitialSize })
+  }, [bgImgUrl])
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -70,10 +79,23 @@ export const Preview: React.FC<PreviewProps> = ({
                     centerOnInit
                     centerZoomedOut
                     minScale={0.2}
+                    maxScale={20}
                     {...imagePreviewProps}
                   >
                     <TransformComponent wrapperClass={styles.wrapper} contentClass={`${styles.component} ${styles.image}`}>
-                      <MibaoImage src={imgSrc} onError={bgImageOnError} {...imageProps} />
+                      <MibaoImage
+                        src={imgSrc}
+                        onError={bgImageOnError} {...imageProps}
+                        objectFit="contain"
+                        w="full"
+                        h="full"
+                        containerProps={{
+                          style: {
+                            width: `${imgSize.width}px`,
+                            height: `${imgSize.height}px`
+                          }
+                        }}
+                      />
                     </TransformComponent>
                   </TransformWrapper>
                   )
