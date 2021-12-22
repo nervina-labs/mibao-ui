@@ -5,6 +5,7 @@ import { AudioPreview } from './audio'
 import styles from './preview.module.scss'
 import { VideoPreview } from './video'
 import { Image as MibaoImage, ImageProps } from '../image/image'
+import { useInnerSize } from '../../hooks/useInnerSize'
 
 export interface PreviewProps {
   isOpen: boolean
@@ -43,7 +44,8 @@ export const Preview: React.FC<PreviewProps> = ({
     },
     [onClose, type]
   )
-  const initialSize = Math.min(window.innerWidth, window.innerHeight)
+  const innerSize = useInnerSize()
+  const initialSize = Math.min(innerSize.width, innerSize.height)
   const [imgSrc, setImgSrc] = useState<string | undefined>(undefined)
   const [imgSize, setImgSize] = useState<{ width: number, height: number }>({ width: initialSize, height: initialSize })
   useEffect(() => {
@@ -63,6 +65,7 @@ export const Preview: React.FC<PreviewProps> = ({
     const currentInitialSize = Math.min(window.innerWidth, window.innerHeight)
     setImgSize({ width: currentInitialSize, height: currentInitialSize })
   }, [bgImgUrl])
+  const scale = Math.min(initialSize / imgSize.width, initialSize / imgSize.height)
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -91,8 +94,8 @@ export const Preview: React.FC<PreviewProps> = ({
                         h="full"
                         containerProps={{
                           style: {
-                            width: `${imgSize.width}px`,
-                            height: `${imgSize.height}px`
+                            width: `${Math.floor(imgSize.width * scale)}px`,
+                            height: `${Math.floor(imgSize.height * scale)}px`
                           }
                         }}
                       />
