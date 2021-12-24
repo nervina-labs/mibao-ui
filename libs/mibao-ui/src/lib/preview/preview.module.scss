@@ -3,10 +3,10 @@
     height: 100% !important;
     max-width: 100%;
     max-height: 100%;
-    animation: show 0.3s;
+    animation: show 0.2s ease-out;
 
     img {
-        cursor: grab;
+      cursor: grab;
     }
 }
 
@@ -19,7 +19,7 @@
 @keyframes show {
     0% {
       opacity: 0;
-      transform: scale(0.5);
+      transform: scale(0.8);
     }
 
     100% {
