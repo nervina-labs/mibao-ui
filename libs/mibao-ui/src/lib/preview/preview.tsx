@@ -68,11 +68,11 @@ export const Preview: React.FC<PreviewProps> = ({
   const scale = useMemo(() => {
     const hScale = initialSize / imgSize.height
     const wScale = initialSize / imgSize.width
-    if (imgSize.width < imgSize.height) {
-      return Math.max(hScale, wScale)
+    if (imgSize.height > imgSize.width) {
+      return hScale
     }
-    return Math.min(hScale, wScale)
-  }, [imgSize, initialSize])
+    return wScale
+  }, [imgSize.height, imgSize.width, initialSize])
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
