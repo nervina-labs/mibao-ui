@@ -65,14 +65,7 @@ export const Preview: React.FC<PreviewProps> = ({
     const currentInitialSize = Math.min(window.innerWidth, window.innerHeight)
     setImgSize({ width: currentInitialSize, height: currentInitialSize })
   }, [bgImgUrl])
-  const scale = useMemo(() => {
-    const hScale = initialSize / imgSize.height
-    const wScale = initialSize / imgSize.width
-    if (imgSize.height > imgSize.width) {
-      return hScale
-    }
-    return wScale
-  }, [imgSize.height, imgSize.width, initialSize])
+  const scale = initialSize / imgSize.width
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
