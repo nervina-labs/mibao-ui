@@ -1,11 +1,11 @@
 import { Modal, ModalCloseButton, ModalContent, ModalOverlay } from '@chakra-ui/react'
-import React, { MouseEvent, useCallback, useEffect, useMemo, useState } from 'react'
-import { ReactZoomPanPinchProps, TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
+import React, { MouseEvent, useCallback } from 'react'
+import { ReactZoomPanPinchProps } from 'react-zoom-pan-pinch'
 import { AudioPreview } from './audio'
 import styles from './preview.module.scss'
 import { VideoPreview } from './video'
-import { Image as MibaoImage, ImageProps } from '../image/image'
-import { useInnerSize } from '../../hooks/useInnerSize'
+import { ImageProps } from '../image/image'
+import { ZoomImage } from './zoom-image'
 
 export interface PreviewProps {
   isOpen: boolean
@@ -44,28 +44,6 @@ export const Preview: React.FC<PreviewProps> = ({
     },
     [onClose, type]
   )
-  const innerSize = useInnerSize()
-  const initialSize = Math.min(innerSize.width, innerSize.height)
-  const [imgSrc, setImgSrc] = useState<string | undefined>(undefined)
-  const [imgSize, setImgSize] = useState<{ width: number, height: number }>({ width: initialSize, height: initialSize })
-  useEffect(() => {
-    if (preload) {
-      const image = new Image()
-      image.src = bgImgUrl ?? ''
-      image.onload = () => {
-        setImgSrc(bgImgUrl)
-        setImgSize({ width: image.width, height: image.height })
-      }
-      if (bgImageOnError) {
-        image.onerror = bgImageOnError
-      }
-    }
-  }, [bgImgUrl, isOpen, bgImageOnError, preload])
-  useEffect(() => {
-    const currentInitialSize = Math.min(window.innerWidth, window.innerHeight)
-    setImgSize({ width: currentInitialSize, height: currentInitialSize })
-  }, [bgImgUrl])
-  const scale = initialSize / imgSize.width
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -76,32 +54,8 @@ export const Preview: React.FC<PreviewProps> = ({
         isOpen
           ? <>
             {
-              type === 'image' || (type === 'audio' && bgImgUrl)
-                ? (
-                  <TransformWrapper
-                    centerOnInit
-                    centerZoomedOut
-                    minScale={0.2}
-                    maxScale={20}
-                    {...imagePreviewProps}
-                  >
-                    <TransformComponent wrapperClass={styles.wrapper} contentClass={`${styles.component} ${styles.image}`}>
-                      <MibaoImage
-                        src={imgSrc}
-                        onError={bgImageOnError} {...imageProps}
-                        objectFit="contain"
-                        w="full"
-                        h="full"
-                        containerProps={{
-                          style: {
-                            width: `${Math.floor(imgSize.width * scale)}px`,
-                            height: `${Math.floor(imgSize.height * scale)}px`
-                          }
-                        }}
-                      />
-                    </TransformComponent>
-                  </TransformWrapper>
-                  )
+              bgImgUrl && (type === 'image' || type === 'audio')
+                ? <ZoomImage src={bgImgUrl} onError={bgImageOnError} imagePreviewProps={imagePreviewProps} {...imageProps} />
                 : null
             }
             {
