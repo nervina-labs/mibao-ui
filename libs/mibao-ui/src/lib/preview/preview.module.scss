@@ -1,43 +1,45 @@
 .wrapper {
-    width: 100% !important;
-    height: 100% !important;
-    max-width: 100%;
-    max-height: 100%;
-    animation: show 0.3s;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100%;
+  max-height: 100%;
+  animation: show 0.2s ease-out;
 
-    img {
-        cursor: grab;
-    }
+  img {
+    cursor: grab;
+  }
 }
 
 .component {
-    &.image {
-        cursor: grab;
-    }
+  &.image {
+      cursor: grab;
+  }
 }
 
 @keyframes show {
-    0% {
-        transform: scale(0);
-    }
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
 
-    100% {
-        transform: scale(1);
-    }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .audio {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100% - 20px);
-    max-width: 500px;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 20px);
+  max-width: 500px;
 }
 
 .video {
-    margin: auto;
-    width: calc(100% - 20px);
-    max-width: 500px;
-    max-height: calc(100vh - 100px);
+  margin: auto;
+  width: calc(100% - 20px);
+  max-width: 500px;
+  max-height: calc(100vh - 100px);
 }

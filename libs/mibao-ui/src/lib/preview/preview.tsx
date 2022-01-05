@@ -1,5 +1,5 @@
 import { Modal, ModalCloseButton, ModalContent, ModalOverlay } from '@chakra-ui/react'
-import React, { MouseEvent, useCallback, useEffect, useState } from 'react'
+import React, { MouseEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import { ReactZoomPanPinchProps, TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 import { AudioPreview } from './audio'
 import styles from './preview.module.scss'
@@ -65,7 +65,14 @@ export const Preview: React.FC<PreviewProps> = ({
     const currentInitialSize = Math.min(window.innerWidth, window.innerHeight)
     setImgSize({ width: currentInitialSize, height: currentInitialSize })
   }, [bgImgUrl])
-  const scale = Math.min(initialSize / imgSize.width, initialSize / imgSize.height)
+  const scale = useMemo(() => {
+    const hScale = initialSize / imgSize.height
+    const wScale = initialSize / imgSize.width
+    if (imgSize.height > imgSize.width) {
+      return hScale
+    }
+    return wScale
+  }, [imgSize.height, imgSize.width, initialSize])
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
