@@ -55,7 +55,12 @@ export const Preview: React.FC<PreviewProps> = ({
           ? <>
             {
               bgImgUrl && (type === 'image' || type === 'audio')
-                ? <ZoomImage src={bgImgUrl} onError={bgImageOnError} imagePreviewProps={imagePreviewProps} {...imageProps} />
+                ? <ZoomImage
+                    src={bgImgUrl}
+                    onError={bgImageOnError}
+                    imagePreviewProps={imagePreviewProps}
+                    {...imageProps}
+                  />
                 : null
             }
             {

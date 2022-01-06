@@ -3,6 +3,7 @@ import styles from './preview.module.scss'
 import { Image as MibaoImage, ImageProps } from '../image/image'
 import { useEffect, useState } from 'react'
 import { Center, Spinner } from '@chakra-ui/react'
+import { useInnerSize } from '../../hooks/useInnerSize'
 
 interface ZoomImageProps extends ImageProps {
   src: string
@@ -17,12 +18,20 @@ export const ZoomImage: React.FC<ZoomImageProps> = ({
   ...imageProps
 }) => {
   const [isLoading, setIsLoading] = useState(true)
+  const innerSize = useInnerSize()
+  const initialSize = Math.min(innerSize.width, innerSize.height)
+  const [imageSize, setImageSize] = useState({
+    width: initialSize,
+    height: initialSize
+  })
+  const imageScale = Math.min(innerSize.width / imageSize.width, innerSize.height / imageSize.height)
   useEffect(() => {
     const image = new Image()
     image.src = src
     setIsLoading(true)
     image.onload = () => {
       setIsLoading(false)
+      setImageSize({ width: image.width, height: image.height })
     }
     image.onerror = () => {
       imageOnError?.()
@@ -54,6 +63,10 @@ export const ZoomImage: React.FC<ZoomImageProps> = ({
           objectFit="contain"
           w="full"
           h="full"
+          style={{
+            width: `${Math.floor(imageScale * imageSize.width)}px`,
+            height: `${Math.floor(imageScale * imageSize.height)}px`
+          }}
         />
       </TransformComponent>
     </TransformWrapper>
