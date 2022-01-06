@@ -1,59 +1,82 @@
 import './table.module.scss'
 
 import {
-  Table,
-  Thead as RowThead,
+  Table as RawTable,
+  Thead,
   Tbody,
   Tfoot,
   Tr,
-  Th as RowTh,
+  Th,
   Td,
-  TableCaption as RowTableCaption,
+  TableCaption,
   TableHeadProps,
   TableBodyProps,
-  TableProps,
+  TableProps as RawTableProps,
   TableRowProps,
   TableColumnHeaderProps,
   TableCellProps,
   TableCaptionProps
 } from '@chakra-ui/react'
 import React from 'react'
+import styled from '@emotion/styled'
 
 export {
-  Table,
+  Thead,
   Tbody,
   Tfoot,
   Tr,
+  Th,
   Td,
+  TableCaption,
   TableHeadProps,
   TableBodyProps,
-  TableProps,
   TableRowProps,
   TableColumnHeaderProps,
   TableCellProps,
   TableCaptionProps
 }
 
-export const Thead: React.FC<TableHeadProps & { variant: 'filled' | 'unstyled' }> = (props) => {
-  const variant = props.variant ?? 'unstyled'
-  return <RowThead
-    bg={variant === 'filled' ? 'var(--chakra-colors-primary-100)' : undefined}
+export interface TableProps extends RawTableProps {
+  variant: RawTableProps['variant'] | 'filled'
+}
+
+const TableStyled = styled(RawTable)`
+  ${({ _variant }: TableProps & { _variant?: TableProps['variant'] }) => _variant === 'filled'
+    ? `
+thead, tfoot {
+  th {
+    background-color: var(--chakra-colors-primary-100);
+  }
+}
+thead {
+  th:first-child {
+    border-top-left-radius: 6px;
+  }
+  th:last-child {
+    border-top-right-radius: 6px;
+  }
+}
+tfoot {
+  th:first-child {
+    border-bottom-left-radius: 6px;
+  }
+  th:last-child {
+    border-bottom-right-radius: 6px;
+  }
+}
+`
+    : undefined
+  }
+`
+
+export const Table: React.FC<TableProps> = ({
+  children,
+  variant = 'simple',
+  ...props
+}) => {
+  return <TableStyled
+    variant={variant === 'filled' ? 'simple' : variant}
+    _variant={variant}
     {...props}
-  >{props.children}</RowThead>
-}
-
-export const Th: React.FC<TableColumnHeaderProps> = (props) => {
-  return (
-    <RowTh
-      textTransform="none"
-    >{props.children}</RowTh>
-  )
-}
-
-export const TableCaption: React.FC<TableCaptionProps> = (props) => {
-  return (
-    <RowTableCaption
-      textTransform="none"
-    >{props.children}</RowTableCaption>
-  )
+    >{children}</TableStyled>
 }
