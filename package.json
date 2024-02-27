@@ -14,8 +14,8 @@
   "dependencies": {
     "@chakra-ui/icons": "1.1.1",
     "@chakra-ui/react": "1.7.2",
-    "@emotion/react": "11.4.1",
-    "@emotion/styled": "11.3.0",
+    "@emotion/react": "11.11.4",
+    "@emotion/styled": "11.11.0",
     "@google/model-viewer": "1.9.2",
     "core-js": "3.19.1",
     "framer-motion": "4.1.17",
